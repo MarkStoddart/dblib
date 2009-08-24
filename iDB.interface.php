@@ -13,21 +13,20 @@
  */
 public interface iDB {
 	
-	public const DB_HOST;
-	public const DB_USER;
-	public const DB_PASS;
-	public const DB_NAME;
-	public const DB_FILE;
-	
-	public var $DBmode;
-	public var $DBobject;
+	private var $DBobject;
+	private var $DBhost;
+	private var $DBuser;
+	private var $DBpass;
+	private var $DBname;
+	private var $queryCount;
 	
 	public function preDB($p_var);
 	public function postDB($p_var);
 	
-	public function errorDB($p_context, $p_query);
+	private function errorDB($p_context, $p_query);
 	public function connectDB();
 	public function closeDB();
+	public function setupDB();
 	
 	public function getField($p_field, $p_table, $p_opt);
 	public function getRow($p_table, $p_opt);
