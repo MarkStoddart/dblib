@@ -50,21 +50,9 @@ public class mysqlDB extends DB implements iDB {
 	 */
 	private function errorDB($p_error, $p_db_error = '', $p_query = '') {
 
-		// Only provide detailed output in debug mode
-		echo '<p>';
-		if(DBLIB_DEBUG) {
-			echo 'Query error in context "' . $p_error . '":<br /><strong>'
-					. $p_db_error . 
-					'</strong><br /><br />';
-			if(!empty($p_query))
-				echo '<em>' . $p_query . '</em>';
-		} else {
-			echo 'A database error occurred when performing the last operation. The system administrator has been informed.';
-			// TODO Need to configure an email for an error here!
-		}
-		echo '</p>';
-		// TODO Think about whether we need this exit or not...
-		exit;
+		// Pass up to the parent class
+		parent::errorDB($p_error, $p_db_error, $p_query);
+		
 	}
 	
 	/**
@@ -132,19 +120,8 @@ public class mysqlDB extends DB implements iDB {
 	 */
 	public function preDB($p_var) {
 		
-		// Make sure any false variables are returned as passed
-		if(!$p_var)
-			return false;
-		
-		// Use a recursive call if the variable is an array, to make sure it
-		// is penetrated to the correct depth
-		if(is_array($p_var)) {
-			$new_array = array();
-			foreach($p_var as $key => $value)
-				$new_array[addslashes(htmlspecialchars_decode($key))] = $this->preDB($value);
-			return $new_array;
-		} else
-			return addslashes(htmlspecialchars_decode($p_var));
+		// Pass control to parent
+		parent::preDB($p_var);
 	}
 
 	/**
@@ -155,34 +132,26 @@ public class mysqlDB extends DB implements iDB {
 	 */
 	public function postDB($p_var) {
 		
-		// Make sure any false variables are returned as passed
-		if(!$p_var)
-			return false;
-
-		// Use a recursive call if the variable is an array, to make sure it
-		// is penetrated to the correct depth
-		if(is_array($p_var)) {
-			$new_array = array();
-			foreach($p_var as $key => $value)
-				$new_array[htmlspecialchars(stripslashes($key))] = $this->postDB($value);
-			return $new_array;
-		} else
-			return htmlspecialchars(stripslashes($p_var));
+		// Pass control to parent
+		parent::postDB($p_var);
 	}
 	
 	/**
 	 * Get a single field from a database using a table and a where query
 	 *
-	 * @param	string	$p_field	Field to fetch
-	 * @param	string	$p_table	Table to get field from
-	 * @param	string	$p_opt		[Optional] Any options, such as WHERE clauses
+	 * @param	string	$p_field		Field to fetch
+	 * @param	string	$p_table		Table to get field from
+	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getField($p_field, $p_table, $p_opt = '') {
+	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array()) {
 
 		// Prepare values for database checking
 		$p_field = $this->preDB($p_field);
 		$p_table = $this->preDB($p_table);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
 		
 		// Build the query
 		$query = "
@@ -205,14 +174,17 @@ public class mysqlDB extends DB implements iDB {
 	/**
 	 * Get a single row from a database
 	 *
-	 * @param	string	$p_table	Table to get row from
-	 * @param	string	$p_opt		[Optional] Any options, such as WHERE clauses
+	 * @param	string	$p_table		Table to get row from
+	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getRow($p_table, $p_opt = '') {
+	public function getRow($p_table, $p_opt = '', $p_opt_values = array()) {
 		
-		// Prepare table for database
+		// Prepare values for database
 		$p_table = $this->preDB($p_table);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
 		
 		// Build the query
 		$query = "
@@ -235,14 +207,17 @@ public class mysqlDB extends DB implements iDB {
 	/**
 	 * Get multiple rows from a database, fetch them in an array
 	 *
-	 * @param	string	$p_table	Table to get data from
-	 * @param	string	$p_opt		[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	string	$p_table		Table to get data from
+	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getRows($p_table, $p_opt = '') {
+	public function getRows($p_table, $p_opt = '', $p_opt_values = array()) {
 		
-		// Prepare table for database
+		// Prepare values for database
 		$p_table = $this->preDB($p_table);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
 		
 		// Build the query
 		$query = "
@@ -267,14 +242,17 @@ public class mysqlDB extends DB implements iDB {
 	/**
 	 * Get the number of rows returned from a query
 	 *
-	 * @param	string	$p_table	Table to get data from
-	 * @param	string	$p_opt		[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	string	$p_table		Table to get data from
+	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	int		Number of rows
 	 */
-	public function getNumRows($p_table, $p_opt = '') {
+	public function getNumRows($p_table, $p_opt = '', $p_opt_values = array()) {
 
-		// Prepare table for database
+		// Prepare values for database
 		$p_table = $this->preDB($p_table);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
 		
 		// Build the query
 		$query = "
