@@ -276,6 +276,177 @@ public class mysqliDB extends DB implements iDB {
 	}
 	
 	/**
+	 * Get one or more fields from a database using a table and a where query,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param	string	$p_fields		Fields to fetch
+	 * @param	string	$p_tables		Tables to get fields from
+	 * @param	array	$p_joins		[Optional] An array that contains an array of items with the following options:
+	 *									string type Type of join, e.g. left
+	 *									string table Table to join with optional alias
+	 *									string local Local key to join on
+	 *									string foreign Foreign key to join on
+	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	mixed	Result
+	 */
+	public function getJoinedFields($p_fields, $p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+
+		// Prepare values for database checking
+		$p_fields = parent::buildSelectString($this->preDB($p_fields));
+		$p_tables = parent::buildFromString($this->preDB($p_tables));
+		$p_joins = parent::buildJoinString($this->preDB($p_joins));
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		
+		// Build the query
+		$query = "
+			SELECT {$p_fields}
+			FROM {$p_tables}
+			{$p_joins}
+			{$p_opt}
+			LIMIT 1
+		";
+				
+		// Run the query and report all errors
+		$result = $this->db->query($query);
+		$this->queryCount++;
+		if(!$result)
+			$this->errorDB('get_joined_fields', $this->db->error, $query);
+		
+		// Return the resulting field
+		$row = @$result->fetch_row();
+		if(!is_array($p_fields))
+			return $this->postDB($row[0]);
+		else
+			return $this->postDB($row);
+	}
+	
+	/**
+	 * Get a single row from a database,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param	string	$p_tables		Tables to get row from
+	 * @param	array	$p_joins		[Optional] An array that contains an array of items with the following options:
+	 *									string type Type of join, e.g. left
+	 *									string table Table to join with optional alias
+	 *									string local Local key to join on
+	 *									string foreign Foreign key to join on
+	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	mixed	Result
+	 */
+	public function getJoinedRow($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+		
+		// Prepare values for database
+		$p_tables = parent::buildFromString($this->preDB($p_tables));
+		$p_joins = parent::buildJoinString($this->preDB($p_joins));
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+				
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$p_tables}
+			{$p_joins}
+			{$p_opt}
+			LIMIT 1
+		";
+		
+		// Get the result and report any errors
+		$result = $this->db->query($query);
+		$this->queryCount++;
+		if(!$result)
+			$this->errorDB('get_joined_row', $this->db->error, $query);
+		
+		// Return the resulting row
+		return $this->postDB(@$result->fetch_row());
+	}
+	
+	/**
+	 * Get multiple rows from a database, fetch them in an array,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param	string	$p_tables		Tables to get data from
+	 * @param	array	$p_joins		[Optional] An array that contains an array of items with the following options:
+	 *									string type Type of join, e.g. left
+	 *									string table Table to join with optional alias
+	 *									string local Local key to join on
+	 *									string foreign Foreign key to join on
+	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	mixed	Result
+	 */
+	public function getJoinedRows($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+		
+		// Prepare values for database
+		$p_tables = parent::buildFromString($this->preDB($p_tables));
+		$p_joins = parent::buildJoinString($this->preDB($p_joins));
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+				
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$p_tables}
+			{$p_joins}
+			{$p_opt}
+		";
+		
+		// Get the result, report any errors
+		$result = $this->db->query($query);
+		$this->queryCount++;
+		if(!$result)
+			$this->errorDB('get_joined_rows', $this->db->error, $query);
+		
+		// Return the built array of rows
+		$return = array();
+		while($temp = $result->fetch_row())
+			$return[] = $temp;
+		return $this->postDB($return);
+	}
+	
+	/**
+	 * Get the number of rows returned from a query,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param	string	$p_tables		Tables to get data from
+	 * @param	array	$p_joins		[Optional] An array that contains an array of items with the following options:
+	 *									string type Type of join, e.g. left
+	 *									string table Table to join with optional alias
+	 *									string local Local key to join on
+	 *									string foreign Foreign key to join on
+	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	int		Number of rows
+	 */
+	public function getNumJoinedRows($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+
+		// Prepare values for database
+		$p_tables = parent::buildFromString($this->preDB($p_tables));
+		$p_joins = parent::buildJoinString($this->preDB($p_joins));
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+				
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$p_tables}
+			{$p_joins}
+			{$p_opt}
+		";
+
+		// Get the result, report any errors
+		$result = $this->db->query($query);
+		$this->queryCount++;
+		if(!$result)
+			$this->errorDB('get_num_joined_rows', $this->db->error, $query);
+		
+		// Return the number of rows
+		return $result->num_rows;
+	}
+	
+	/**
 	 * Update one or more table rows
 	 *
 	 * @param	string	$p_table		Table to perform update on
