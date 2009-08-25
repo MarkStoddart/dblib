@@ -12,7 +12,7 @@ require 'iDB.interface.php';
 /**
  * Common DB class
  */
-public class DB {
+private abstract class DB {
 	
 	/**
 	 * Constructor
@@ -50,8 +50,8 @@ public class DB {
 	/**
 	 * Prepare a variable to be used in a database query
 	 *
-	 * @param mixed $p_var Any variable
-	 * @return mixed Variable post-processing
+	 * @param	mixed	$p_var	Any variable
+	 * @return	mixed	Variable post-processing
 	 */
 	protected function preDB($p_var) {
 		
@@ -73,8 +73,8 @@ public class DB {
 	/**
 	 * Prepare a variable result from a database to be used 
 	 *
-	 * @param mixed $p_var Any variable
-	 * @return mixed Variable post-processing
+	 * @param	mixed	$p_var	Any variable
+	 * @return	mixed	Variable post-processing
 	 */
 	protected function postDB($p_var) {
 		
@@ -94,6 +94,70 @@ public class DB {
 	}
 	
 	/**
+	 * Build a SELECT string for a query using one or more fields
+	 *
+	 * @param	mixed	$p_fields	Fields to use
+	 * @return	string	MySQL formatted string
+	 */
+	protected function buildSelectString($p_fields) {
+		
+		// Every field needs to be enclosed in ` characters
+		if(is_array($p_fields)) {
+			foreach($p_fields as $key => $field)
+				$p_fields[$key] = preg_replace('/(\w+)/i', '`$1`', $field);
+			$string = join(', ', $p_fields);
+		} else
+			$string = preg_replace('/(\w+)/i', '`$1`', $p_fields);
+		
+		// Return the correctly formatted string
+		return $string;
+	}
+	
+	/**
+	 * Build a FROM string for a query using one or more tables
+	 *
+	 * @param	mixed	$p_tables	Tables to use
+	 * @return	string	MySQL formatted string
+	 */
+	protected function buildFromString($p_tables) {
+		
+		// Every table name, with alias, needs to be enclosed in ` characters
+		if(is_array($p_tables)) {
+			foreach($p_tables as $key => $table)
+				$p_tables[$key] = preg_replace('/(\w+)/i', '`$1`', $table);
+			$string = join(', ', $p_tables);
+		} else
+			$string = preg_replace('/(\w+)/i', '`$1`', $p_tables);
+		
+		// Return the tables in brackets so joins can be made
+		return '(' . $string . ')';
+	}
+	
+	/**
+	 * Build a JOIN string for a query using one or more joins
+	 * 
+	 * @param	array	$p_joins	Joins to perform (as passed from other functions)
+	 * @return	string	MySQL formatted string
+	 */
+	protected function buildJoinString($p_joins) {
+		$string = '';
+		foreach($p_joins as $join) {
+			// Build the join string each time by enclosing fields and tables in ` characters
+			$string .= "\n"
+					. strtoupper($join['type'])
+					. ' JOIN '
+					. preg_replace('/(\w+)/i', '`$1`', $join['table'])
+					. ' ON '
+					. preg_replace('/(\w+)/i', '`$1`', $join['local'])
+					. ' = '
+					. preg_replace('/(\w+)/i', '`$1`', $join['foreign']);
+		}
+		
+		// Return the formatted string
+		return $string;
+	}
+	
+	/**
 	 * Build a WHERE/GROUP/ORDER/LIMIT string using the given MySQL command string
 	 * and a set of values that are to be used in replacements with ?
 	 *
@@ -101,7 +165,7 @@ public class DB {
 	 * @param array $p_opt_values Array of values to use in replacements
 	 * @return string Correctly formatted and escaped string
 	 */
-	protected static function buildOptString($p_opt, $p_opt_values) {
+	protected function buildOptString($p_opt, $p_opt_values) {
 		
 		// Get matches
 		preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
