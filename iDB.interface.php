@@ -20,13 +20,13 @@ public interface iDB {
 	private var $name;
 	private var $queryCount;
 	
-	public function preDB($p_var);
-	public function postDB($p_var);
-	
 	private function errorDB($p_context, $p_query);
 	public function setupDB($p_host, $p_user, $p_pass, $p_db);
 	public function connectDB($p_host, $p_user, $p_pass, $p_db);
 	public function closeDB();
+	
+	public function preDB($p_var);
+	public function postDB($p_var);
 	
 	public function getField($p_field, $p_table, $p_opt);
 	public function getRow($p_table, $p_opt);
