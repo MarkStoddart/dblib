@@ -271,7 +271,117 @@ public class mysqlDB extends DB implements iDB {
 		return mysql_num_rows($result);
 	}
 	
+	/**
+	 * Update one or more table rows
+	 *
+	 * @param	string	$p_table		Table to perform update on
+	 * @param	array	$p_data			K=>V array of columns and data
+	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	boolean	Successful update or not
+	 */
+	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
+		
+		// Sort out values for database query
+		$p_table = $this->preDB($p_table);
+		$p_data = $this->preDB($p_data);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
 	
+		// Join up data
+		$updates = array();
+		foreach($p_data as $key => $value)
+			$updates[] = "`{$key}` = '{$value}'";
+		$updates = join(', ', $updates);
+		
+		// Build the query
+		$query = "
+			UPDATE `{$p_table}`
+			SET {$updates}
+			{$p_opt}
+		";
+		
+		// Get the result and sort out any errors
+		$result = mysql_query($query, $this->db);
+		if(!$result)
+			self::errorDB('update_rows', mysql_error($this->db), $query);
+		
+		// Return the query result
+		return $result;
+	}
 	
-	// TODO Do the rest of it
+	/**
+	 * Insert a row into the database
+	 * 
+	 * @param	string	$p_table		Table to perform update on
+	 * @param	array	$p_data			K=>V array of columns and data
+	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	boolean	Successful update or not
+	 */
+	public static function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
+
+		// Sort out values for database query
+		$p_table = $this->preDB($p_table);
+		$p_data = $this->preDB($p_data);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+			
+		// Join up data
+		$fields = array();
+		foreach(array_keys($p_data) as $field)
+			$fields[] = '`' . $field . '`';
+		$fields = join(', ', $fields);
+		
+		$values = array();
+		foreach($p_data as $value)
+			$values[] = "'" . $values . "'";
+		$values = join(', ', $values);
+		
+		// Build the query
+		$query = "
+			INSERT INTO `{$p_table}`
+			({$fields}) VALUES ({$values})
+			{$p_opt}
+		";
+			
+		// Get the result and sort out any errors
+		$result = mysql_query($query, $this->db);
+		if(!$result)
+			self::errorDB('insert_row', mysql_error($this->db), $query);
+		
+		// Return the query result
+		return $result;
+	}
+	
+	/**
+	 * Delete one or more rows from the database
+	 *
+	 * @param	string	$p_table		Table to delete from
+	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
+	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *										each ? will be replaced with a value, to escape use \?
+	 * @return	boolean	Query was successful or not
+	 */
+	public static function deleteRows($p_table, $p_opt = '', $p_opt_values = array()) {
+
+		// Sort out values for database query
+		$p_table = $this->preDB($p_table);
+		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		
+		// Build query
+		$query = "
+			DELETE FROM `{$p_table}`
+			{$p_opt}
+		";
+		
+		// Get the result and sort out any errors
+		$result = mysql_query($query, $this->db);
+		if(!$result)
+			self::errorDB('delete_rows', mysql_error($this->db), $query);
+		
+		// Return the query result
+		return $result;
+	}
+	
 }
