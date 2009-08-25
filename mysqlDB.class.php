@@ -8,7 +8,7 @@
  */
 
 require 'iDB.interface.php';
-require 'DB.interface.php';
+require 'DB.class.php';
 
 /**
  * MySQL class
