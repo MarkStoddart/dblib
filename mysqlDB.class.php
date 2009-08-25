@@ -30,6 +30,7 @@ public class mysqlDB extends DB implements iDB {
 	 */
 	public function __construct($p_db = false) {
 		$this->db = $p_db;
+		$this->queryCount = 0;
 		parent::__construct;
 	}
 	
@@ -110,6 +111,15 @@ public class mysqlDB extends DB implements iDB {
 	public function closeDB() {
 		if($this->db)
 			mysql_close($this->db);
+	}
+	
+	/**
+	 * Return the current query count
+	 * 
+	 * @return	int	Query count
+	 */
+	public function getQueryCount() {
+		return $this->queryCount;
 	}
 	
 	/**
@@ -303,6 +313,7 @@ public class mysqlDB extends DB implements iDB {
 		
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->db);
+		$this->queryCount++;
 		if(!$result)
 			self::errorDB('update_rows', mysql_error($this->db), $query);
 		
@@ -347,6 +358,7 @@ public class mysqlDB extends DB implements iDB {
 			
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->db);
+		$this->queryCount++;
 		if(!$result)
 			self::errorDB('insert_row', mysql_error($this->db), $query);
 		
@@ -377,6 +389,7 @@ public class mysqlDB extends DB implements iDB {
 		
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->db);
+		$this->queryCount++;
 		if(!$result)
 			self::errorDB('delete_rows', mysql_error($this->db), $query);
 		

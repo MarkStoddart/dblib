@@ -24,6 +24,7 @@ public interface iDB {
 	public function setupDB($p_host, $p_user, $p_pass, $p_db);
 	public function connectDB($p_host, $p_user, $p_pass, $p_db);
 	public function closeDB();
+	public function getQueryCount();
 	
 	public function preDB($p_var);
 	public function postDB($p_var);
