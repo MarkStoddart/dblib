@@ -11,7 +11,7 @@ require 'iDB.interface.php';
 require 'DB.class.php';
 
 /**
- * MySQL class
+ * MySQLi class
  */
 public class mysqliDB extends DB implements iDB {
 	
