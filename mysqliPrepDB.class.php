@@ -85,7 +85,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 			$result = array();
 			for($i = 0; $i < $rows; $i++) {
 				$p_object->fetch();
-				die(var_dump($row));
 				$result[] = $row;
 			}
 			
@@ -268,6 +267,12 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 			{$p_opt}
 			LIMIT 1
 		";
+		
+		// Get the result, report any errors
+		$result = $this->db->prepare($query);
+		$this->queryCount++;
+		if(!$result)
+			$this->errorDB('get_joined_row', $this->db->error, $query);
 		
 		// Return the query object
 		return $result;
