@@ -124,7 +124,7 @@ class mysqliDB extends DB implements iDB {
 	public function preDB($p_var) {
 		
 		// Pass control to parent
-		parent::preDB($p_var);
+		return parent::preDB($p_var);
 	}
 
 	/**
@@ -136,7 +136,7 @@ class mysqliDB extends DB implements iDB {
 	public function postDB($p_var) {
 		
 		// Pass control to parent
-		parent::postDB($p_var);
+		return parent::postDB($p_var);
 	}
 	
 	/**
