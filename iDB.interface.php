@@ -13,22 +13,22 @@
  */
 interface iDB {
 	
-	function errorDB($p_context, $p_query);
-	public function setupDB($p_host, $p_user, $p_pass, $p_db);
-	public function connectDB($p_host, $p_user, $p_pass, $p_db);
+	//protected function errorDB($p_error, $p_db_error, $p_query);
+	public function setupDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null);
+	public function connectDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null);
 	public function closeDB();
 	public function getQueryCount();
 	
 	public function preDB($p_var);
 	public function postDB($p_var);
 	
-	public function getField($p_field, $p_table, $p_opt);
-	public function getRow($p_table, $p_opt);
-	public function getRows($p_table, $p_opt);
-	public function getNumRows($p_table, $p_opt);
+	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array());
+	public function getRow($p_table, $p_opt = '', $p_opt_values = array());
+	public function getRows($p_table, $p_opt = '', $p_opt_values = array());
+	public function getNumRows($p_table, $p_opt = '', $p_opt_values = array());
 	
-	public function insertRow($p_table, $p_data, $p_opt);
-	public function updateRows($p_table, $p_data, $p_opt);
-	public function deleteRows($p_table, $p_opt);
+	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array());
+	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = array());
+	public function deleteRows($p_table, $p_opt = '', $p_opt_values = array());
 	
 }

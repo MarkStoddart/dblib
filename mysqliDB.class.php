@@ -496,7 +496,7 @@ class mysqliDB extends DB implements iDB {
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	boolean	Successful update or not
 	 */
-	public static function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
+	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
 
 		// Sort out values for database query
 		$p_table = $this->preDB($p_table);
@@ -540,7 +540,7 @@ class mysqliDB extends DB implements iDB {
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	boolean	Query was successful or not
 	 */
-	public static function deleteRows($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function deleteRows($p_table, $p_opt = '', $p_opt_values = array()) {
 
 		// Sort out values for database query
 		$p_table = $this->preDB($p_table);
