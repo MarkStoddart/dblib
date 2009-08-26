@@ -7,8 +7,6 @@
  * @version 1.0
  */
 
-require 'iDB.interface.php';
-
 /**
  * Common DB class
  */

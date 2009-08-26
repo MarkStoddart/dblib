@@ -7,7 +7,6 @@
  * @version 1.0
  */
 
-require 'iDB.interface.php';
 require 'mysqliDB.class.php';
 
 /**

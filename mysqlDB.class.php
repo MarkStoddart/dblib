@@ -17,7 +17,7 @@ class mysqlDB extends DB implements iDB {
 	
 	private $db;
 	private $host;
-	private $Duser;
+	private $user;
 	private $pass;
 	private $name;
 	private $queryCount;
