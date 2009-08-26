@@ -31,7 +31,7 @@ class mysqliDB extends DB implements iDB {
 	public function __construct($p_db = false) {
 		$this->db = $p_db;
 		$this->queryCount = 0;
-		parent::__construct;
+		parent::__construct();
 	}
 	
 	/**
