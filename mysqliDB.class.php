@@ -171,7 +171,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_field', $this->db->error, $query);
 		
 		// Return the resulting field
-		$row = @$result->fetch_row();
+		$row = @$result->fetch_array();
 		return $this->postDB($row[0]);
 	}
 	
@@ -205,7 +205,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_row', $this->db->error, $query);
 		
 		// Return the resulting row
-		return $this->postDB(@$result->fetch_row());
+		return $this->postDB(@$result->fetch_array());
 	}
 	
 	/**
@@ -238,7 +238,7 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_row())
+		while($temp = $result->fetch_array())
 			$return[] = $temp;
 		return $this->postDB($return);
 	}
@@ -315,7 +315,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_joined_fields', $this->db->error, $query);
 		
 		// Return the resulting field
-		$row = @$result->fetch_row();
+		$row = @$result->fetch_array();
 		if(!is_array($p_fields))
 			return $this->postDB($row[0]);
 		else
@@ -360,7 +360,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_joined_row', $this->db->error, $query);
 		
 		// Return the resulting row
-		return $this->postDB(@$result->fetch_row());
+		return $this->postDB(@$result->fetch_array());
 	}
 	
 	/**
@@ -401,7 +401,7 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_row())
+		while($temp = $result->fetch_array())
 			$return[] = $temp;
 		return $this->postDB($return);
 	}
