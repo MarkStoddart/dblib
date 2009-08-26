@@ -17,7 +17,7 @@ class mysqliDB extends DB implements iDB {
 	
 	private $db;
 	private $host;
-	private $Duser;
+	private $user;
 	private $pass;
 	private $name;
 	private $queryCount;
@@ -89,7 +89,7 @@ class mysqliDB extends DB implements iDB {
 		$this->setupDB($p_host, $p_user, $p_pass, $p_db);
 		
 		// Attempt a connection
-		$this->db = new mysqli($p_host, $p_user, $p_pass, $p_db);
+		$this->db = new mysqli($this->host, $this->user, $this->pass, $this->name);
 		if(!$this->db) {
 			$this->errorDB('connect');
 			return false;
