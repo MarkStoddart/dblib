@@ -125,7 +125,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		
 		// Run the query and report all errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_field', $this->db->error, $query);
 		
@@ -157,7 +156,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		
 		// Get the result and report any errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_row', $this->db->error, $query);
 		
@@ -188,7 +186,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		
 		// Get the result, report any errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_rows', $this->db->error, $query);
 		
@@ -230,7 +227,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 				
 		// Run the query and report all errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_joined_fields', $this->db->error, $query);
 		
@@ -270,7 +266,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		
 		// Get the result, report any errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_joined_row', $this->db->error, $query);
 		
@@ -309,7 +304,6 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		
 		// Get the result, report any errors
 		$result = $this->db->prepare($query);
-		$this->queryCount++;
 		if(!$result)
 			$this->errorDB('get_joined_rows', $this->db->error, $query);
 		
