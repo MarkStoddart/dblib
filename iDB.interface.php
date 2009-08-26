@@ -13,13 +13,6 @@
  */
 interface iDB {
 	
-	private $db;
-	private $host;
-	private $user;
-	private $pass;
-	private $name;
-	private $queryCount;
-	
 	private function errorDB($p_context, $p_query);
 	public function setupDB($p_host, $p_user, $p_pass, $p_db);
 	public function connectDB($p_host, $p_user, $p_pass, $p_db);
