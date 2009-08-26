@@ -49,7 +49,7 @@ class mysqlDB extends DB implements iDB {
 	 * @param	string	$p_db_error	Error given from DB
 	 * @param	string	$p_query	[Optional] Query from where the error happened
 	 */
-	private function errorDB($p_error, $p_db_error = '', $p_query = '') {
+	protected function errorDB($p_error, $p_db_error = '', $p_query = '') {
 
 		// Pass up to the parent class
 		parent::errorDB($p_error, $p_db_error, $p_query);
