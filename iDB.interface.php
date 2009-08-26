@@ -11,7 +11,7 @@
 /**
  * Interface for database classes
  */
-public interface iDB {
+interface iDB {
 	
 	private var $db;
 	private var $host;

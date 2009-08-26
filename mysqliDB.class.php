@@ -13,7 +13,7 @@ require 'DB.class.php';
 /**
  * MySQLi class
  */
-public class mysqliDB extends DB implements iDB {
+class mysqliDB extends DB implements iDB {
 	
 	private var $db;
 	private var $host;

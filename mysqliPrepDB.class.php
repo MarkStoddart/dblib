@@ -13,7 +13,7 @@ require 'mysqliDB.class.php';
 /**
  * MySQLi class
  */
-public class mysqliPrepDB extends mysqliDB implements iDB {
+class mysqliPrepDB extends mysqliDB implements iDB {
 	
 	/**
 	 * Constructor

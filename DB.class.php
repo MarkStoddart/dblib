@@ -12,7 +12,7 @@ require 'iDB.interface.php';
 /**
  * Common DB class
  */
-private abstract class DB {
+abstract class DB {
 	
 	/**
 	 * Constructor
