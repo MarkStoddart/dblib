@@ -15,12 +15,12 @@ require 'DB.class.php';
  */
 class mysqlDB extends DB implements iDB {
 	
-	private var $db;
-	private var $host;
-	private var $Duser;
-	private var $pass;
-	private var $name;
-	private var $queryCount;
+	private $db;
+	private $host;
+	private $Duser;
+	private $pass;
+	private $name;
+	private $queryCount;
 	
 	/**
 	 * Constructor
