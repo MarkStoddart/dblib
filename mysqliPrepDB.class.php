@@ -39,7 +39,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 * @param	array	$p_params	[Optional] An array of values to replace parameters in the query with
 	 * @return	mixed	Array of results on success, false on failure
 	 */
-	public static function getResult($p_object, $p_params = array()) {
+	public function getResult($p_object, $p_params = array()) {
 		
 		// Check the parameters are the same
 		if($p_object->param_count != count($p_params))
@@ -71,10 +71,13 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 			
 			// Set up the fields in an array
 			$row = array();
-			foreach($fields as $field)
-				$row[$field] = false;
+			foreach($fields as $field) {
+				${$field->table . '_' . $field->name} = false;
+				$row[$field->table . '_' . $field->name] = &${$field->table . '_' . $field->name};
+			}
+			
 			// Bind the results
-			call_user_func_array(array($p_object, 'bind_param'), $row);
+			call_user_func_array(array($p_object, 'bind_result'), $row);
 			
 			// Get the number of rows affected
 			$rows = $p_object->affected_rows;
@@ -82,17 +85,18 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 			$result = array();
 			for($i = 0; $i < $rows; $i++) {
 				$p_object->fetch();
-				$rows[] = $row;
+				die(var_dump($row));
+				$result[] = $row;
 			}
 			
 			// Free the result
 			$p_object->free_result();
 			
 			// Return single array of results or otherwise
-			if($count($rows) == 1)
-				return parent::postDB($rows[0]);
+			if(count($result) == 1)
+				return parent::postDB($result[0]);
 			else
-				return parent::postDB($rows);
+				return parent::postDB($result);
 		}
 	}
 	
@@ -102,8 +106,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 * @param	string	$p_field		Field to fetch
 	 * @param	string	$p_table		Table to get field from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array()) {
@@ -111,7 +114,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		// Prepare values for database checking
 		$p_field = $this->preDB($p_field);
 		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$p_opt = $this->preDB($p_opt);
 		
 		// Build the query
 		$query = "
@@ -136,16 +139,15 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get row from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getRow($p_table, $p_opt = '', $p_opt_values = array()) {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
-		
+		$p_opt = $this->preDB($p_opt);
+				
 		// Build the query
 		$query = "
 			SELECT *
@@ -169,16 +171,15 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get data from
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getRows($p_table, $p_opt = '', $p_opt_values = array()) {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
-		
+		$p_opt = $this->preDB($p_opt);
+				
 		// Build the query
 		$query = "
 			SELECT *
@@ -208,8 +209,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getJoinedFields($p_fields, $p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
@@ -218,8 +218,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		$p_fields = parent::buildSelectString($this->preDB($p_fields));
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
 		$p_joins = parent::buildJoinString($this->preDB($p_joins));
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
-		
+		$p_opt = $this->preDB($p_opt);
+				
 		// Build the query
 		$query = "
 			SELECT {$p_fields}
@@ -235,12 +235,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		if(!$result)
 			$this->errorDB('get_joined_fields', $this->db->error, $query);
 		
-		// Return the resulting field
-		$row = @$result->fetch_array();
-		if(!is_array($p_fields))
-			return $this->postDB($row[0]);
-		else
-			return $this->postDB($row);
+		// Return the query object
+		return $result;
 	}
 	
 	/**
@@ -254,8 +250,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getJoinedRow($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
@@ -263,8 +258,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		// Prepare values for database
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
 		$p_joins = parent::buildJoinString($this->preDB($p_joins));
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
-				
+		$p_opt = $this->preDB($p_opt);
+						
 		// Build the query
 		$query = "
 			SELECT *
@@ -274,14 +269,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 			LIMIT 1
 		";
 		
-		// Get the result and report any errors
-		$result = $this->db->prepare($query);
-		$this->queryCount++;
-		if(!$result)
-			$this->errorDB('get_joined_row', $this->db->error, $query);
-		
-		// Return the resulting row
-		return $this->postDB(@$result->fetch_array());
+		// Return the query object
+		return $result;
 	}
 	
 	/**
@@ -295,8 +284,7 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
+	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
 	public function getJoinedRows($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
@@ -304,8 +292,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		// Prepare values for database
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
 		$p_joins = parent::buildJoinString($this->preDB($p_joins));
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
-				
+		$p_opt = $this->preDB($p_opt);
+						
 		// Build the query
 		$query = "
 			SELECT *
@@ -320,11 +308,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		if(!$result)
 			$this->errorDB('get_joined_rows', $this->db->error, $query);
 		
-		// Return the built array of rows
-		$return = array();
-		while($temp = $result->fetch_array())
-			$return[] = $temp;
-		return $this->postDB($return);
+		// Return the query object
+		return $result;
+		
 	}
-	
 }

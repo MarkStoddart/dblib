@@ -62,7 +62,7 @@ abstract class DB {
 		if(is_array($p_var)) {
 			$new_array = array();
 			foreach($p_var as $key => $value)
-				$new_array[addslashes(htmlspecialchars_decode($key))] = $this->preDB($value);
+				$new_array[addslashes(htmlspecialchars_decode($key))] = self::preDB($value);
 			return $new_array;
 		} else
 			return addslashes(htmlspecialchars_decode($p_var));
@@ -85,7 +85,7 @@ abstract class DB {
 		if(is_array($p_var)) {
 			$new_array = array();
 			foreach($p_var as $key => $value)
-				$new_array[htmlspecialchars(stripslashes($key))] = $this->postDB($value);
+				$new_array[htmlspecialchars(stripslashes($key))] = self::postDB($value);
 			return $new_array;
 		} else
 			return htmlspecialchars(stripslashes($p_var));
