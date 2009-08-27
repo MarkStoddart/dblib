@@ -159,20 +159,25 @@ abstract class DB {
 	 * Build a WHERE/GROUP/ORDER/LIMIT string using the given MySQL command string
 	 * and a set of values that are to be used in replacements with ?
 	 *
-	 * @param string $p_opt Raw MySQL string
-	 * @param array $p_opt_values Array of values to use in replacements
-	 * @return string Correctly formatted and escaped string
+	 * @param	string	$p_opt Raw MySQL string
+	 * @param	mixed	$p_opt_values Array of values or string to use in replacements
+	 * @return	string	Correctly formatted and escaped string
 	 */
 	protected function buildOptString($p_opt, $p_opt_values) {
 		
-		// Get matches
-		preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
-		
 		// Go through each match and replace the ? if a value exists
-		foreach($matches as $id => $match) {
-			if(isset($p_opt_values[$id]))
-				$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values[$id]) . "'", $p_opt, 1);
-		}
+		if(is_array($p_opt_values)) {
+
+			// Get matches
+			preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
+			
+			// Replace all matches found
+			foreach($matches as $id => $match) {
+				if(isset($p_opt_values[$id]))
+					$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values[$id]) . "'", $p_opt, 1);
+			}
+		} else
+			$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values) . "'", $p_opt, 1);
 		
 		// Return the finished string
 		return $p_opt;

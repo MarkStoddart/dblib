@@ -152,11 +152,11 @@ class mysqlDB extends DB implements iDB {
 	 * @param	string	$p_field		Field to fetch
 	 * @param	string	$p_table		Table to get field from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = '') {
 
 		// Prepare values for database checking
 		$p_field = $this->preDB($p_field);
@@ -186,11 +186,11 @@ class mysqlDB extends DB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get row from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getRow($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getRow($p_table, $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
@@ -219,11 +219,11 @@ class mysqlDB extends DB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get data from
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	mixed	Result
 	 */
-	public function getRows($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getRows($p_table, $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
@@ -254,11 +254,11 @@ class mysqlDB extends DB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get data from
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	int		Number of rows
 	 */
-	public function getNumRows($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getNumRows($p_table, $p_opt = '', $p_opt_values = '') {
 
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
@@ -287,11 +287,11 @@ class mysqlDB extends DB implements iDB {
 	 * @param	string	$p_table		Table to perform update on
 	 * @param	array	$p_data			K=>V array of columns and data
 	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	boolean	Successful update or not
 	 */
-	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
+	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = '') {
 		
 		// Sort out values for database query
 		$p_table = $this->preDB($p_table);
@@ -327,11 +327,11 @@ class mysqlDB extends DB implements iDB {
 	 * @param	string	$p_table		Table to perform update on
 	 * @param	array	$p_data			K=>V array of columns and data
 	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	boolean	Successful update or not
 	 */
-	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array()) {
+	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = '') {
 
 		// Sort out values for database query
 		$p_table = $this->preDB($p_table);
@@ -371,11 +371,11 @@ class mysqlDB extends DB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to delete from
 	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	array	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
+	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *										each ? will be replaced with a value, to escape use \?
 	 * @return	boolean	Query was successful or not
 	 */
-	public function deleteRows($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function deleteRows($p_table, $p_opt = '', $p_opt_values = '') {
 
 		// Sort out values for database query
 		$p_table = $this->preDB($p_table);

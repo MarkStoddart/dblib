@@ -22,13 +22,13 @@ interface iDB {
 	public function preDB($p_var);
 	public function postDB($p_var);
 	
-	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array());
-	public function getRow($p_table, $p_opt = '', $p_opt_values = array());
-	public function getRows($p_table, $p_opt = '', $p_opt_values = array());
-	public function getNumRows($p_table, $p_opt = '', $p_opt_values = array());
+	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = '');
+	public function getRow($p_table, $p_opt = '', $p_opt_values = '');
+	public function getRows($p_table, $p_opt = '', $p_opt_values = '');
+	public function getNumRows($p_table, $p_opt = '', $p_opt_values = '');
 	
-	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = array());
-	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = array());
-	public function deleteRows($p_table, $p_opt = '', $p_opt_values = array());
+	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = '');
+	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = '');
+	public function deleteRows($p_table, $p_opt = '', $p_opt_values = '');
 	
 }

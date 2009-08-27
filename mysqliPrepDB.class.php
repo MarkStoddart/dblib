@@ -105,10 +105,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 * @param	string	$p_field		Field to fetch
 	 * @param	string	$p_table		Table to get field from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = '') {
 
 		// Prepare values for database checking
 		$p_field = $this->preDB($p_field);
@@ -137,10 +137,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get row from
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getRow($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getRow($p_table, $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
@@ -168,10 +168,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *
 	 * @param	string	$p_table		Table to get data from
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getRows($p_table, $p_opt = '', $p_opt_values = array()) {
+	public function getRows($p_table, $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_table = $this->preDB($p_table);
@@ -205,10 +205,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getJoinedFields($p_fields, $p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+	public function getJoinedFields($p_fields, $p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = '') {
 
 		// Prepare values for database checking
 		$p_fields = parent::buildSelectString($this->preDB($p_fields));
@@ -245,10 +245,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getJoinedRow($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+	public function getJoinedRow($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
@@ -284,10 +284,10 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 *									string local Local key to join on
 	 *									string foreign Foreign key to join on
 	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	array	$p_opt_values	[Optional] This is ignored, but ? are replaced
+	 * @param	mixed	$p_opt_values	[Optional] This is ignored, but ? are replaced
 	 * @return	mixed	Result
 	 */
-	public function getJoinedRows($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = array()) {
+	public function getJoinedRows($p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = '') {
 		
 		// Prepare values for database
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
