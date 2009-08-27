@@ -169,12 +169,12 @@ abstract class DB {
 		if(is_array($p_opt_values)) {
 
 			// Get matches
-			preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
+			$num_matches = preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
 			
 			// Replace all matches found
-			foreach($matches as $id => $match) {
-				if(isset($p_opt_values[$id]))
-					$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values[$id]) . "'", $p_opt, 1);
+			for($i = 0; $i < $num_matches; $i++) {
+				if(isset($p_opt_values[$i]))
+					$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values[$i]) . "'", $p_opt, 1);
 			}
 		} else
 			$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values) . "'", $p_opt, 1);
