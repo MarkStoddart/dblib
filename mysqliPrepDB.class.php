@@ -47,6 +47,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 		else {
 			// Bind each parameter
 			$bind_string = '';
+			if(!is_array($p_params))
+				$p_params = array($p_params);
 			foreach($p_params as $param_id => $param) {
 				if(is_float($param))
 					$bind_string .= 'd';
@@ -55,7 +57,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 				else
 					$bind_string .= 's';
 			}
-			// Esacpe the parameters using the preDB function
+			
+			// Escape the parameters using the preDB function
 			$p_params = parent::preDB($p_params);
 			$params = array_merge(array($bind_string), $p_params);
 			call_user_func_array(array($p_object, 'bind_param'), $params);
