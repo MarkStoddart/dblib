@@ -511,7 +511,7 @@ class mysqliDB extends DB implements iDB {
 		
 		$values = array();
 		foreach($p_data as $value)
-			$values[] = "'" . $values . "'";
+			$values[] = "'" . $value . "'";
 		$values = join(', ', $values);
 		
 		// Build the query
