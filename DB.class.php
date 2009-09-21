@@ -54,7 +54,7 @@ abstract class DB {
 	protected function preDB($p_var) {
 		
 		// Make sure any false variables are returned as passed
-		if(!$p_var)
+		if($p_var === false)
 			return false;
 		
 		// Use a recursive call if the variable is an array, to make sure it
@@ -77,7 +77,7 @@ abstract class DB {
 	protected function postDB($p_var) {
 		
 		// Make sure any false variables are returned as passed
-		if(!$p_var)
+		if($p_var === false)
 			return false;
 
 		// Use a recursive call if the variable is an array, to make sure it
