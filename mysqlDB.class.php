@@ -397,4 +397,13 @@ class mysqlDB extends DB implements iDB {
 		return $result;
 	}
 	
+	/**
+	 * Get the last inserted row's ID
+	 *
+	 * @return	string	Auto-increment ID value of last insert
+	 */
+	public function insertID() {
+		return mysql_insert_id($this->db);
+	}
+	
 }

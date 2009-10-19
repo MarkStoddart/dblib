@@ -561,5 +561,14 @@ class mysqliDB extends DB implements iDB {
 		// Return the query result
 		return $result;
 	}
-	
+
+	/**
+	 * Get the last inserted row's ID
+	 *
+	 * @return	string	Auto-increment ID value of last insert
+	 */
+	public function insertID() {
+		return $this->db->insert_id;
+	}
+		
 }
