@@ -292,7 +292,11 @@ class mysqliDB extends DB implements iDB {
 	 * @return	mixed	Result
 	 */
 	public function getJoinedFields($p_fields, $p_tables, $p_joins = array(), $p_opt = '', $p_opt_values = '') {
-
+		
+		// Check if fields is an array
+		if(is_array($p_fields))
+			$fields_array = true;
+		
 		// Prepare values for database checking
 		$p_fields = parent::buildSelectString($this->preDB($p_fields));
 		$p_tables = parent::buildFromString($this->preDB($p_tables));
@@ -316,10 +320,10 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the resulting field
 		$row = @$result->fetch_array();
-		if(!is_array($p_fields))
-			return $this->postDB($row[0]);
-		else
+		if($fields_array)
 			return $this->postDB($row);
+		else
+			return $this->postDB($row[0]);
 	}
 	
 	/**
