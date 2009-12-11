@@ -29,7 +29,8 @@ class mysqliPrepDB extends mysqliDB implements iDB {
 	 * Close the database
 	 */
 	public function __destruct() {
-		parent::closeDB();
+		if(DBLIB_AUTO_CLOSE)
+			parent::closeDB();
 	}
 	
 	/**

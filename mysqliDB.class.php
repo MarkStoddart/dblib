@@ -39,7 +39,8 @@ class mysqliDB extends DB implements iDB {
 	 * Close the database
 	 */
 	public function __destruct() {
-		$this->closeDB();
+		if(DBLIB_AUTO_CLOSE)
+			$this->closeDB();
 	}
 	
 	/**
