@@ -77,6 +77,7 @@ abstract class DB {
 				return addslashes(htmlspecialchars_decode($p_var));
 			else
 				return htmlspecialchars_decode($p_var);
+		}
 	}
 
 	/**
