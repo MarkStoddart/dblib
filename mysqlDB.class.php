@@ -212,7 +212,7 @@ class mysqlDB extends DB implements iDB {
 			$this->errorDB('get_row', mysql_error($this->db), $query);
 		
 		// Return the resulting row
-		return $this->postDB(@mysql_fetch_array($result));
+		return $this->postDB(@mysql_fetch_assoc($result));
 	}
 	
 	/**
@@ -245,7 +245,7 @@ class mysqlDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = mysql_fetch_array($result))
+		while($temp = mysql_fetch_assoc($result))
 			$return[] = $temp;
 		return $this->postDB($return);
 	}

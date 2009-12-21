@@ -206,7 +206,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_row', $this->db->error, $query);
 		
 		// Return the resulting row
-		return $this->postDB(@$result->fetch_array());
+		return $this->postDB(@$result->fetch_assoc());
 	}
 	
 	/**
@@ -239,7 +239,7 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_array())
+		while($temp = $result->fetch_assoc())
 			$return[] = $temp;
 		return $this->postDB($return);
 	}
@@ -365,7 +365,7 @@ class mysqliDB extends DB implements iDB {
 			$this->errorDB('get_joined_row', $this->db->error, $query);
 		
 		// Return the resulting row
-		return $this->postDB(@$result->fetch_array());
+		return $this->postDB(@$result->fetch_assoc());
 	}
 	
 	/**
@@ -406,7 +406,7 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_array())
+		while($temp = $result->fetch_assoc())
 			$return[] = $temp;
 		return $this->postDB($return);
 	}
