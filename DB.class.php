@@ -12,11 +12,16 @@
  */
 abstract class DB {
 	
+	protected $strip_enabled = true;
+	
 	/**
 	 * Constructor
 	 */
 	protected function __construct() {
 		
+		// Check for magic quotes
+		if(get_magic_quotes_gpc())
+			$this->strip_enabled = false;
 	}
 	
 	/**
@@ -62,10 +67,16 @@ abstract class DB {
 		if(is_array($p_var)) {
 			$new_array = array();
 			foreach($p_var as $key => $value)
-				$new_array[addslashes(htmlspecialchars_decode($key))] = self::preDB($value);
+				if($this->strip_enabled)
+					$new_array[addslashes(htmlspecialchars_decode($key))] = self::preDB($value);
+				else
+					$new_array[htmlspecialchars_decode($key)] = self::preDB($value);
 			return $new_array;
-		} else
-			return addslashes(htmlspecialchars_decode($p_var));
+		} else {
+			if($this->strip_enabled)
+				return addslashes(htmlspecialchars_decode($p_var));
+			else
+				return htmlspecialchars_decode($p_var);
 	}
 
 	/**
