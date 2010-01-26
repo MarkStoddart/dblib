@@ -35,7 +35,7 @@ abstract class DB {
 
 		// Only provide detailed output in debug mode
 		echo '<p>';
-		if(DBLIB_DEBUG) {
+		if(DBLIB_DEBUG === true && defined('DBLIB_DEBUG')) {
 			echo 'Query error in context "' . $p_error . '":<br /><strong>'
 					. $p_db_error . 
 					'</strong><br /><br />';
