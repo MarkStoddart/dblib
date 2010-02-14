@@ -3,8 +3,9 @@
 /**
  * Standard database class using traditional PHP MySQL functions
  * 
+ * @package dblib
  * @author Jamie Hurst
- * @version 1.0
+ * @version 1.1
  */
 
 require 'iDB.interface.php';
@@ -15,22 +16,22 @@ require 'DB.class.php';
  */
 class mysqlDB extends DB implements iDB {
 	
-	private $db;
-	private $host;
-	private $user;
-	private $pass;
-	private $name;
-	private $queryCount;
+	protected $_db;
+	protected $_host;
+	protected $_user;
+	protected $_pass;
+	protected $_name;
+	protected $_queryCount;
 	
 	/**
 	 * Constructor
 	 * Use the provided DB variable if set, otherwise don't connect just yet
 	 * 
-	 * @param	mixed	$p_db	[Optional] MySQL connection link
+	 * @param mixed $db [Optional] MySQL connection link
 	 */
-	public function __construct($p_db = false) {
-		$this->db = $p_db;
-		$this->queryCount = 0;
+	public function __construct($db = null) {
+		$this->_db = $db;
+		$this->_queryCount = 0;
 		parent::__construct();
 	}
 	
@@ -39,65 +40,51 @@ class mysqlDB extends DB implements iDB {
 	 * Close the database
 	 */
 	public function __destruct() {
-		if(DBLIB_AUTO_CLOSE)
+		if($this->_autoClose)
 			$this->closeDB();
-	}
-	
-	/**
-	 * Handle any database errors
-	 *
-	 * @param	string	$p_error	Error context
-	 * @param	string	$p_db_error	Error given from DB
-	 * @param	string	$p_query	[Optional] Query from where the error happened
-	 */
-	protected function errorDB($p_error, $p_db_error = '', $p_query = '') {
-
-		// Pass up to the parent class
-		parent::errorDB($p_error, $p_db_error, $p_query);
-		
 	}
 	
 	/**
 	 * Set the parameters used to connect to the database
 	 * 
-	 * @param	string	$p_host	[Optional] Database host
-	 * @param	string	$p_user	[Optional] Database username
-	 * @param	string	$p_pass	[Optional] Database password
-	 * @param	string	$p_db	[Optional] Database to use
+	 * @param string $host [Optional] Database host
+	 * @param string $user [Optional] Database username
+	 * @param string $pass [Optional] Database password
+	 * @param string $db [Optional] Database to use
 	 */
-	public function setupDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null) {
-		if(!is_null($p_host))
-			$this->host = $p_host;
-		if(!is_null($p_user))
-			$this->user = $p_user;
-		if(!is_null($p_pass))
-			$this->pass = $p_pass;
-		if(!is_null($p_db))
-			$this->name = $p_db;
+	public function setupDB($host = null, $user = null, $pass = null, $db = null) {
+		if(!is_null($host))
+			$this->_host = $host;
+		if(!is_null($user))
+			$this->_user = $user;
+		if(!is_null($pass))
+			$this->_pass = $pass;
+		if(!is_null($db))
+			$this->_name = $db;
 	}
 	
 	/**
 	 * Connect to the database using the parameters given, or those already present
 	 * 
-	 * @param	string	$p_host	[Optional] Database host
-	 * @param	string	$p_user	[Optional] Database username
-	 * @param	string	$p_pass	[Optional] Database password
-	 * @param	string	$p_db	[Optional] Database to use
-	 * @return	boolean	Success or not
+	 * @param string $host [Optional] Database host
+	 * @param string $user [Optional] Database username
+	 * @param string $pass [Optional] Database password
+	 * @param string $db [Optional] Database to use
+	 * @return boolean Success or not
 	 */
-	public function connectDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null) {
+	public function connectDB($host = null, $user = null, $pass = null, $db = null) {
 		// Call setupDB() to handle the parameters
-		$this->setupDB($p_host, $p_user, $p_pass, $p_db);
+		$this->setupDB($host, $user, $pass, $db);
 		
 		// Attempt a connection
-		$this->db = mysql_connect($this->host, $this->user, $this->pass);
-		if(!$this->db) {
+		$this->_db = mysql_connect($this->_host, $this->_user, $this->_pass);
+		if(!$this->_db) {
 			$this->errorDB('connect');
 			return false;
 		}
 		
 		// Select the database to use
-		$select = mysql_select_db($this->name, $this->db);
+		$select = mysql_select_db($this->_name, $this->_db);
 		if(!$select) {
 			$this->errorDB('connect_db');
 			return false;
@@ -110,8 +97,8 @@ class mysqlDB extends DB implements iDB {
 	 * Close the active database connection if one exists
 	 */
 	public function closeDB() {
-		if($this->db)
-			mysql_close($this->db);
+		if($this->_db)
+			mysql_close($this->_db);
 	}
 	
 	/**
@@ -120,96 +107,81 @@ class mysqlDB extends DB implements iDB {
 	 * @return	int	Query count
 	 */
 	public function getQueryCount() {
-		return $this->queryCount;
-	}
-	
-	/**
-	 * Prepare a variable to be used in a database query
-	 *
-	 * @param mixed $p_var Any variable
-	 * @return mixed Variable post-processing
-	 */
-	public function preDB($p_var) {
-		
-		// Pass control to parent
-		return parent::preDB($p_var);
-	}
-
-	/**
-	 * Prepare a variable result from a database to be used 
-	 *
-	 * @param mixed $p_var Any variable
-	 * @return mixed Variable post-processing
-	 */
-	public function postDB($p_var) {
-		
-		// Pass control to parent
-		return parent::postDB($p_var);
+		return $this->_queryCount;
 	}
 	
 	/**
 	 * Get a single field from a database using a table and a where query
 	 *
-	 * @param	string	$p_field		Field to fetch
-	 * @param	string	$p_table		Table to get field from
-	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	mixed	Result
+	 * @param string $field Field to fetch
+	 * @param string $table Table to get field from
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
 	 */
-	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = '') {
+	public function getField($field, $table, $opt = '', $optValues = '') {
 
 		// Prepare values for database checking
-		$p_field = $this->preDB($p_field);
-		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
-			SELECT `{$p_field}`
-			FROM `{$p_table}`
-			{$p_opt}
+			SELECT `{$field}`
+			FROM `{$table}`
+			{$opt}
 			LIMIT 1
 		";
 		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+		
 		// Run the query and report all errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			$this->errorDB('get_field', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_field', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the resulting field
 		return $this->postDB(@mysql_result($result, 0));
 	}
-	
+
 	/**
 	 * Get a single row from a database
 	 *
-	 * @param	string	$p_table		Table to get row from
-	 * @param	string	$p_opt			[Optional] Any options, such as WHERE clauses
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	mixed	Result
+	 * @param string $table Table to get row from
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
 	 */
-	public function getRow($p_table, $p_opt = '', $p_opt_values = '') {
+	public function getRow($table, $opt = '', $optValues = '') {
 		
 		// Prepare values for database
-		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$p_table}`
-			{$p_opt}
+			FROM `{$table}`
+			{$opt}
 			LIMIT 1
 		";
 		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+		
 		// Get the result and report any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			$this->errorDB('get_row', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_row', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the resulting row
 		return $this->postDB(@mysql_fetch_assoc($result));
@@ -218,30 +190,35 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Get multiple rows from a database, fetch them in an array
 	 *
-	 * @param	string	$p_table		Table to get data from
-	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	mixed	Result
+	 * @param string $table Table to get data from
+	 * @param string $opt [Optional] Any MySQL commands to pass, such as WHERE
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
 	 */
-	public function getRows($p_table, $p_opt = '', $p_opt_values = '') {
+	public function getRows($table, $opt = '', $optValues = '') {
 		
 		// Prepare values for database
-		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$p_table}`
-			{$p_opt}
+			FROM `{$table}`
+			{$opt}
 		";
 		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+			
 		// Get the result, report any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			$this->errorDB('get_rows', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_rows', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the built array of rows
 		$return = array();
@@ -253,31 +230,234 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Get the number of rows returned from a query
 	 *
-	 * @param	string	$p_table		Table to get data from
-	 * @param	string	$p_opt			[Optional] Any MySQL commands to pass, such as WHERE
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	int		Number of rows
+	 * @param string $table Table to get data from
+	 * @param string $opt [Optional] Any MySQL commands to pass, such as WHERE
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return int Number of rows
 	 */
-	public function getNumRows($p_table, $p_opt = '', $p_opt_values = '') {
+	public function getNumRows($table, $opt = '', $optValues = '') {
 
 		// Prepare values for database
-		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$p_table}`
-			{$p_opt}
+			FROM `{$table}`
+			{$opt}
 		";
 
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
 		// Get the result, report any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			$this->errorDB('get_num_rows', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_num_rows', mysql_error($this->_db), $query);
+			return false;
+		}
 		
+		// Return the number of rows
+		return mysql_num_rows($result);
+	}
+	
+	/**
+	 * Get one or more fields from a database using a table and a where query,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param string $fields Fields to fetch
+	 * @param string $tables Tables to get fields from
+	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
+	 *						string type Type of join, e.g. left
+	 *						string table Table to join with optional alias
+	 *						string local Local key to join on
+	 *						string foreign Foreign key to join on
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getJoinedFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
+		
+		// Check if fields is an array
+		if(is_array($fields))
+			$fieldsArray = true;
+		
+		// Prepare values for database checking
+		$fields = $this->buildSelectString($fields);
+		$tables = $this->buildFromString($tables);
+		$joins = $this->buildJoinString($joins);
+		$opt = $this->buildOptString($opt, $optValues);
+		
+		// Build the query
+		$query = "
+			SELECT {$fields}
+			FROM {$tables}
+			{$joins}
+			{$opt}
+			LIMIT 1
+		";
+		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+		
+		// Run the query and report all errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_joined_fields', mysql_error($this->_db), $query);
+			return false;
+		}
+		
+		// Return the resulting field
+		if($fieldsArray)
+			return $this->postDB(mysql_fetch_assoc($result));
+		else
+			return $this->postDB(@mysql_result($result, 0));
+	}
+	
+	/**
+	 * Get one row from a database using a table and a where query,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param string $tables Tables to get fields from
+	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
+	 *						string type Type of join, e.g. left
+	 *						string table Table to join with optional alias
+	 *						string local Local key to join on
+	 *						string foreign Foreign key to join on
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getJoinedRow($tables, $joins = array(), $opt = '', $optValues = '') {
+		
+		// Prepare values for database checking
+		$tables = $this->buildFromString($tables);
+		$joins = $this->buildJoinString($joins);
+		$opt = $this->buildOptString($opt, $optValues);
+		
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$tables}
+			{$joins}
+			{$opt}
+			LIMIT 1
+		";
+		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+		
+		// Run the query and report all errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_joined_row', mysql_error($this->_db), $query);
+			return false;
+		}
+		
+		// Return the resulting field
+		return $this->postDB(mysql_fetch_assoc($result));
+	}
+	
+	/**
+	 * Get multiple rows from a database, fetch them in an array,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param string $tables Tables to get fields from
+	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
+	 *						string type Type of join, e.g. left
+	 *						string table Table to join with optional alias
+	 *						string local Local key to join on
+	 *						string foreign Foreign key to join on
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getJoinedRows($tables, $joins = array(), $opt = '', $optValues = '') {
+
+		// Prepare values for database checking
+		$tables = $this->buildFromString($tables);
+		$joins = $this->buildJoinString($joins);
+		$opt = $this->buildOptString($opt, $optValues);
+
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$tables}
+			{$joins}
+			{$opt}
+		";
+
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
+		// Run the query and report all errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_joined_rows', mysql_error($this->_db), $query);
+			return false;
+		}
+		
+		// Return the built array of rows
+		$return = array();
+		while($temp = mysql_fetch_assoc($result))
+			$return[] = $temp;
+		return $this->postDB($return);
+	}
+	
+	/**
+	 * Get the number of rows returned from a query,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param string $tables Tables to get fields from
+	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
+	 *						string type Type of join, e.g. left
+	 *						string table Table to join with optional alias
+	 *						string local Local key to join on
+	 *						string foreign Foreign key to join on
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getNumJoinedRows($tables, $joins = array(), $opt = '', $optValues = '') {
+
+		// Prepare values for database checking
+		$tables = $this->buildFromString($tables);
+		$joins = $this->buildJoinString($joins);
+		$opt = $this->buildOptString($opt, $optValues);
+
+		// Build the query
+		$query = "
+			SELECT *
+			FROM {$tables}
+			{$joins}
+			{$opt}
+		";
+
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
+		// Run the query and report all errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_joined_num_rows', mysql_query($this->_db), $query);
+			return false;
+		}
+
 		// Return the number of rows
 		return mysql_num_rows($result);
 	}
@@ -285,38 +465,43 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Update one or more table rows
 	 *
-	 * @param	string	$p_table		Table to perform update on
-	 * @param	array	$p_data			K=>V array of columns and data
-	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	boolean	Successful update or not
+	 * @param string $table Table to perform update on
+	 * @param array $data K=>V array of columns and data
+	 * @param string $opt [Optional] Any WHERE clauses or other options
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return boolean Successful update or not
 	 */
-	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = '') {
+	public function updateRows($table, $data, $opt = '', $optValues = '') {
 		
 		// Sort out values for database query
-		$p_table = $this->preDB($p_table);
-		$p_data = $this->preDB($p_data);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$data = $this->preDB($data);
+		$opt = $this->buildOptString($opt, $optValues);
 	
 		// Join up data
 		$updates = array();
-		foreach($p_data as $key => $value)
-			$updates[] = "`{$key}` = '{$value}'";
-		$updates = join(', ', $updates);
+		foreach($data as $key => $value)
+			$updates[] = "`{$key}` = {$value}";
+		$data = join(', ', $updates);
 		
 		// Build the query
 		$query = "
-			UPDATE `{$p_table}`
-			SET {$updates}
-			{$p_opt}
+			UPDATE `{$table}`
+			SET {$data}
+			{$opt}
 		";
 		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
 		// Get the result and sort out any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			self::errorDB('update_rows', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('update_rows', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the query result
 		return $result;
@@ -325,43 +510,43 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Insert a row into the database
 	 * 
-	 * @param	string	$p_table		Table to perform update on
-	 * @param	array	$p_data			K=>V array of columns and data
-	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	boolean	Successful update or not
+	 * @param string $table Table to perform update on
+	 * @param array $data K=>V array of columns and data
+	 * @return boolean Successful update or not
 	 */
-	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = '') {
+	public function insertRow($table, $data) {
 
 		// Sort out values for database query
-		$p_table = $this->preDB($p_table);
-		$p_data = $this->preDB($p_data);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$data = $this->preDB($data);
 			
 		// Join up data
 		$fields = array();
-		foreach(array_keys($p_data) as $field)
+		foreach(array_keys($data) as $field)
 			$fields[] = '`' . $field . '`';
 		$fields = join(', ', $fields);
 		
 		$values = array();
-		foreach($p_data as $value)
-			$values[] = "'" . $value . "'";
+		foreach($data as $value)
+			$values[] = $value;
 		$values = join(', ', $values);
 		
 		// Build the query
 		$query = "
-			INSERT INTO `{$p_table}`
+			INSERT INTO `{$table}`
 			({$fields}) VALUES ({$values})
-			{$p_opt}
 		";
 			
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
 		// Get the result and sort out any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			self::errorDB('insert_row', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('insert_row', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the query result
 		return $result;
@@ -370,29 +555,34 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Delete one or more rows from the database
 	 *
-	 * @param	string	$p_table		Table to delete from
-	 * @param	string	$p_opt			[Optional] Any WHERE clauses or other options
-	 * @param	mixed	$p_opt_values	[Optional] An optional set of values to escape and replace into the $p_opt string,
-	 *										each ? will be replaced with a value, to escape use \?
-	 * @return	boolean	Query was successful or not
+	 * @param string $table Table to delete from
+	 * @param string $opt [Optional] Any WHERE clauses or other options
+	 * @param mixed	$optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return boolean Query was successful or not
 	 */
-	public function deleteRows($p_table, $p_opt = '', $p_opt_values = '') {
+	public function deleteRows($table, $opt = '', $optValues = '') {
 
 		// Sort out values for database query
-		$p_table = $this->preDB($p_table);
-		$p_opt = parent::buildOptString($p_opt, $p_opt_values);
+		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build query
 		$query = "
-			DELETE FROM `{$p_table}`
-			{$p_opt}
+			DELETE FROM `{$table}`
+			{$opt}
 		";
 		
+		// Check if the query needs to be printed
+		if($this->_printQueries)
+			return $query;
+
 		// Get the result and sort out any errors
-		$result = mysql_query($query, $this->db);
-		$this->queryCount++;
-		if(!$result)
-			self::errorDB('delete_rows', mysql_error($this->db), $query);
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('delete_rows', mysql_error($this->_db), $query);
+			return false;
+		}
 		
 		// Return the query result
 		return $result;
@@ -401,10 +591,10 @@ class mysqlDB extends DB implements iDB {
 	/**
 	 * Get the last inserted row's ID
 	 *
-	 * @return	string	Auto-increment ID value of last insert
+	 * @return int Auto-increment ID value of last insert
 	 */
 	public function insertID() {
-		return mysql_insert_id($this->db);
+		return mysql_insert_id($this->_db);
 	}
 	
 }

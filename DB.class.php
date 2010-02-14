@@ -3,8 +3,9 @@
 /**
  * Superclass for all database classes, provides common functionality
  * 
+ * @package dblib
  * @author Jamie Hurst
- * @version 1.0
+ * @version 1.1
  */
 
 /**
@@ -12,146 +13,271 @@
  */
 abstract class DB {
 	
-	protected $strip_enabled = true;
+	// Set up some useful options
+	protected $_stripEnabled = true;
+	protected $_debug = false;
+	protected $_autoClose = true;
+	protected $_caching = true;
+	protected $_exitOnError = true;
+	protected $_getQueries = false;
+	protected $_adminEmail = false;
 	
 	/**
 	 * Constructor
 	 */
 	protected function __construct() {
-		
 		// Check for magic quotes
 		if(get_magic_quotes_gpc())
-			$this->strip_enabled = false;
+			$this->_stripEnabled = false;
 	}
 	
 	/**
+	 * Set the value of debug
+	 *
+	 * @param boolean $value Value to set
+	 * @return object For chaining
+	 */
+	public function setDebug($value) {
+		$this->_debug = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get debug value
+	 *
+	 * @return boolean Debug value
+	 */
+	public function getDebug() {
+		return $this->_debug;
+	}
+		
+	/**
+	 * Set the value of auto close
+	 *
+	 * @param boolean $value Value to set
+	 * @return object For chaining
+	 */
+	public function setAutoClose($value) {
+		$this->_autoClose = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get auto close value
+	 *
+	 * @return boolean Auto close value
+	 */
+	public function getAutoClose() {
+		return $this->_autoClose;
+	}
+		
+	/**
+	 * Set the value of caching
+	 *
+	 * @param boolean $value Value to set
+	 * @return object For chaining
+	 */
+	public function setCaching($value) {
+		$this->_caching = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get caching value
+	 *
+	 * @return boolean Caching value
+	 */
+	public function getCaching() {
+		return $this->_caching;
+	}
+		
+	/**
+	 * Set the value of exit on error
+	 *
+	 * @param boolean $value Value to set
+	 * @return object For chaining
+	 */
+	public function setExitOnError($value) {
+		$this->_exitOnError = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get exit on error value
+	 *
+	 * @return boolean Exit on error value
+	 */
+	public function getExitOnError() {
+		return $this->_exitOnError;
+	}
+		
+	/**
+	 * Set the value of get queries
+	 *
+	 * @param boolean $value Value to set
+	 * @return object For chaining
+	 */
+	public function setGettQueries($value) {
+		$this->_getQueries = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get get queries value
+	 *
+	 * @return boolean Get queries value
+	 */
+	public function getGetQueries() {
+		return $this->_getQueries;
+	}
+		
+	/**
+	 * Set the value of admin email
+	 *
+	 * @param mixed $value Value to set
+	 * @return object For chaining
+	 */
+	public function setAdminEmail($value) {
+		$this->_adminEmail = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get admin email value
+	 *
+	 * @return mixed Admin email value
+	 */
+	public function getAdminEmail() {
+		return $this->_adminEmail;
+	}
+		
+	/**
 	 * Handle any database errors
 	 *
-	 * @param	string	$p_error	Error context
-	 * @param	string	$p_db_error	Error given from DB
-	 * @param	string	$p_query	[Optional] Query from where the error happened
+	 * @param string $error Error context
+	 * @param string $dbError Error given from DB
+	 * @param string $query [Optional] Query from where the error happened
 	 */
-	protected function errorDB($p_error, $p_db_error = '', $p_query = '') {
+	protected function errorDB($error, $dbError = '', $query = '') {
 
 		// Only provide detailed output in debug mode
-		echo '<p>';
-		if(DBLIB_DEBUG === true && defined('DBLIB_DEBUG')) {
-			echo 'Query error in context "' . $p_error . '":<br /><strong>'
-					. $p_db_error . 
+		echo '<p class="db_error">';
+		if($this->_debug) {
+			echo 'Query error in context "' . $error . '":<br /><strong>'
+					. $dbError . 
 					'</strong><br /><br />';
-			if(!empty($p_query))
-				echo '<em>' . $p_query . '</em>';
+			if(!empty($query))
+				echo '<em>' . $query . '</em>';
 		} else {
 			echo 'A database error occurred when performing the last operation. The system administrator has been informed.';
-			// TODO Need to configure an email for an error here!
+			if($this->_adminEmail)
+				mail($this->_adminEmail, 'DBLIB -> DB Error (' . $error . ')', 'A database error occurred in context "' . $error . '".' . "\n\n" . $dbError . "\n\n" . 'Query: ' . $query);
 		}
 		echo '</p>';
-		// TODO Think about whether we need this exit or not...
-		exit;
+		if($this->_exitOnError)
+			exit;
 	}
 	
 	/**
 	 * Prepare a variable to be used in a database query
 	 *
-	 * @param	mixed	$p_var	Any variable
-	 * @return	mixed	Variable post-processing
+	 * @param mixed	$var Any variable
+	 * @return mixed Variable post-processing
 	 */
-	protected function preDB($p_var) {
+	protected function preDB($var) {
 		
-		// Make sure any false variables are returned as passed
-		if($p_var === false)
+		// Make sure any false variables are returned as passed and the same with nulls
+		if($var === false)
 			return false;
+		elseif($var === null || $var == 'NULL')
+			return 'NULL';
 		
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
-		if(is_array($p_var)) {
-			$new_array = array();
-			foreach($p_var as $key => $value)
-				if($this->strip_enabled)
-					$new_array[addslashes(htmlspecialchars_decode($key))] = self::preDB($value);
+		if(is_array($var)) {
+			$newArray = array();
+			foreach($var as $key => $value)
+				if($this->_stripEnabled)
+					$newArray[mysql_real_escape_string(html_entity_decode($key))] = self::preDB($value);
 				else
-					$new_array[htmlspecialchars_decode($key)] = self::preDB($value);
-			return $new_array;
+					$newArray[html_entity_decode($key)] = self::preDB($value);
+			return $newArray;
 		} else {
-			if($this->strip_enabled)
-				return addslashes(htmlspecialchars_decode($p_var));
+			if($this->_stripEnabled)
+				return "'" . mysql_real_escape_string(html_entity_decode($var)) . "'";
 			else
-				return htmlspecialchars_decode($p_var);
+				return "'" . html_entity_decode($var) . "'";
 		}
 	}
 
 	/**
 	 * Prepare a variable result from a database to be used 
 	 *
-	 * @param	mixed	$p_var	Any variable
-	 * @return	mixed	Variable post-processing
+	 * @param mixed $var Any variable
+	 * @return mixed Variable post-processing
 	 */
-	protected function postDB($p_var) {
+	protected function postDB($var) {
 		
-		// Make sure any false variables are returned as passed
-		if($p_var === false)
+		// Make sure any false and null variables are returned as passed
+		if($var === false)
 			return false;
+		elseif($var === null || $var == 'NULL')
+			return null;
 
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
-		if(is_array($p_var)) {
-			$new_array = array();
-			foreach($p_var as $key => $value)
-				$new_array[htmlspecialchars(stripslashes($key))] = self::postDB($value);
-			return $new_array;
+		if(is_array($var)) {
+			$newArray = array();
+			foreach($var as $key => $value)
+				$newArray[htmlentities(stripslashes($key))] = self::postDB($value);
+			return $newArray;
 		} else
-			return htmlspecialchars(stripslashes($p_var));
+			return htmlentities(stripslashes($var));
 	}
 	
 	/**
 	 * Build a SELECT string for a query using one or more fields
 	 *
-	 * @param	mixed	$p_fields	Fields to use
-	 * @return	string	MySQL formatted string
+	 * @param mixed $fields Fields to use
+	 * @return string MySQL formatted string
 	 */
-	protected function buildSelectString($p_fields) {
+	protected function buildSelectString($fields) {
 		
 		// Every field needs to be enclosed in ` characters
-		if(is_array($p_fields)) {
-			foreach($p_fields as $key => $field)
-				$p_fields[$key] = preg_replace('/(\w+)/i', '`$1`', $field);
-			$string = join(', ', $p_fields);
+		if(is_array($fields)) {
+			foreach($fields as $key => $field)
+				$fields[$key] = preg_replace('/(\w+)/i', '`$1`', $field);
+			return str_replace('`AS`', 'AS', join(', ', $fields));
 		} else
-			$string = preg_replace('/(\w+)/i', '`$1`', $p_fields);
-		
-		// Return the correctly formatted string
-		return $string;
+			return str_replace('`AS`', 'AS', preg_replace('/(\w+)/i', '`$1`', $fields));
 	}
 	
 	/**
 	 * Build a FROM string for a query using one or more tables
 	 *
-	 * @param	mixed	$p_tables	Tables to use
-	 * @return	string	MySQL formatted string
+	 * @param mixed $tables Tables to use
+	 * @return string MySQL formatted string
 	 */
-	protected function buildFromString($p_tables) {
+	protected function buildFromString($tables) {
 		
 		// Every table name, with alias, needs to be enclosed in ` characters
-		if(is_array($p_tables)) {
-			foreach($p_tables as $key => $table)
-				$p_tables[$key] = preg_replace('/(\w+)/i', '`$1`', $table);
-			$string = join(', ', $p_tables);
+		if(is_array($tables)) {
+			foreach($tables as $key => $table)
+				$tables[$key] = preg_replace('/(\w+)/i', '`$1`', $table);
+			return '(' . join(', ', $tables) . ')';
 		} else
-			$string = preg_replace('/(\w+)/i', '`$1`', $p_tables);
-		
-		// Return the tables in brackets so joins can be made
-		return '(' . $string . ')';
+		 	return '(' . preg_replace('/(\w+)/i', '`$1`', $tables) . ')';
 	}
 	
 	/**
 	 * Build a JOIN string for a query using one or more joins
 	 * 
-	 * @param	array	$p_joins	Joins to perform (as passed from other functions)
-	 * @return	string	MySQL formatted string
+	 * @param array	$joins Joins to perform (as passed from other functions)
+	 * @return string MySQL formatted string
 	 */
-	protected function buildJoinString($p_joins) {
+	protected function buildJoinString($joins) {
 		$string = '';
-		foreach($p_joins as $join) {
+		foreach($joins as $join) {
 			// Build the join string each time by enclosing fields and tables in ` characters
 			$string .= "\n"
 					. strtoupper($join['type'])
@@ -159,7 +285,7 @@ abstract class DB {
 					. preg_replace('/(\w+)/i', '`$1`', $join['table'])
 					. ' ON '
 					. preg_replace('/(\w+)/i', '`$1`', $join['local'])
-					. ' = '
+					. ' ' . (isset($join['condition']) ? $join['condition'] : '=') . ' '
 					. preg_replace('/(\w+)/i', '`$1`', $join['foreign']);
 		}
 		
@@ -171,28 +297,28 @@ abstract class DB {
 	 * Build a WHERE/GROUP/ORDER/LIMIT string using the given MySQL command string
 	 * and a set of values that are to be used in replacements with ?
 	 *
-	 * @param	string	$p_opt Raw MySQL string
-	 * @param	mixed	$p_opt_values Array of values or string to use in replacements
-	 * @return	string	Correctly formatted and escaped string
+	 * @param string $opt Raw MySQL string
+	 * @param mixed	$optValues Array of values or string to use in replacements
+	 * @return string Correctly formatted and escaped string
 	 */
-	protected function buildOptString($p_opt, $p_opt_values) {
+	protected function buildOptString($opt, $optValues) {
 		
 		// Go through each match and replace the ? if a value exists
-		if(is_array($p_opt_values)) {
+		if(is_array($optValues)) {
 
 			// Get matches
-			$num_matches = preg_match_all('/([^\\\]\?)/i', $p_opt, $matches);
+			$numMatches = preg_match_all('/([^\\\]\?)/i', $opt, $matches);
 			
 			// Replace all matches found
-			for($i = 0; $i < $num_matches; $i++) {
-				if(isset($p_opt_values[$i]))
-					$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values[$i]) . "'", $p_opt, 1);
+			for($i = 0; $i < $numMatches; $i++) {
+				if(isset($optValues[$i]))
+					$opt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDB($optValues[$i]), $opt, 1);
 			}
 		} else
-			$p_opt = preg_replace('/([^\\\])\?/i', "$1'" . $this->preDB($p_opt_values) . "'", $p_opt, 1);
+			$opt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDB($optValues), $opt, 1);
 		
 		// Return the finished string
-		return $p_opt;
+		return $opt;
 	}
 	
 

@@ -4,8 +4,9 @@
  * Database interface, all classes must implement this
  * Provides function and variable definitions that must be used
  * 
+ * @package dblib
  * @author Jamie Hurst
- * @version 1.0
+ * @version 1.1
  */
 
 /**
@@ -13,22 +14,25 @@
  */
 interface iDB {
 	
-	//protected function errorDB($p_error, $p_db_error, $p_query);
-	public function setupDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null);
-	public function connectDB($p_host = null, $p_user = null, $p_pass = null, $p_db = null);
+	public function setupDB($host = null, $user = null, $pass = null, $db = null);
+	public function connectDB($host = null, $user = null, $pass = null, $db = null);
 	public function closeDB();
 	public function getQueryCount();
 	
-	public function preDB($p_var);
-	public function postDB($p_var);
+	public function getField($field, $table, $opt = '', $optValues = '');
+	public function getRow($table, $opt = '', $optValues = '');
+	public function getRows($table, $opt = '', $optValues = '');
+	public function getNumRows($table, $opt = '', $optValues = '');
 	
-	public function getField($p_field, $p_table, $p_opt = '', $p_opt_values = '');
-	public function getRow($p_table, $p_opt = '', $p_opt_values = '');
-	public function getRows($p_table, $p_opt = '', $p_opt_values = '');
-	public function getNumRows($p_table, $p_opt = '', $p_opt_values = '');
+	public function getJoinedFields($fields, $table, $joins = array(), $opt = '', $optValues = '');
+	public function getJoinedRow($table, $joins = array(), $opt = '', $optValues = '');
+	public function getJoinedRows($table, $joins = array(), $opt = '', $optValues = '');
+	public function getNumJoinedRows($table, $joins = array(), $opt = '', $optValues = '');
 	
-	public function insertRow($p_table, $p_data, $p_opt = '', $p_opt_values = '');
-	public function updateRows($p_table, $p_data, $p_opt = '', $p_opt_values = '');
-	public function deleteRows($p_table, $p_opt = '', $p_opt_values = '');
+	public function insertRow($table, $data);
+	public function updateRows($table, $data, $opt = '', $optValues = '');
+	public function deleteRows($table, $opt = '', $optValues = '');
+	
+	public function insertID();
 	
 }
