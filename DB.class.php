@@ -198,13 +198,13 @@ abstract class DB {
 			$newArray = array();
 			foreach($var as $key => $value)
 				if($this->_stripEnabled)
-					$newArray[mysql_real_escape_string(html_entity_decode($key))] = self::preDB($value);
+					$newArray[addslashes(html_entity_decode($key))] = self::preDB($value);
 				else
 					$newArray[html_entity_decode($key)] = self::preDB($value);
 			return $newArray;
 		} else {
 			if($this->_stripEnabled)
-				return "'" . mysql_real_escape_string(html_entity_decode($var)) . "'";
+				return "'" . addslashes(html_entity_decode($var)) . "'";
 			else
 				return "'" . html_entity_decode($var) . "'";
 		}

@@ -8,8 +8,8 @@
  * @version 1.1
  */
 
-require 'iDB.interface.php';
-require 'DB.class.php';
+require_once 'iDB.interface.php';
+require_once 'DB.class.php';
 
 /**
  * MySQLi class
@@ -127,7 +127,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 		
 		// Run the query and report all errors
@@ -166,7 +166,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 		
 		// Get the result and report any errors
@@ -203,7 +203,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 			
 		// Get the result, report any errors
@@ -243,7 +243,7 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Get the result, report any errors
@@ -296,7 +296,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 		
 		// Run the query and report all errors
@@ -347,7 +347,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 		
 		// Run the query and report all errors
@@ -393,7 +393,7 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Run the query and report all errors
@@ -442,7 +442,7 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Run the query and report all errors
@@ -487,7 +487,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Get the result and sort out any errors
@@ -532,7 +532,7 @@ class mysqliDB extends DB implements iDB {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Get the result and sort out any errors
@@ -568,7 +568,7 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_printQueries)
+		if($this->_getQueries)
 			return $query;
 
 		// Get the result and sort out any errors
