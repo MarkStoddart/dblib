@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class mysqliPrepDB</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class mysqliPrepDB</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../dblib/iDB.html">iDB</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">MySQLi class</p>
+		<p class="notes">
+			Located in <a class="field" href="_mysqliPrepDB.class.php.html">/mysqliPrepDB.class.php</a> (line <span class="field">15</span>)
+		</p>
+		
+				
+		<pre><a href="../dblib/DB.html">DB</a>
+   |
+   --<a href="../dblib/mysqliDB.html">mysqliDB</a>
+      |
+      --mysqliPrepDB</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																												
+												<div class="method-definition">
+											<span class="method-result">mysqliPrepDB</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_db</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getField" title="details" class="method-name">getField</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_field</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getJoinedFields" title="details" class="method-name">getJoinedFields</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getJoinedRow" title="details" class="method-name">getJoinedRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getJoinedRows" title="details" class="method-name">getJoinedRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getResult" title="details" class="method-name">getResult</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$p_object</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_params</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getRow" title="details" class="method-name">getRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getRows" title="details" class="method-name">getRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../dblib/mysqliDB.html">mysqliDB</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_db">mysqliDB::$_db</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_host">mysqliDB::$_host</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_name">mysqliDB::$_name</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_pass">mysqliDB::$_pass</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_queryCount">mysqliDB::$_queryCount</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/mysqliDB.html#var$_user">mysqliDB::$_user</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../dblib/DB.html">DB</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_adminEmail">DB::$_adminEmail</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_autoClose">DB::$_autoClose</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_caching">DB::$_caching</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_debug">DB::$_debug</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_exitOnError">DB::$_exitOnError</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_getQueries">DB::$_getQueries</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/DB.html#var$_stripEnabled">DB::$_stripEnabled</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">23</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor  Use the provided DB variable if set, otherwise don't connect just yet</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mysqliPrepDB</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_db</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_db</span><span class="var-description">: [Optional] MySQL connection link</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#method__construct">mysqliDB::__construct()</a></dt>
+						<dd>Constructor  Use the provided DB variable if set, otherwise don't connect just yet</dd>
+					</dl>
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">31</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destructor</p>
+<p class="description"><p>Close the database</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#method__destruct">mysqliDB::__destruct()</a></dt>
+						<dd>Destructor</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetField" id="getField"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getField</span> (line <span class="line-number">115</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a single field from a database using a table and a where query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getField
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_field</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_field</span><span class="var-description">: Field to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_table</span><span class="var-description">: Table to get field from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetField">mysqliDB::getField()</a></dt>
+						<dd>Get a single field from a database using a table and a where query</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetField">iDB::getField()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedFields" id="getJoinedFields"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedFields</span> (line <span class="line-number">215</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getJoinedFields
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_fields</span><span class="var-description">: Fields to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$p_joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                                     string type Type of join, e.g. left                                     string table Table to join with optional alias                                     string local Local key to join on                                     string foreign Foreign key to join on</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetJoinedFields">mysqliDB::getJoinedFields()</a></dt>
+						<dd>Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetJoinedFields">iDB::getJoinedFields()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedRow" id="getJoinedRow"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedRow</span> (line <span class="line-number">255</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a single row from a database,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getJoinedRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_tables</span><span class="var-description">: Tables to get row from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$p_joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                                     string type Type of join, e.g. left                                     string table Table to join with optional alias                                     string local Local key to join on                                     string foreign Foreign key to join on</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetJoinedRow">mysqliDB::getJoinedRow()</a></dt>
+						<dd>Get one row from a database using a table and a where query,  also make use of MySQL joins in query</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetJoinedRow">iDB::getJoinedRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedRows" id="getJoinedRows"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedRows</span> (line <span class="line-number">294</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getJoinedRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_tables</span><span class="var-description">: Tables to get data from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$p_joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                                     string type Type of join, e.g. left                                     string table Table to join with optional alias                                     string local Local key to join on                                     string foreign Foreign key to join on</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any MySQL commands to pass, such as WHERE</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetJoinedRows">mysqliDB::getJoinedRows()</a></dt>
+						<dd>Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetJoinedRows">iDB::getJoinedRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetResult" id="getResult"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getResult</span> (line <span class="line-number">43</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Bind parameters and get the affected rows back into an array of values</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of results on success, false on failure</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getResult
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$p_object</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$p_params</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$p_object</span><span class="var-description">: MySQLi statement object returned from prepared query</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$p_params</span><span class="var-description">: [Optional] An array of values to replace parameters in the query with</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetRow" id="getRow"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRow</span> (line <span class="line-number">147</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a single row from a database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_table</span><span class="var-description">: Table to get row from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetRow">mysqliDB::getRow()</a></dt>
+						<dd>Get a single row from a database</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetRow">iDB::getRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetRows" id="getRows"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRows</span> (line <span class="line-number">178</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get multiple rows from a database, fetch them in an array</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$p_table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$p_opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$p_opt_values</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_table</span><span class="var-description">: Table to get data from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$p_opt</span><span class="var-description">: [Optional] Any MySQL commands to pass, such as WHERE</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$p_opt_values</span><span class="var-description">: [Optional] This is ignored, but ? are replaced</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/mysqliDB.html#methodgetRows">mysqliDB::getRows()</a></dt>
+						<dd>Get multiple rows from a database, fetch them in an array</dd>
+					</dl>
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetRows">iDB::getRows()</a></dt>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../dblib/mysqliDB.html">mysqliDB</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#method__construct">mysqliDB::__construct()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodcloseDB">mysqliDB::closeDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodconnectDB">mysqliDB::connectDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methoddeleteRows">mysqliDB::deleteRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodescape">mysqliDB::escape()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetField">mysqliDB::getField()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetJoinedFields">mysqliDB::getJoinedFields()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetJoinedRow">mysqliDB::getJoinedRow()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetJoinedRows">mysqliDB::getJoinedRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetNumJoinedRows">mysqliDB::getNumJoinedRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetNumRows">mysqliDB::getNumRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetQueryCount">mysqliDB::getQueryCount()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetRow">mysqliDB::getRow()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodgetRows">mysqliDB::getRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodinsertID">mysqliDB::insertID()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodinsertRow">mysqliDB::insertRow()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodsetupDB">mysqliDB::setupDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#methodupdateRows">mysqliDB::updateRows()</a></span><br>
+													<span class="method-name"><a href="../dblib/mysqliDB.html#method__destruct">mysqliDB::__destruct()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../dblib/DB.html">DB</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../dblib/DB.html#method__construct">DB::__construct()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodbuildFromString">DB::buildFromString()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodbuildJoinString">DB::buildJoinString()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodbuildOptString">DB::buildOptString()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodbuildSelectString">DB::buildSelectString()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methoderrorDB">DB::errorDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetAdminEmail">DB::getAdminEmail()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetAutoClose">DB::getAutoClose()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetCaching">DB::getCaching()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetDebug">DB::getDebug()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetExitOnError">DB::getExitOnError()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodgetGetQueries">DB::getGetQueries()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodpostDB">DB::postDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodpreDB">DB::preDB()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetAdminEmail">DB::setAdminEmail()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetAutoClose">DB::setAutoClose()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetCaching">DB::setCaching()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetDebug">DB::setDebug()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetExitOnError">DB::setExitOnError()</a></span><br>
+													<span class="method-name"><a href="../dblib/DB.html#methodsetGettQueries">DB::setGettQueries()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 15 Feb 2010 16:56:17 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
