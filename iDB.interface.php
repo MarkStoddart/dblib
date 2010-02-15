@@ -18,6 +18,7 @@ interface iDB {
 	public function connectDB($host = null, $user = null, $pass = null, $db = null);
 	public function closeDB();
 	public function getQueryCount();
+	public function escape($str);
 	
 	public function getField($field, $table, $opt = '', $optValues = '');
 	public function getRow($table, $opt = '', $optValues = '');

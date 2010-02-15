@@ -97,10 +97,20 @@ class mysqliDB extends DB implements iDB {
 	/**
 	 * Return the current query count
 	 * 
-	 * @return	int	Query count
+	 * @return int Query count
 	 */
 	public function getQueryCount() {
 		return $this->_queryCount;
+	}
+	
+	/**
+	 * Escape the given string
+	 *
+	 * @param string $str String to escape
+	 * @return string Escaped string
+	 */
+	public function escape($str) {
+		return $this->_db->real_escape_string($str);
 	}
 	
 	/**

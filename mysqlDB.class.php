@@ -111,6 +111,16 @@ class mysqlDB extends DB implements iDB {
 	}
 	
 	/**
+	 * Escape the given string
+	 *
+	 * @param string $str String to escape
+	 * @return string Escaped string
+	 */
+	public function escape($str) {
+		return mysql_real_escape_string($str, $this->_db);
+	}
+	
+	/**
 	 * Get a single field from a database using a table and a where query
 	 *
 	 * @param string $field Field to fetch
