@@ -285,6 +285,8 @@ class mysqlDB extends DB implements iDB {
 		// Check if fields is an array
 		if(is_array($fields))
 			$fieldsArray = true;
+		else
+			$fieldsArray = false;
 		
 		// Prepare values for database checking
 		$fields = $this->buildSelectString($fields);
