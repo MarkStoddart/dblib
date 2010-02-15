@@ -1,6 +1,6 @@
 <?php
 
-require_once '../mysqlDB.class.php';
+require_once '../mysqliDB.class.php';
 require_once 'PHPUnit/Framework.php';
 
 class mysqlDBTest extends PHPUnit_Framework_TestCase {
@@ -34,7 +34,7 @@ class mysqlDBTest extends PHPUnit_Framework_TestCase {
 		", $init);
 		mysql_close($init);
 		
-		$this->db = new mysqlDB();
+		$this->db = new mysqliDB();
 
 		$this->db->setDebug(true);
 		//$this->assertTrue($db->getDebug());

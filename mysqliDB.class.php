@@ -279,6 +279,8 @@ class mysqliDB extends DB implements iDB {
 		// Check if fields is an array
 		if(is_array($fields))
 			$fieldsArray = true;
+		else
+			$fieldsArray = false;
 		
 		// Prepare values for database checking
 		$fields = $this->buildSelectString($fields);
@@ -308,11 +310,13 @@ class mysqliDB extends DB implements iDB {
 		}
 		
 		// Return the resulting field
-		$row = @$result->fetch_assoc();
-		if($fieldsArray)
+		if($fieldsArray) {
+			$row = @$result->fetch_assoc();
 			return $this->postDB($row);
-		else
+		} else {
+			$row = @$result->fetch_array();
 			return $this->postDB($row[0]);
+		}
 	}
 	
 	/**
