@@ -1,3 +1,2 @@
-<phpunit colors="true" processIsolation="false" convertErrorsToExceptions="true" convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true">
+<phpunit colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true">
 </phpunit>
