@@ -87,4 +87,38 @@ class mysqlDBTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($rows[0]['content'], 'Test Four');
 		$this->assertEquals($rows[1]['content'], 'Test Five');
 	}
+
+	public function testGetNumRows() {
+		$this->db->connectDB('localhost', 'root', 'ga6-bxd', 'test');
+		$this->db->insertRow('testing', array(
+			'subject'	=>	'TEST_MULTIPLE',
+			'content'	=>	'Test Four'
+		));
+		$this->db->insertRow('testing', array(
+			'subject'	=>	'TEST_MULTIPLE',
+			'content'	=>	'Test Five'
+		));
+		$rows = $this->db->getNumRows('testing', 'WHERE `subject` = ?', 'TEST_MULTIPLE');
+		$this->assertEquals($rows, 2);
+	}
+
+	public function testUpdateRow() {
+		$this->db->connectDB('localhost', 'root', 'ga6-bxd', 'test');
+		$insert = $this->db->insertRow('testing', array(
+			'subject'	=>	'TEST6',
+			'content'	=>	'Testing'
+		));
+		$update = $this->db->updateRows('testing', array('content' => 'Test Six'), 'WHERE `subject` = ?', 'TEST6');
+		$this->assertTrue($update);
+	}
+
+	public function testDeleteRow() {
+		$this->db->connectDB('localhost', 'root', 'ga6-bxd', 'test');
+		$insert = $this->db->insertRow('testing', array(
+			'subject'	=>	'TEST7',
+			'content'	=>	'Test Seven'
+		));
+		$delete = $this->db->deleteRows('testing', 'WHERE `subject` = ?', 'TEST7');
+		$this->assertTrue($delete);
+	}
 }
