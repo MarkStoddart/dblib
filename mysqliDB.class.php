@@ -603,7 +603,7 @@ class mysqliDB extends DB implements iDB {
 	 * @return int Auto-increment ID value of last insert
 	 */
 	public function insertID() {
-		return $this->db->insert_id;
+		return $this->_db->insert_id;
 	}
 		
 }
