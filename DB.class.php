@@ -187,7 +187,7 @@ abstract class DB {
 	protected function preDB($var) {
 		
 		// Make sure any null variables are returned as passed
-		if($var === null || $var == 'NULL')
+		if(is_null($var) || $var === 'NULL')
 			return 'NULL';
 		
 		// Use a recursive call if the variable is an array, to make sure it
