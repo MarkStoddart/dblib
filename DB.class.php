@@ -16,7 +16,7 @@ abstract class DB {
 	// Set up some useful options
 	protected $_stripEnabled = true;
 	protected $_debug = false;
-	protected $_autoClose = true;
+	protected $_autoClose = false;
 	protected $_caching = true;
 	protected $_exitOnError = true;
 	protected $_getQueries = false;
@@ -117,7 +117,7 @@ abstract class DB {
 	 * @param boolean $value Value to set
 	 * @return object For chaining
 	 */
-	public function setGettQueries($value) {
+	public function setGetQueries($value) {
 		$this->_getQueries = $value;
 		return $this;
 	}
@@ -186,10 +186,8 @@ abstract class DB {
 	 */
 	protected function preDB($var) {
 		
-		// Make sure any false variables are returned as passed and the same with nulls
-		if($var === false)
-			return false;
-		elseif($var === null || $var == 'NULL')
+		// Make sure any null variables are returned as passed
+		if($var === null || $var == 'NULL')
 			return 'NULL';
 		
 		// Use a recursive call if the variable is an array, to make sure it
@@ -221,8 +219,6 @@ abstract class DB {
 		// Make sure any false and null variables are returned as passed
 		if($var === false)
 			return false;
-		elseif($var === null || $var == 'NULL')
-			return null;
 
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
