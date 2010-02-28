@@ -40,8 +40,9 @@ class mysqliDB extends DB implements iDB {
 	 * Close the database
 	 */
 	public function __destruct() {
-		if($this->_autoClose)
+		if($this->_autoClose) {
 			$this->closeDB();
+		}
 	}
 	
 	/**
@@ -53,14 +54,18 @@ class mysqliDB extends DB implements iDB {
 	 * @param string $db [Optional] Database to use
 	 */
 	public function setupDB($host = null, $user = null, $pass = null, $db = null) {
-		if(!is_null($host))
+		if(!is_null($host)) {
 			$this->_host = $host;
-		if(!is_null($user))
+		}
+		if(!is_null($user)) {
 			$this->_user = $user;
-		if(!is_null($pass))
+		}
+		if(!is_null($pass)) {
 			$this->_pass = $pass;
-		if(!is_null($db))
+		}
+		if(!is_null($db)) {
 			$this->_name = $db;
+		}
 	}
 	
 	/**
@@ -90,8 +95,9 @@ class mysqliDB extends DB implements iDB {
 	 * Close the active database connection if one exists
 	 */
 	public function closeDB() {
-		if($this->_db)
+		if($this->_db) {
 			@$this->_db->close();
+		}
 	}
 	
 	/**
@@ -141,10 +147,11 @@ class mysqliDB extends DB implements iDB {
 	public function getFields($fields, $table, $opt = '', $optValues = '') {
 
 		// Check if fields is an array
-		if(is_array($fields))
+		if(is_array($fields)) {
 			$fieldsArray = true;
-		else
+		} else {
 			$fieldsArray = false;
+		}
 		
 		// Prepare values for database checking
 		$fields = $this->buildSelectString($fields);
@@ -160,8 +167,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
@@ -205,8 +213,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 		
 		// Get the result and report any errors
 		$result = $this->_db->query($query);
@@ -243,8 +252,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 			
 		// Get the result, report any errors
 		$result = $this->_db->query($query);
@@ -256,8 +266,9 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_assoc())
+		while($temp = $result->fetch_assoc()) {
 			$return[] = $temp;
+		}
 		return $this->postDB($return);
 	}
 	
@@ -284,8 +295,9 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Get the result, report any errors
 		$result = $this->_db->query($query);
@@ -318,10 +330,11 @@ class mysqliDB extends DB implements iDB {
 	public function getJoinedFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
 		
 		// Check if fields is an array
-		if(is_array($fields))
+		if(is_array($fields)) {
 			$fieldsArray = true;
-		else
+		} else {
 			$fieldsArray = false;
+		}
 		
 		// Prepare values for database checking
 		$fields = $this->buildSelectString($fields);
@@ -339,8 +352,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
@@ -392,8 +406,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
@@ -438,8 +453,9 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
@@ -451,8 +467,9 @@ class mysqliDB extends DB implements iDB {
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_assoc())
+		while($temp = $result->fetch_assoc()) {
 			$return[] = $temp;
+		}
 		return $this->postDB($return);
 	}
 	
@@ -487,8 +504,9 @@ class mysqliDB extends DB implements iDB {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
@@ -521,8 +539,9 @@ class mysqliDB extends DB implements iDB {
 	
 		// Join up data
 		$updates = array();
-		foreach($data as $key => $value)
+		foreach($data as $key => $value) {
 			$updates[] = "`{$key}` = {$value}";
+		}
 		$data = join(', ', $updates);
 		
 		// Build the query
@@ -533,8 +552,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
@@ -563,13 +583,15 @@ class mysqliDB extends DB implements iDB {
 			
 		// Join up data
 		$fields = array();
-		foreach(array_keys($data) as $field)
+		foreach(array_keys($data) as $field) {
 			$fields[] = '`' . $field . '`';
+		}
 		$fields = join(', ', $fields);
 		
 		$values = array();
-		foreach($data as $value)
+		foreach($data as $value) {
 			$values[] = $value;
+		}
 		$values = join(', ', $values);
 		
 		// Build the query
@@ -579,8 +601,9 @@ class mysqliDB extends DB implements iDB {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
@@ -616,8 +639,9 @@ class mysqliDB extends DB implements iDB {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries)
+		if($this->_getQueries) {
 			return $query;
+		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);

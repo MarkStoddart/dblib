@@ -27,8 +27,9 @@ abstract class DB {
 	 */
 	protected function __construct() {
 		// Check for magic quotes
-		if(get_magic_quotes_gpc())
+		if(get_magic_quotes_gpc()) {
 			$this->_stripEnabled = false;
+		}
 	}
 	
 	/**
@@ -186,16 +187,19 @@ abstract class DB {
 			echo 'Query error in context "' . $error . '":<br /><strong>'
 					. $dbError . 
 					'</strong><br /><br />';
-			if(!empty($query))
+			if(!empty($query)) {
 				echo '<em>' . $query . '</em>';
+			}
 		} else {
 			echo 'A database error occurred when performing the last operation. The system administrator has been informed.';
-			if($this->_adminEmail)
-				mail($this->_adminEmail, 'DBLIB -> DB Error (' . $error . ')', 'A database error occurred in context "' . $error . '".' . "\n\n" . $dbError . "\n\n" . 'Query: ' . $query);
+			if($this->_adminEmail) {
+				mail($this->_adminEmail, 'DBlib -> DB Error (' . $error . ')', 'A database error occurred in context "' . $error . '".' . "\n\n" . $dbError . "\n\n" . 'Query: ' . $query);
+			}
 		}
 		echo '</p>';
-		if($this->_exitOnError)
+		if($this->_exitOnError) {
 			exit;
+		}
 	}
 	
 	/**
@@ -207,24 +211,28 @@ abstract class DB {
 	protected function preDB($var) {
 		
 		// Make sure any null variables are returned as passed
-		if(is_null($var) || $var === 'NULL')
+		if(is_null($var) || $var === 'NULL') {
 			return 'NULL';
+		}
 		
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
 		if(is_array($var)) {
 			$newArray = array();
-			foreach($var as $key => $value)
-				if($this->_stripEnabled)
+			foreach($var as $key => $value) {
+				if($this->_stripEnabled) {
 					$newArray[$this->escape(html_entity_decode($key))] = self::preDB($value);
-				else
+				} else {
 					$newArray[html_entity_decode($key)] = self::preDB($value);
+				}
+			}
 			return $newArray;
 		} else {
-			if($this->_stripEnabled)
+			if($this->_stripEnabled) {
 				return "'" . $this->escape(html_entity_decode($var)) . "'";
-			else
+			} else {
 				return "'" . html_entity_decode($var) . "'";
+			}
 		}
 	}
 
@@ -237,18 +245,21 @@ abstract class DB {
 	protected function postDB($var) {
 		
 		// Make sure any false and null variables are returned as passed
-		if($var === false)
+		if($var === false) {
 			return false;
+		}
 
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
 		if(is_array($var)) {
 			$newArray = array();
-			foreach($var as $key => $value)
+			foreach($var as $key => $value) {
 				$newArray[htmlentities(stripslashes($key))] = self::postDB($value);
+			}
 			return $newArray;
-		} else
+		} else {
 			return htmlentities(stripslashes($var));
+		}
 	}
 	
 	/**
@@ -261,11 +272,13 @@ abstract class DB {
 		
 		// Every field needs to be enclosed in ` characters
 		if(is_array($fields)) {
-			foreach($fields as $key => $field)
-				$fields[$key] = preg_replace('/(\w+)/i', '`$1`', $field);
+			foreach($fields as $key => $field) {
+				$fields[$key] = preg_replace('/(`+)/', '`', preg_replace('/(\w+)/i', '`$1`', $field));
+			}
 			return str_replace('`AS`', 'AS', join(', ', $fields));
-		} else
+		} else {
 			return str_replace('`AS`', 'AS', preg_replace('/(\w+)/i', '`$1`', $fields));
+		}
 	}
 	
 	/**
@@ -278,11 +291,13 @@ abstract class DB {
 		
 		// Every table name, with alias, needs to be enclosed in ` characters
 		if(is_array($tables)) {
-			foreach($tables as $key => $table)
-				$tables[$key] = preg_replace('/(\w+)/i', '`$1`', $table);
+			foreach($tables as $key => $table) {
+				$tables[$key] = preg_replace('/(`+)/', '`', preg_replace('/(\w+)/i', '`$1`', $table));
+			}
 			return '(' . join(', ', $tables) . ')';
-		} else
+		} else {
 		 	return preg_replace('/(\w+)/i', '`$1`', $tables);
+		}
 	}
 	
 	/**
@@ -298,11 +313,11 @@ abstract class DB {
 			$string .= "\n"
 					. strtoupper($join['type'])
 					. ' JOIN '
-					. preg_replace('/(\w+)/i', '`$1`', $join['table'])
+					. preg_replace('/(`+)/', '`', preg_replace('/(\w+)/i', '`$1`', $join['table']))
 					. ' ON '
-					. preg_replace('/(\w+)/i', '`$1`', $join['local'])
+					. preg_replace('/(`+)/', '`', preg_replace('/(\w+)/i', '`$1`', $join['local']))
 					. ' ' . (isset($join['condition']) ? $join['condition'] : '=') . ' '
-					. preg_replace('/(\w+)/i', '`$1`', $join['foreign']);
+					. preg_replace('/(`+)/', '`', preg_replace('/(\w+)/i', '`$1`', $join['foreign']));
 		}
 		
 		// Return the formatted string
@@ -325,13 +340,20 @@ abstract class DB {
 			// Get matches
 			$numMatches = preg_match_all('/([^\\\]\?)/i', $opt, $matches);
 			
+			// Throw an error if the matches aren't the same
+			if($numMatches > count($optValues)) {
+				$this->errorDB('escape_count');
+			}
+			
 			// Replace all matches found
 			for($i = 0; $i < $numMatches; $i++) {
-				if(isset($optValues[$i]))
+				if(isset($optValues[$i])) {
 					$opt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDB($optValues[$i]), $opt, 1);
+				}
 			}
-		} else
+		} else {
 			$opt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDB($optValues), $opt, 1);
+		}
 		
 		// Return the finished string
 		return $opt;
