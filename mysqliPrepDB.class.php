@@ -3,8 +3,10 @@
 /**
  * Class extending original MySQLi DB class to make use of prepared queries
  * 
+ * @package dblib
  * @author Jamie Hurst
  * @version 1.0
+ * @todo FIX THIS ENTIRE FILE
  */
 
 require 'mysqliDB.class.php';

@@ -1,5 +1,3 @@
-
-Warning: strftime(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'UTC' for 'GMT/0.0/no DST' instead in /usr/lib/php/PhpDocumentor/phpDocumentor/Smarty-2.6.0/libs/Smarty_Compiler.class.php on line 370
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,7 +13,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 <h3>Package indexes</h3>
 <ul>
 	<li><a href="elementindex_dblib.html">dblib</a></li>
-	<li><a href="elementindex_default.html">default</a></li>
 </ul>
 <br />
 <div class="index-letter-menu">
@@ -28,7 +25,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 	<a class="index-letter" href="elementindex.html#m">m</a>
 	<a class="index-letter" href="elementindex.html#"></a>
 	<a class="index-letter" href="elementindex.html#s">s</a>
-	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
 </div>
 
@@ -123,12 +119,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 		<div style="clear: both"></div>
 	</div>
 	<dl>
-			<dt class="field">
-						<span class="var-title">$db</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#var$db">mysqlDBTest::$db</a> in mysqlDBTest.php</div>
-					</dd>
 			<dt class="field">
 						DB
 					</dt>
@@ -244,14 +234,7 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="method-title">getField</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliPrepDB.html#methodgetField">mysqliPrepDB::getField()</a> in mysqliPrepDB.class.php</div>
-							<div class="index-item-description">Get a single field from a database using a table and a where query</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getField</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetField">mysqlDB::getField()</a> in mysqlDB.class.php</div>
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetField">mysqliDB::getField()</a> in mysqliDB.class.php</div>
 							<div class="index-item-description">Get a single field from a database using a table and a where query</div>
 					</dd>
 			<dt class="field">
@@ -264,8 +247,35 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="method-title">getField</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetField">mysqliDB::getField()</a> in mysqliDB.class.php</div>
+			<div class="index-item-details"><a href="dblib/mysqliPrepDB.html#methodgetField">mysqliPrepDB::getField()</a> in mysqliPrepDB.class.php</div>
 							<div class="index-item-description">Get a single field from a database using a table and a where query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getField</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetField">mysqlDB::getField()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Get a single field from a database using a table and a where query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getFields</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/iDB.html#methodgetFields">iDB::getFields()</a> in iDB.interface.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getFields</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetFields">mysqlDB::getFields()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Get one or more fields from a database using a table and a where query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getFields</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetFields">mysqliDB::getFields()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get one or more fields from a database using a table and a where query</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getGetQueries</span>
@@ -273,6 +283,20 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/DB.html#methodgetGetQueries">DB::getGetQueries()</a> in DB.class.php</div>
 							<div class="index-item-description">Get get queries value</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getJoinedFields</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedFields">mysqliDB::getJoinedFields()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getJoinedFields</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetJoinedFields">mysqlDB::getJoinedFields()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getJoinedFields</span>
@@ -286,27 +310,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetJoinedFields">iDB::getJoinedFields()</a> in iDB.interface.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getJoinedFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetJoinedFields">mysqlDB::getJoinedFields()</a> in mysqlDB.class.php</div>
-							<div class="index-item-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getJoinedFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedFields">mysqliDB::getJoinedFields()</a> in mysqliDB.class.php</div>
-							<div class="index-item-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getJoinedRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedRow">mysqliDB::getJoinedRow()</a> in mysqliDB.class.php</div>
-							<div class="index-item-description">Get one row from a database using a table and a where query,  also make use of MySQL joins in query</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getJoinedRow</span>
@@ -329,17 +332,11 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetJoinedRow">iDB::getJoinedRow()</a> in iDB.interface.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getJoinedRows</span>
+						<span class="method-title">getJoinedRow</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/iDB.html#methodgetJoinedRows">iDB::getJoinedRows()</a> in iDB.interface.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getJoinedRows</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedRows">mysqliDB::getJoinedRows()</a> in mysqliDB.class.php</div>
-							<div class="index-item-description">Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</div>
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedRow">mysqliDB::getJoinedRow()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get one row from a database using a table and a where query,  also make use of MySQL joins in query</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getJoinedRows</span>
@@ -352,15 +349,21 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="method-title">getJoinedRows</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetJoinedRows">mysqliDB::getJoinedRows()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getJoinedRows</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetJoinedRows">mysqlDB::getJoinedRows()</a> in mysqlDB.class.php</div>
 							<div class="index-item-description">Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getNumJoinedRows</span>
+						<span class="method-title">getJoinedRows</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetNumJoinedRows">mysqliDB::getNumJoinedRows()</a> in mysqliDB.class.php</div>
-							<div class="index-item-description">Get the number of rows returned from a query,  also make use of MySQL joins in query</div>
+			<div class="index-item-details"><a href="dblib/iDB.html#methodgetJoinedRows">iDB::getJoinedRows()</a> in iDB.interface.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getNumJoinedRows</span>
@@ -374,6 +377,19 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetNumJoinedRows">iDB::getNumJoinedRows()</a> in iDB.interface.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getNumJoinedRows</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetNumJoinedRows">mysqliDB::getNumJoinedRows()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get the number of rows returned from a query,  also make use of MySQL joins in query</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getNumRows</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/iDB.html#methodgetNumRows">iDB::getNumRows()</a> in iDB.interface.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getNumRows</span>
@@ -390,10 +406,11 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 							<div class="index-item-description">Get the number of rows returned from a query</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getNumRows</span>
+						<span class="method-title">getQueryCount</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/iDB.html#methodgetNumRows">iDB::getNumRows()</a> in iDB.interface.php</div>
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetQueryCount">mysqlDB::getQueryCount()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Return the current query count</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getQueryCount</span>
@@ -407,13 +424,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetQueryCount">iDB::getQueryCount()</a> in iDB.interface.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getQueryCount</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetQueryCount">mysqlDB::getQueryCount()</a> in mysqlDB.class.php</div>
-							<div class="index-item-description">Return the current query count</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getResult</span>
@@ -433,13 +443,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="method-title">getRow</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetRow">mysqliDB::getRow()</a> in mysqliDB.class.php</div>
-							<div class="index-item-description">Get a single row from a database</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">getRow</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetRow">mysqlDB::getRow()</a> in mysqlDB.class.php</div>
 							<div class="index-item-description">Get a single row from a database</div>
 					</dd>
@@ -450,17 +453,17 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetRow">iDB::getRow()</a> in iDB.interface.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">getRows</span>
+						<span class="method-title">getRow</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqliPrepDB.html#methodgetRows">mysqliPrepDB::getRows()</a> in mysqliPrepDB.class.php</div>
-							<div class="index-item-description">Get multiple rows from a database, fetch them in an array</div>
+			<div class="index-item-details"><a href="dblib/mysqliDB.html#methodgetRow">mysqliDB::getRow()</a> in mysqliDB.class.php</div>
+							<div class="index-item-description">Get a single row from a database</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">getRows</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetRows">mysqlDB::getRows()</a> in mysqlDB.class.php</div>
+			<div class="index-item-details"><a href="dblib/mysqliPrepDB.html#methodgetRows">mysqliPrepDB::getRows()</a> in mysqliPrepDB.class.php</div>
 							<div class="index-item-description">Get multiple rows from a database, fetch them in an array</div>
 					</dd>
 			<dt class="field">
@@ -475,6 +478,20 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="dblib/iDB.html#methodgetRows">iDB::getRows()</a> in iDB.interface.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getRows</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodgetRows">mysqlDB::getRows()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Get multiple rows from a database, fetch them in an array</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">getStripEnabled</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="dblib/DB.html#methodgetStripEnabled">DB::getStripEnabled()</a> in DB.class.php</div>
+							<div class="index-item-description">Get strip enabled value</div>
 					</dd>
 		</dl>
 	<a name="i"></a>
@@ -559,12 +576,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 			<div class="index-item-details"><a href="dblib/_mysqlDB.class.php.html">mysqlDB.class.php</a> in mysqlDB.class.php</div>
 					</dd>
 			<dt class="field">
-						mysqlDBTest
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html">mysqlDBTest</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
 						mysqliDB
 					</dt>
 		<dd class="index-item-body">
@@ -588,19 +599,7 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="include-title">mysqliPrepDB.class.php</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_mysqliPrepDB.class.php.html">mysqliPrepDB.class.php</a> in mysqliPrepDB.class.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">mysqlDBTest.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_tests---mysqlDBTest.php.html">mysqlDBTest.php</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="include-title">mysqliDBTest.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/_tests---mysqliDBTest.php.html">mysqliDBTest.php</a> in mysqliDBTest.php</div>
+			<div class="index-item-details"><a href="dblib/_mysqliPrepDB.class.php.html">mysqliPrepDB.class.php</a> in mysqliPrepDB.class.php</div>
 					</dd>
 		</dl>
 	<a name="p"></a>
@@ -668,17 +667,18 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 							<div class="index-item-description">Set the value of exit on error</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">setGettQueries</span>
+						<span class="method-title">setGetQueries</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/DB.html#methodsetGettQueries">DB::setGettQueries()</a> in DB.class.php</div>
+			<div class="index-item-details"><a href="dblib/DB.html#methodsetGetQueries">DB::setGetQueries()</a> in DB.class.php</div>
 							<div class="index-item-description">Set the value of get queries</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">setUp</span>
+						<span class="method-title">setStripEnabled</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodsetUp">mysqlDBTest::setUp()</a> in mysqlDBTest.php</div>
+			<div class="index-item-details"><a href="dblib/DB.html#methodsetStripEnabled">DB::setStripEnabled()</a> in DB.class.php</div>
+							<div class="index-item-description">Set the value of strip enabled</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">setupDB</span>
@@ -691,106 +691,14 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 						<span class="method-title">setupDB</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodsetupDB">mysqlDB::setupDB()</a> in mysqlDB.class.php</div>
-							<div class="index-item-description">Set the parameters used to connect to the database</div>
+			<div class="index-item-details"><a href="dblib/iDB.html#methodsetupDB">iDB::setupDB()</a> in iDB.interface.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">setupDB</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="dblib/iDB.html#methodsetupDB">iDB::setupDB()</a> in iDB.interface.php</div>
-					</dd>
-		</dl>
-	<a name="t"></a>
-	<div class="index-letter-section">
-		<div style="float: left" class="index-letter-title">t</div>
-		<div style="float: right"><a href="#top">top</a></div>
-		<div style="clear: both"></div>
-	</div>
-	<dl>
-			<dt class="field">
-						<span class="method-title">testConnect</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestConnect">mysqlDBTest::testConnect()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testDeleteRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestDeleteRow">mysqlDBTest::testDeleteRow()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetField</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetField">mysqlDBTest::testGetField()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetJoinedField</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetJoinedField">mysqlDBTest::testGetJoinedField()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetJoinedFields</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetJoinedFields">mysqlDBTest::testGetJoinedFields()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetJoinedRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetJoinedRow">mysqlDBTest::testGetJoinedRow()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetJoinedRows</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetJoinedRows">mysqlDBTest::testGetJoinedRows()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetNumJoinedRows</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetNumJoinedRows">mysqlDBTest::testGetNumJoinedRows()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetNumRows</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetNumRows">mysqlDBTest::testGetNumRows()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetRow">mysqlDBTest::testGetRow()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testGetRows</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestGetRows">mysqlDBTest::testGetRows()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testInsertRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestInsertRow">mysqlDBTest::testInsertRow()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testUpdateRow</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestUpdateRow">mysqlDBTest::testUpdateRow()</a> in mysqlDBTest.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">testVariables</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="default/mysqlDBTest.html#methodtestVariables">mysqlDBTest::testVariables()</a> in mysqlDBTest.php</div>
+			<div class="index-item-details"><a href="dblib/mysqlDB.html#methodsetupDB">mysqlDB::setupDB()</a> in mysqlDB.class.php</div>
+							<div class="index-item-description">Set the parameters used to connect to the database</div>
 					</dd>
 		</dl>
 	<a name="u"></a>
@@ -1003,7 +911,6 @@ Warning: strftime(): It is not safe to rely on the system's timezone settings. Y
 	<a class="index-letter" href="elementindex.html#m">m</a>
 	<a class="index-letter" href="elementindex.html#"></a>
 	<a class="index-letter" href="elementindex.html#s">s</a>
-	<a class="index-letter" href="elementindex.html#t">t</a>
 	<a class="index-letter" href="elementindex.html#u">u</a>
 </div>	</body>
 </html>

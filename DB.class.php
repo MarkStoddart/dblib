@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1
+ * @version 1.1.1
  */
 
 /**

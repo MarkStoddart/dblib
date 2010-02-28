@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1
+ * @version 1.1.1
  */
 
 require_once 'iDB.interface.php';
@@ -128,7 +128,7 @@ class mysqliDB extends DB implements iDB {
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
 	 *							each ? will be replaced with a value, to escape use \?
 	 * @return mixed Result
-	 * @deprecated
+	 * @deprecated Use getFields instead
 	 */
 	public function getField($field, $table, $opt = '', $optValues = '') {
 		return $this->getFields($field, $table, $opt, $optValues);
@@ -143,6 +143,7 @@ class mysqliDB extends DB implements iDB {
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
 	 *							each ? will be replaced with a value, to escape use \?
 	 * @return mixed Result
+	 * @since 1.1.1
 	 */
 	public function getFields($fields, $table, $opt = '', $optValues = '') {
 
@@ -318,10 +319,10 @@ class mysqliDB extends DB implements iDB {
 	 * @param string $fields Fields to fetch
 	 * @param string $tables Tables to get fields from
 	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
-	 *						string type Type of join, e.g. left
-	 *						string table Table to join with optional alias
-	 *						string local Local key to join on
-	 *						string foreign Foreign key to join on
+	 *						{string 'type' Type of join, e.g. left},
+	 *						{string 'table' Table to join with optional alias},
+	 *						{string 'local' Local key to join on},
+	 *						{string 'foreign' Foreign key to join on}
 	 * @param string $opt [Optional] Any options, such as WHERE clauses
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *							each ? will be replaced with a value, to escape use \?
@@ -380,10 +381,10 @@ class mysqliDB extends DB implements iDB {
 	 *
 	 * @param string $tables Tables to get fields from
 	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
-	 *						string type Type of join, e.g. left
-	 *						string table Table to join with optional alias
-	 *						string local Local key to join on
-	 *						string foreign Foreign key to join on
+	 *						{string 'type' Type of join, e.g. left},
+	 *						{string 'table' Table to join with optional alias},
+	 *						{string 'local' Local key to join on},
+	 *						{string 'foreign' Foreign key to join on}
 	 * @param string $opt [Optional] Any options, such as WHERE clauses
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *							each ? will be replaced with a value, to escape use \?
@@ -428,10 +429,10 @@ class mysqliDB extends DB implements iDB {
 	 *
 	 * @param string $tables Tables to get fields from
 	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
-	 *						string type Type of join, e.g. left
-	 *						string table Table to join with optional alias
-	 *						string local Local key to join on
-	 *						string foreign Foreign key to join on
+	 *						{string 'type' Type of join, e.g. left},
+	 *						{string 'table' Table to join with optional alias},
+	 *						{string 'local' Local key to join on},
+	 *						{string 'foreign' Foreign key to join on}
 	 * @param string $opt [Optional] Any options, such as WHERE clauses
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *							each ? will be replaced with a value, to escape use \?
@@ -479,10 +480,10 @@ class mysqliDB extends DB implements iDB {
 	 *
 	 * @param string $tables Tables to get fields from
 	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
-	 *						string type Type of join, e.g. left
-	 *						string table Table to join with optional alias
-	 *						string local Local key to join on
-	 *						string foreign Foreign key to join on
+	 *						{string 'type' Type of join, e.g. left},
+	 *						{string 'table' Table to join with optional alias},
+	 *						{string 'local' Local key to join on},
+	 *						{string 'foreign' Foreign key to join on}
 	 * @param string $opt [Optional] Any options, such as WHERE clauses
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
 	 *							each ? will be replaced with a value, to escape use \?
