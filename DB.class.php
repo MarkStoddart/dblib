@@ -220,7 +220,7 @@ abstract class DB {
 		if(is_array($var)) {
 			$newArray = array();
 			foreach($var as $key => $value) {
-				if($this->_stripEnabled) {
+				if($this->_stripEnabled && strpos($value, "\'") === false) {
 					$newArray[$this->escape(html_entity_decode($key))] = self::preDB($value);
 				} else {
 					$newArray[html_entity_decode($key)] = self::preDB($value);
