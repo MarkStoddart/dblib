@@ -282,7 +282,7 @@ abstract class DB {
 				$tables[$key] = preg_replace('/(\w+)/i', '`$1`', $table);
 			return '(' . join(', ', $tables) . ')';
 		} else
-		 	return '(' . preg_replace('/(\w+)/i', '`$1`', $tables) . ')';
+		 	return preg_replace('/(\w+)/i', '`$1`', $tables);
 	}
 	
 	/**
