@@ -21,6 +21,7 @@ interface iDB {
 	public function escape($str);
 	
 	public function getField($field, $table, $opt = '', $optValues = '');
+	public function getFields($fields, $table, $opt = '', $optValues = '');
 	public function getRow($table, $opt = '', $optValues = '');
 	public function getRows($table, $opt = '', $optValues = '');
 	public function getNumRows($table, $opt = '', $optValues = '');

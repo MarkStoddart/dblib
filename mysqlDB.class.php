@@ -129,17 +129,38 @@ class mysqlDB extends DB implements iDB {
 	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
 	 *							each ? will be replaced with a value, to escape use \?
 	 * @return mixed Result
+	 * @deprecated
 	 */
 	public function getField($field, $table, $opt = '', $optValues = '') {
+		return $this->getFields($field, $table, $opt, $optValues);
+	}
 
+	/**
+	 * Get one or more fields from a database using a table and a where query
+	 *
+	 * @param mixed $fields Fields to fetch
+	 * @param string $table Table to get field from
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getFields($fields, $table, $opt = '', $optValues = '') {
+
+		// Check if fields is an array
+		if(is_array($fields))
+			$fieldsArray = true;
+		else
+			$fieldsArray = false;
+		
 		// Prepare values for database checking
-		$field = $this->buildSelectString($field);
+		$fields = $this->buildSelectString($fields);
 		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
-			SELECT {$field}
+			SELECT {$fields}
 			FROM {$table}
 			{$opt}
 			LIMIT 1
@@ -153,12 +174,15 @@ class mysqlDB extends DB implements iDB {
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
 		if(!$result) {
-			$this->errorDB('get_field', mysql_error($this->_db), $query);
+			$this->errorDB('get_fields', mysql_error($this->_db), $query);
 			return false;
 		}
 		
-		// Return the resulting field
-		return $this->postDB(@mysql_result($result, 0));
+		// Return the resulting fields
+		if($fieldsArray)
+			return $this->postDB(mysql_fetch_assoc($result));
+		else
+			return $this->postDB(@mysql_result($result, 0));
 	}
 
 	/**
