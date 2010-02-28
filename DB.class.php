@@ -150,6 +150,26 @@ abstract class DB {
 	public function getAdminEmail() {
 		return $this->_adminEmail;
 	}
+
+	/**
+	 * Set the value of strip enabled
+	 *
+	 * @param mixed $value Value to set
+	 * @return object For chaining
+	 */
+	public function setStripEnabled($value) {
+		$this->_stripEnabled = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get strip enabled value
+	 *
+	 * @return mixed strip enabled value
+	 */
+	public function getStripEnabled() {
+		return $this->_stripEnabled;
+	}
 		
 	/**
 	 * Handle any database errors

@@ -133,12 +133,14 @@ class mysqlDB extends DB implements iDB {
 	public function getField($field, $table, $opt = '', $optValues = '') {
 
 		// Prepare values for database checking
+		$field = $this->buildSelectString($field);
+		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
-			SELECT `{$field}`
-			FROM `{$table}`
+			SELECT {$field}
+			FROM {$table}
 			{$opt}
 			LIMIT 1
 		";
@@ -171,12 +173,13 @@ class mysqlDB extends DB implements iDB {
 	public function getRow($table, $opt = '', $optValues = '') {
 		
 		// Prepare values for database
+		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$table}`
+			FROM {$table}
 			{$opt}
 			LIMIT 1
 		";
@@ -209,12 +212,13 @@ class mysqlDB extends DB implements iDB {
 	public function getRows($table, $opt = '', $optValues = '') {
 		
 		// Prepare values for database
+		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$table}`
+			FROM {$table}
 			{$opt}
 		";
 		
@@ -249,12 +253,13 @@ class mysqlDB extends DB implements iDB {
 	public function getNumRows($table, $opt = '', $optValues = '') {
 
 		// Prepare values for database
+		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build the query
 		$query = "
 			SELECT *
-			FROM `{$table}`
+			FROM {$table}
 			{$opt}
 		";
 
@@ -487,6 +492,7 @@ class mysqlDB extends DB implements iDB {
 	public function updateRows($table, $data, $opt = '', $optValues = '') {
 		
 		// Sort out values for database query
+		$table = $this->buildFromString($table);
 		$data = $this->preDB($data);
 		$opt = $this->buildOptString($opt, $optValues);
 	
@@ -498,7 +504,7 @@ class mysqlDB extends DB implements iDB {
 		
 		// Build the query
 		$query = "
-			UPDATE `{$table}`
+			UPDATE {$table}
 			SET {$data}
 			{$opt}
 		";
@@ -529,6 +535,7 @@ class mysqlDB extends DB implements iDB {
 	public function insertRow($table, $data) {
 
 		// Sort out values for database query
+		$table = $this->buildFromString($table);
 		$data = $this->preDB($data);
 			
 		// Join up data
@@ -544,7 +551,7 @@ class mysqlDB extends DB implements iDB {
 		
 		// Build the query
 		$query = "
-			INSERT INTO `{$table}`
+			INSERT INTO {$table}
 			({$fields}) VALUES ({$values})
 		";
 			
@@ -576,11 +583,12 @@ class mysqlDB extends DB implements iDB {
 	public function deleteRows($table, $opt = '', $optValues = '') {
 
 		// Sort out values for database query
+		$table = $this->buildFromString($table);
 		$opt = $this->buildOptString($opt, $optValues);
 		
 		// Build query
 		$query = "
-			DELETE FROM `{$table}`
+			DELETE FROM {$table}
 			{$opt}
 		";
 		
