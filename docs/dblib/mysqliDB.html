@@ -122,7 +122,12 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																				
+																																																																												<div class="method-definition">
+					static 						<span class="method-result"><a href="../dblib/mysqliDB.html">mysqliDB</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+										()
+									</div>
+																																																																																																								
 												<div class="method-definition">
 											<span class="method-result">mysqliDB</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -163,7 +168,7 @@
 										<a href="#getFields" title="details" class="method-name">getFields</a>
 											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
 									</div>
-																<div class="method-definition">
+																								<div class="method-definition">
 											<span class="method-result">mixed</span>
 										<a href="#getJoinedFields" title="details" class="method-name">getJoinedFields</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
@@ -409,9 +414,40 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getInstance</span> (line <span class="line-number">53</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the singleton instance of this class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Instance</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../dblib/mysqliDB.html">mysqliDB</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDB.html#methodgetInstance">iDB::getInstance()</a></dt>
+					</dl>
+			
+	</div>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">32</span>)
@@ -454,7 +490,7 @@
 				</ul>
 	</div>
 <a name="method__destruct" id="__destruct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">42</span>)
@@ -487,10 +523,10 @@
 				</ul>
 	</div>
 <a name="methodcloseDB" id="closeDB"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">closeDB</span> (line <span class="line-number">97</span>)
+		<span class="method-title">closeDB</span> (line <span class="line-number">109</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -516,10 +552,10 @@
 			
 	</div>
 <a name="methodconnectDB" id="connectDB"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">connectDB</span> (line <span class="line-number">80</span>)
+		<span class="method-title">connectDB</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -560,10 +596,10 @@
 			
 	</div>
 <a name="methoddeleteRows" id="deleteRows"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">deleteRows</span> (line <span class="line-number">630</span>)
+		<span class="method-title">deleteRows</span> (line <span class="line-number">642</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -601,10 +637,10 @@
 			
 	</div>
 <a name="methodescape" id="escape"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">escape</span> (line <span class="line-number">118</span>)
+		<span class="method-title">escape</span> (line <span class="line-number">130</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -636,10 +672,10 @@
 			
 	</div>
 <a name="methodgetField" id="getField"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getField</span> (line <span class="line-number">133</span>)
+		<span class="method-title">getField</span> (line <span class="line-number">145</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -689,10 +725,10 @@
 				</ul>
 	</div>
 <a name="methodgetFields" id="getFields"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getFields</span> (line <span class="line-number">148</span>)
+		<span class="method-title">getFields</span> (line <span class="line-number">160</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -734,10 +770,10 @@
 			
 	</div>
 <a name="methodgetJoinedFields" id="getJoinedFields"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getJoinedFields</span> (line <span class="line-number">331</span>)
+		<span class="method-title">getJoinedFields</span> (line <span class="line-number">343</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -789,10 +825,10 @@
 				</ul>
 	</div>
 <a name="methodgetJoinedRow" id="getJoinedRow"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getJoinedRow</span> (line <span class="line-number">393</span>)
+		<span class="method-title">getJoinedRow</span> (line <span class="line-number">405</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -841,10 +877,10 @@
 				</ul>
 	</div>
 <a name="methodgetJoinedRows" id="getJoinedRows"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getJoinedRows</span> (line <span class="line-number">441</span>)
+		<span class="method-title">getJoinedRows</span> (line <span class="line-number">453</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -893,10 +929,10 @@
 				</ul>
 	</div>
 <a name="methodgetNumJoinedRows" id="getNumJoinedRows"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getNumJoinedRows</span> (line <span class="line-number">492</span>)
+		<span class="method-title">getNumJoinedRows</span> (line <span class="line-number">504</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -937,10 +973,10 @@
 			
 	</div>
 <a name="methodgetNumRows" id="getNumRows"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getNumRows</span> (line <span class="line-number">285</span>)
+		<span class="method-title">getNumRows</span> (line <span class="line-number">297</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -978,10 +1014,10 @@
 			
 	</div>
 <a name="methodgetQueryCount" id="getQueryCount"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getQueryCount</span> (line <span class="line-number">108</span>)
+		<span class="method-title">getQueryCount</span> (line <span class="line-number">120</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1008,10 +1044,10 @@
 			
 	</div>
 <a name="methodgetRow" id="getRow"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRow</span> (line <span class="line-number">202</span>)
+		<span class="method-title">getRow</span> (line <span class="line-number">214</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1057,10 +1093,10 @@
 				</ul>
 	</div>
 <a name="methodgetRows" id="getRows"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRows</span> (line <span class="line-number">242</span>)
+		<span class="method-title">getRows</span> (line <span class="line-number">254</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1106,10 +1142,10 @@
 				</ul>
 	</div>
 <a name="methodinsertID" id="insertID"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">insertID</span> (line <span class="line-number">664</span>)
+		<span class="method-title">insertID</span> (line <span class="line-number">676</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1136,10 +1172,10 @@
 			
 	</div>
 <a name="methodinsertRow" id="insertRow"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">insertRow</span> (line <span class="line-number">579</span>)
+		<span class="method-title">insertRow</span> (line <span class="line-number">591</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1174,10 +1210,10 @@
 			
 	</div>
 <a name="methodsetupDB" id="setupDB"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setupDB</span> (line <span class="line-number">56</span>)
+		<span class="method-title">setupDB</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1217,10 +1253,10 @@
 			
 	</div>
 <a name="methodupdateRows" id="updateRows"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">updateRows</span> (line <span class="line-number">534</span>)
+		<span class="method-title">updateRows</span> (line <span class="line-number">546</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1294,7 +1330,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 28 Feb 2010 20:35:20 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 03 Mar 2010 19:39:47 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

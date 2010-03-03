@@ -48,7 +48,7 @@ class mysqliDB extends DB implements iDB {
 	/**
 	 * Get the singleton instance of this class
 	 *
-	 * @return mysqlDB Instance
+	 * @return mysqliDB Instance
 	 */
 	public static function getInstance() {
 		if(self::$_instance == null) {
