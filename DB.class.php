@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 /**
@@ -21,6 +21,9 @@ abstract class DB {
 	protected $_exitOnError = true;
 	protected $_getQueries = false;
 	protected $_adminEmail = false;
+	
+	// New singleton instance
+	private static $_instance = null;
 	
 	/**
 	 * Constructor

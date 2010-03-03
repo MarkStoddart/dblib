@@ -6,7 +6,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 /**
@@ -36,5 +36,7 @@ interface iDB {
 	public function deleteRows($table, $opt = '', $optValues = '');
 	
 	public function insertID();
+	
+	public static function getInstance();
 	
 }

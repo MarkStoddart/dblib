@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 require_once 'iDB.interface.php';
@@ -43,6 +43,18 @@ class mysqliDB extends DB implements iDB {
 		if($this->_autoClose) {
 			$this->closeDB();
 		}
+	}
+	
+	/**
+	 * Get the singleton instance of this class
+	 *
+	 * @return mysqlDB Instance
+	 */
+	public static function getInstance() {
+		if(self::$_instance == null) {
+			self::$_instance = new mysqlDB();
+		}
+		return self::$_instance;
 	}
 	
 	/**
