@@ -58,6 +58,19 @@ class mysqliDB extends DB implements iDB {
 	}
 	
 	/**
+	 * Apply an existing database object (PHP MySQLi object) to the mysqliDB object
+	 *
+	 * @param object $object PHP MySQLi Object
+	 * @return mysqliDB This object
+	 */
+	public function applyObject($object) {
+		if($this->_db == null) {
+			$this->_db = $object;
+		}
+		return $this;
+	}
+	
+	/**
 	 * Set the parameters used to connect to the database
 	 * 
 	 * @param string $host [Optional] Database host
