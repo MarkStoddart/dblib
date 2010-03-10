@@ -23,7 +23,7 @@ abstract class DB {
 	protected $_adminEmail = false;
 	
 	// New singleton instance
-	private static $_instance = null;
+	protected static $_instance = null;
 	
 	/**
 	 * Constructor
