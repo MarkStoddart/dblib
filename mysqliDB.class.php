@@ -52,7 +52,7 @@ class mysqliDB extends DB implements iDB {
 	 */
 	public static function getInstance() {
 		if(self::$_instance == null) {
-			self::$_instance = new mysqlDB();
+			self::$_instance = new mysqliDB();
 		}
 		return self::$_instance;
 	}
