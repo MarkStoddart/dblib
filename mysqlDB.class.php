@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.2
+ * @version 1.2
  */
 
 require_once 'iDB.interface.php';
@@ -55,6 +55,19 @@ class mysqlDB extends DB implements iDB {
 			self::$_instance = new mysqlDB();
 		}
 		return self::$_instance;
+	}
+	
+	/**
+	 * Apply an existing database object (PHP MySQL resource) to the mysqlDB object
+	 *
+	 * @param object $object PHP MySQL Resource
+	 * @return mysqlDB This object
+	 */
+	public function applyObject($object) {
+		if($this->_db == null) {
+			$this->_db = $object;
+		}
+		return $this;
 	}
 	
 	/**
@@ -136,6 +149,26 @@ class mysqlDB extends DB implements iDB {
 	 */
 	public function escape($str) {
 		return mysql_real_escape_string($str, $this->_db);
+	}
+	
+	/**
+	 * Return the field names for a given table that need to be pulled out
+	 *
+	 * @param string $table Table name
+	 * @return array Array of fields
+	 */
+	public function getFieldsFromTable($table) {
+		$query = 'SHOW COLUMNS FROM `' . $table . '`';
+		$result = mysql_query($query, $this->_db);
+		if(!$result) {
+			$this->errorDB('get_fields_from_table', mysql_error($this->_db), $query);
+			return false;
+		}
+		$fields = array();
+		while($row = mysql_fetch_assoc($result)) {
+			$fields[] = $row['field'];
+		}
+		return $fields;
 	}
 	
 	/**

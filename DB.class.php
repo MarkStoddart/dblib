@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.2
+ * @version 1.2
  */
 
 /**
@@ -21,6 +21,7 @@ abstract class DB {
 	protected $_exitOnError = true;
 	protected $_getQueries = false;
 	protected $_adminEmail = false;
+	protected $_tableSeparator = '|';
 	
 	// New singleton instance
 	protected static $_instance = null;
@@ -35,6 +36,26 @@ abstract class DB {
 		}
 	}
 	
+	/**
+	 * Set the value of strip enabled
+	 *
+	 * @param mixed $value Value to set
+	 * @return object For chaining
+	 */
+	public function setStripEnabled($value) {
+		$this->_stripEnabled = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get strip enabled value
+	 *
+	 * @return mixed strip enabled value
+	 */
+	public function getStripEnabled() {
+		return $this->_stripEnabled;
+	}
+		
 	/**
 	 * Set the value of debug
 	 *
@@ -154,27 +175,28 @@ abstract class DB {
 	public function getAdminEmail() {
 		return $this->_adminEmail;
 	}
-
+	
 	/**
-	 * Set the value of strip enabled
+	 * Set the table separator
 	 *
-	 * @param mixed $value Value to set
+	 * @param string $sep Table separator
 	 * @return object For chaining
 	 */
-	public function setStripEnabled($value) {
-		$this->_stripEnabled = $value;
+	public function setTableSeparator($sep) {
+		$this->_tableSeparator = $sep;
 		return $this;
 	}
 	
 	/**
-	 * Get strip enabled value
+	 * Get the table separator
 	 *
-	 * @return mixed strip enabled value
+	 * @return string Table separator
+	 * @author Jamie Hurst
 	 */
-	public function getStripEnabled() {
-		return $this->_stripEnabled;
+	public function getTableSeparator() {
+		return $this->getTableSeparator;
 	}
-		
+
 	/**
 	 * Handle any database errors
 	 *

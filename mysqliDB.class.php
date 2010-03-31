@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.1.2
+ * @version 1.2
  */
 
 require_once 'iDB.interface.php';
@@ -142,6 +142,26 @@ class mysqliDB extends DB implements iDB {
 	 */
 	public function escape($str) {
 		return $this->_db->real_escape_string($str);
+	}
+	
+	/**
+	 * Return the field names for a given table that need to be pulled out
+	 *
+	 * @param string $table Table name
+	 * @return array Array of fields
+	 */
+	public function getFieldsFromTable($table) {
+		$query = 'SHOW COLUMNS FROM `' . $table . '`';
+		$result = $this->_db->query($query);
+		if(!$result) {
+			$this->errorDB('get_fields_from_table', $this->_db->error, $query);
+			return false;
+		}
+		$fields = array();
+		while($row = $result->fetch_assoc()) {
+			$fields[] = $row['field'];
+		}
+		return $fields;
 	}
 	
 	/**
