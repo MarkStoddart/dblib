@@ -416,7 +416,7 @@ class mysqlDB extends DB implements iDB {
 		
 		// Return the resulting field
 		if($fieldsArray) {
-			return $this->postDB(mysql_fetch_assoc($result));
+			return $this->postDB(@mysql_fetch_assoc($result));
 		} else {
 			return $this->postDB(@mysql_result($result, 0));
 		}
@@ -517,6 +517,72 @@ class mysqlDB extends DB implements iDB {
 		$return = array();
 		while($temp = mysql_fetch_assoc($result)) {
 			$return[] = $temp;
+		}
+		return $this->postDB($return);
+	}
+
+	/**
+	 * Get multiple rows of specific fields from a database, fetch them in an array,
+	 * also make use of MySQL joins in query
+	 *
+	 * @param string $fields Fields to fetch
+	 * @param string $tables Tables to get fields from
+	 * @param array	$joins [Optional] An array that contains an array of items with the following options:
+	 *						{string 'type' Type of join, e.g. left},
+	 *						{string 'table' Table to join with optional alias},
+	 *						{string 'local' Local key to join on},
+	 *						{string 'foreign' Foreign key to join on}
+	 * @param string $opt [Optional] Any options, such as WHERE clauses
+	 * @param mixed $optValues [Optional] An optional set of values to escape and replace into the $p_opt string,
+	 *							each ? will be replaced with a value, to escape use \?
+	 * @return mixed Result
+	 */
+	public function getJoinedRowsOfFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
+
+		// Check if fields is an array
+		if(is_array($fields)) {
+			$fieldsArray = true;
+		} else {
+			$fieldsArray = false;
+		}
+		
+		// Prepare values for database checking
+		$fields = $this->buildSelectString($fields);
+		$tables = $this->buildFromString($tables);
+		$joins = $this->buildJoinString($joins);
+		$opt = $this->buildOptString($opt, $optValues);
+
+		// Build the query
+		$query = "
+			SELECT {$fields}
+			FROM {$tables}
+			{$joins}
+			{$opt}
+		";
+
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+
+		// Run the query and report all errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDB('get_joined_rows_fields', mysql_error($this->_db), $query);
+			return false;
+		}
+		
+		// Return the built array of rows
+		$return = array();
+		if($fieldsArray) {
+			while($temp = mysql_fetch_assoc($result)) {
+				$return[] = $temp;
+			}
+		} else {
+			while($temp = mysql_result($result, 0)) {
+				$return[] = $temp;
+			}
 		}
 		return $this->postDB($return);
 	}

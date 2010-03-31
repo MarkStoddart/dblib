@@ -14,6 +14,7 @@
  */
 interface iDB {
 	
+	public function applyObject($object);
 	public function setupDB($host = null, $user = null, $pass = null, $db = null);
 	public function connectDB($host = null, $user = null, $pass = null, $db = null);
 	public function closeDB();
@@ -29,6 +30,7 @@ interface iDB {
 	public function getJoinedFields($fields, $table, $joins = array(), $opt = '', $optValues = '');
 	public function getJoinedRow($table, $joins = array(), $opt = '', $optValues = '');
 	public function getJoinedRows($table, $joins = array(), $opt = '', $optValues = '');
+	public function getJoinedRowsOfFields($fields, $table, $joins = array(), $opt = '', $optValues = '');
 	public function getNumJoinedRows($table, $joins = array(), $opt = '', $optValues = '');
 	
 	public function insertRow($table, $data);
