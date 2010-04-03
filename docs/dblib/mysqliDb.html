@@ -1,0 +1,1459 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class mysqliDb</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class mysqliDb</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-consts">Constants</a>
+						
+			</div>
+	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../dblib/iDb.html">iDb</a></li>            </ul>
+        </p>
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">MySQLi class</p>
+		<p class="notes">
+			Located in <a class="field" href="_mysqliDb.class.php.html">/mysqliDb.class.php</a> (line <span class="field">17</span>)
+		</p>
+		
+				
+		<pre><a href="../dblib/Db.html">Db</a>
+   |
+   --mysqliDb</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-consts">Constants</a>
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_db" title="details" class="var-name">$_db</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_host" title="details" class="var-name">$_host</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_name" title="details" class="var-name">$_name</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_pass" title="details" class="var-name">$_pass</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_queryCount" title="details" class="var-name">$_queryCount</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_user" title="details" class="var-name">$_user</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-consts">Constants</a>
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																												<div class="method-definition">
+					static 						<span class="method-result"><a href="../dblib/mysqliDb.html">mysqliDb</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+										()
+									</div>
+																																																																																																																								
+												<div class="method-definition">
+											<span class="method-result">mysqliDb</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__destruct" title="details" class="method-name">__destruct</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../dblib/mysqliDb.html">mysqliDb</a></span>
+										<a href="#applyObject" title="details" class="method-name">applyObject</a>
+											(<span class="var-type">MySQLi</span>&nbsp;<span class="var-name">$object</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#closeDb" title="details" class="method-name">closeDb</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#connectDb" title="details" class="method-name">connectDb</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$user</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$pass</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#deleteRows" title="details" class="method-name">deleteRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#escape" title="details" class="method-name">escape</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string|boolean</span>
+										<a href="#getField" title="details" class="method-name">getField</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string|array|boolean</span>
+										<a href="#getFields" title="details" class="method-name">getFields</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getFieldsFromTable" title="details" class="method-name">getFieldsFromTable</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>)
+									</div>
+																								<div class="method-definition">
+											<span class="method-result">string|array|boolean</span>
+										<a href="#getJoinedFields" title="details" class="method-name">getJoinedFields</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|boolean</span>
+										<a href="#getJoinedRow" title="details" class="method-name">getJoinedRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|boolean</span>
+										<a href="#getJoinedRows" title="details" class="method-name">getJoinedRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|boolean</span>
+										<a href="#getJoinedRowsOfFields" title="details" class="method-name">getJoinedRowsOfFields</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int|boolean</span>
+										<a href="#getNumJoinedRows" title="details" class="method-name">getNumJoinedRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int|boolean</span>
+										<a href="#getNumRows" title="details" class="method-name">getNumRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#getQueryCount" title="details" class="method-name">getQueryCount</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|boolean</span>
+										<a href="#getRow" title="details" class="method-name">getRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">array|boolean</span>
+										<a href="#getRows" title="details" class="method-name">getRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">int</span>
+										<a href="#insertId" title="details" class="method-name">insertId</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#insertRow" title="details" class="method-name">insertRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isConnected" title="details" class="method-name">isConnected</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setupDb" title="details" class="method-name">setupDb</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$user</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$pass</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#updateRows" title="details" class="method-name">updateRows</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|boolean</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-consts">Constants</a>
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$_db" id="$_db"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_db</span>
+						(line <span class="line-number">19</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_host" id="$_host"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_host</span>
+						(line <span class="line-number">20</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_name" id="$_name"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_name</span>
+						(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_pass" id="$_pass"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_pass</span>
+						(line <span class="line-number">22</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_queryCount" id="$_queryCount"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_queryCount</span>
+						(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_user" id="$_user"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_user</span>
+						(line <span class="line-number">21</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../dblib/Db.html">Db</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_adminEmail">Db::$_adminEmail</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_autoClose">Db::$_autoClose</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_caching">Db::$_caching</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_debug">Db::$_debug</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_exitOnError">Db::$_exitOnError</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_getQueries">Db::$_getQueries</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_instance">Db::$_instance</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_stripEnabled">Db::$_stripEnabled</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../dblib/Db.html#var$_tableSeparator">Db::$_tableSeparator</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																			<a href="#sec-consts">Constants</a>
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getInstance</span> (line <span class="line-number">53</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the singleton instance of this class</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Instance</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result"><a href="../dblib/mysqliDb.html">mysqliDb</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetInstance">iDb::getInstance()</a></dt>
+					</dl>
+			
+	</div>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">32</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor  Use the provided DB variable if set, otherwise don't connect just yet</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mysqliDb</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$db</span><span class="var-description">: [Optional] MySQL connection link</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../dblib/Db.html#method__construct">Db::__construct()</a></dt>
+						<dd>Constructor</dd>
+					</dl>
+			
+	</div>
+<a name="method__destruct" id="__destruct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">42</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Destructor</p>
+<p class="description"><p>Close the database</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__destruct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodapplyObject" id="applyObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">applyObject</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Apply an existing database object (PHP MySQLi object) to the mysqliDb object</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> This object</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../dblib/mysqliDb.html">mysqliDb</a></span>
+		<span class="method-name">
+			applyObject
+		</span>
+					(<span class="var-type">MySQLi</span>&nbsp;<span class="var-name">$object</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">MySQLi</span>
+				<span class="var-name">$object</span><span class="var-description">: PHP MySQLi Object</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodapplyObject">iDb::applyObject()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodcloseDb" id="closeDb"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">closeDb</span> (line <span class="line-number">145</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Close the active database connection if one exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			closeDb
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodcloseDb">iDb::closeDb()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodconnectDb" id="connectDb"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">connectDb</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Connect to the database using the parameters given, or those already present</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Success or not</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			connectDb
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$user</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$pass</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: [Optional] Database host</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$user</span><span class="var-description">: [Optional] Database username</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pass</span><span class="var-description">: [Optional] Database password</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$db</span><span class="var-description">: [Optional] Database to use</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodconnectDb">iDb::connectDb()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methoddeleteRows" id="deleteRows"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">deleteRows</span> (line <span class="line-number">749</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete one or more rows from the database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Query was successful or not</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			deleteRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to delete from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any WHERE clauses or other options</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methoddeleteRows">iDb::deleteRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodescape" id="escape"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">escape</span> (line <span class="line-number">166</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Escape the given string</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Escaped string</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			escape
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$str</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$str</span><span class="var-description">: String to escape</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodescape">iDb::escape()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetField" id="getField"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getField</span> (line <span class="line-number">208</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a single field from a database using a table and a where query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">deprecated:</span> Use getFields instead</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string|boolean</span>
+		<span class="method-name">
+			getField
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$field</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$field</span><span class="var-description">: Field to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to get field from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetField">iDb::getField()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetFields" id="getFields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFields</span> (line <span class="line-number">222</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get one or more fields from a database using a table and a where query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">since:</span> 1.1.1</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string|array|boolean</span>
+		<span class="method-name">
+			getFields
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$fields</span><span class="var-description">: Fields to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to get field from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetFields">iDb::getFields()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetFieldsFromTable" id="getFieldsFromTable"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFieldsFromTable</span> (line <span class="line-number">176</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the field names for a given table that need to be pulled out</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of fields</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getFieldsFromTable
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetJoinedFields" id="getJoinedFields"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedFields</span> (line <span class="line-number">400</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get one or more fields from a database using a table and a where query,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string|array|boolean</span>
+		<span class="method-name">
+			getJoinedFields
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$fields</span><span class="var-description">: Fields to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                         {string 'type' Type of join, e.g. left},                         {string 'table' Table to join with optional alias},                         {string 'local' Local key to join on},                         {string 'foreign' Foreign key to join on}</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetJoinedFields">iDb::getJoinedFields()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedRow" id="getJoinedRow"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedRow</span> (line <span class="line-number">460</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get one row from a database using a table and a where query,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|boolean</span>
+		<span class="method-name">
+			getJoinedRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                         {string 'type' Type of join, e.g. left},                         {string 'table' Table to join with optional alias},                         {string 'local' Local key to join on},                         {string 'foreign' Foreign key to join on}</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetJoinedRow">iDb::getJoinedRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedRows" id="getJoinedRows"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedRows</span> (line <span class="line-number">507</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get multiple rows from a database, fetch them in an array,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|boolean</span>
+		<span class="method-name">
+			getJoinedRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                         {string 'type' Type of join, e.g. left},                         {string 'table' Table to join with optional alias},                         {string 'local' Local key to join on},                         {string 'foreign' Foreign key to join on}</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetJoinedRows">iDb::getJoinedRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetJoinedRowsOfFields" id="getJoinedRowsOfFields"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getJoinedRowsOfFields</span> (line <span class="line-number">558</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get multiple rows of specific fields from a database, fetch them in an array,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|boolean</span>
+		<span class="method-name">
+			getJoinedRowsOfFields
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$fields</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$fields</span><span class="var-description">: Fields to fetch</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                         {string 'type' Type of join, e.g. left},                         {string 'table' Table to join with optional alias},                         {string 'local' Local key to join on},                         {string 'foreign' Foreign key to join on}</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetJoinedRowsOfFields">iDb::getJoinedRowsOfFields()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetNumJoinedRows" id="getNumJoinedRows"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getNumJoinedRows</span> (line <span class="line-number">622</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the number of rows returned from a query,  also make use of MySQL joins in query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int|boolean</span>
+		<span class="method-name">
+			getNumJoinedRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tables</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$joins</span> = <span class="var-default">array()</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tables</span><span class="var-description">: Tables to get fields from</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$joins</span><span class="var-description">: [Optional] An array that contains an array of items with the following options:                         {string 'type' Type of join, e.g. left},                         {string 'table' Table to join with optional alias},                         {string 'local' Local key to join on},                         {string 'foreign' Foreign key to join on}</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetNumJoinedRows">iDb::getNumJoinedRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetNumRows" id="getNumRows"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getNumRows</span> (line <span class="line-number">355</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the number of rows returned from a query</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Number of rows</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int|boolean</span>
+		<span class="method-name">
+			getNumRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to get data from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any MySQL commands to pass, such as WHERE</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetNumRows">iDb::getNumRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetQueryCount" id="getQueryCount"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getQueryCount</span> (line <span class="line-number">156</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return the current query count</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Query count</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			getQueryCount
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetQueryCount">iDb::getQueryCount()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetRow" id="getRow"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRow</span> (line <span class="line-number">274</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a single row from a database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|boolean</span>
+		<span class="method-name">
+			getRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to get row from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any options, such as WHERE clauses</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetRow">iDb::getRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodgetRows" id="getRows"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getRows</span> (line <span class="line-number">313</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get multiple rows from a database, fetch them in an array</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array|boolean</span>
+		<span class="method-name">
+			getRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|array</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to get data from</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any MySQL commands to pass, such as WHERE</span>			</li>
+					<li>
+				<span class="var-type">string|array</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodgetRows">iDb::getRows()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodinsertId" id="insertId"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">insertId</span> (line <span class="line-number">783</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the last inserted row's ID</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Auto-increment ID value of last insert</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">int</span>
+		<span class="method-name">
+			insertId
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodinsertId">iDb::insertId()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodinsertRow" id="insertRow"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">insertRow</span> (line <span class="line-number">708</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Insert a row into the database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Successful update or not</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			insertRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to perform update on</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span><span class="var-description">: K=&gt;V array of columns and data</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodinsertRow">iDb::insertRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodisConnected" id="isConnected"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isConnected</span> (line <span class="line-number">130</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check whether this instance is connected to the server or not</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Connected</li>
+				<li><span class="field">since:</span> 1.2</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isConnected
+		</span>
+				()
+			</div>
+	
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodisConnected">iDb::isConnected()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodsetupDb" id="setupDb"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setupDb</span> (line <span class="line-number">81</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the parameters used to connect to the database</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setupDb
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$user</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$pass</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$db</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: [Optional] Database host</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$user</span><span class="var-description">: [Optional] Database username</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pass</span><span class="var-description">: [Optional] Database password</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$db</span><span class="var-description">: [Optional] Database to use</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodsetupDb">iDb::setupDb()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodupdateRows" id="updateRows"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">updateRows</span> (line <span class="line-number">663</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Update one or more table rows</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Successful update or not</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			updateRows
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$opt</span> = <span class="var-default">''</span>], [<span class="var-type">string|boolean</span>&nbsp;<span class="var-name">$optValues</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to perform update on</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span><span class="var-description">: K=&gt;V array of columns and data</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$opt</span><span class="var-description">: [Optional] Any WHERE clauses or other options</span>			</li>
+					<li>
+				<span class="var-type">string|boolean</span>
+				<span class="var-name">$optValues</span><span class="var-description">: [Optional] An optional set of values to escape and replace into the $opt string, each ? will be replaced with a value, to escape use \?</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodupdateRows">iDb::updateRows()</a></dt>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../dblib/Db.html">Db</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../dblib/Db.html#method__construct">Db::__construct()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodbuildFrom">Db::buildFrom()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodbuildJoin">Db::buildJoin()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodbuildOpt">Db::buildOpt()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodbuildSelect">Db::buildSelect()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methoderrorDb">Db::errorDb()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetAdminEmail">Db::getAdminEmail()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetAutoClose">Db::getAutoClose()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetCaching">Db::getCaching()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetDebug">Db::getDebug()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetExitOnError">Db::getExitOnError()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetGetQueries">Db::getGetQueries()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetStripEnabled">Db::getStripEnabled()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodgetTableSeparator">Db::getTableSeparator()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodpostDb">Db::postDb()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodpreDb">Db::preDb()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodprepareFields">Db::prepareFields()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodprepareStatement">Db::prepareStatement()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetAdminEmail">Db::setAdminEmail()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetAutoClose">Db::setAutoClose()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetCaching">Db::setCaching()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetDebug">Db::setDebug()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetExitOnError">Db::setExitOnError()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetGetQueries">Db::setGetQueries()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetStripEnabled">Db::setStripEnabled()</a></span><br>
+													<span class="method-name"><a href="../dblib/Db.html#methodsetTableSeparator">Db::setTableSeparator()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+										<h4>Inherited Constants</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../dblib/Db.html">Db</a></span></p>
+					<blockquote>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../dblib/Db.html#constVERSION_MAJOR">Db::VERSION_MAJOR</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../dblib/Db.html#constVERSION_MINOR">Db::VERSION_MINOR</a></span><br>
+							</span>
+													<img src="../media/images/Variable.png" />
+							<span class="const-title">
+								<span class="const-name"><a href="../dblib/Db.html#constVERSION_REVISION">Db::VERSION_REVISION</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 03 Apr 2010 16:24:48 +0000 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
