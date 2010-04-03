@@ -324,7 +324,7 @@ abstract class Db {
 		if(is_array($vars)) {
 
 			// Get matches
-			$numMatches = preg_match_all('/([^\\]\?)/i', $stmt, $matches);
+			$numMatches = preg_match_all('/([^\\\]\?)/i', $stmt, $matches);
 			
 			// Throw an error if the matches aren't the same
 			if($numMatches > count($vars)) {
@@ -334,11 +334,11 @@ abstract class Db {
 			// Replace all matches found
 			for($i = 0; $i < $numMatches; $i++) {
 				if(isset($vars[$i])) {
-					$stmt = preg_replace('/([^\\])\?/i', "$1" . $this->preDb($vars[$i]), $stmt, 1);
+					$stmt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDb($vars[$i]), $stmt, 1);
 				}
 			}
 		} else {
-			$stmt = preg_replace('/([^\\])\?/i', "$1" . $this->preDb($vars), $stmt, 1);
+			$stmt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDb($vars), $stmt, 1);
 		}
 		return $stmt;
 	}
@@ -354,7 +354,7 @@ abstract class Db {
 		// Every field needs to be enclosed in ` characters
 		if(is_array($fields)) {
 			foreach($fields as $key => $field) {
-				$fields[$key] = prepareFields($field);
+				$fields[$key] = $this->prepareFields($field);
 			}
 			return join(', ', $fields);
 		}

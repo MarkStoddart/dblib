@@ -136,7 +136,7 @@ class mysqlDb extends Db implements iDb {
 	 */
 	public function isConnected() {
 		if($this->_db) {
-			if(!empty(mysql_stat($this->_db))) {
+			if(is_resource($this->_db)) {
 				return true;
 			}
 			return false;
@@ -181,14 +181,22 @@ class mysqlDb extends Db implements iDb {
 	 */
 	public function getFieldsFromTable($table) {
 		$query = 'SHOW COLUMNS FROM `' . $table . '`';
+
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+		
+		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
 		if(!$result) {
 			$this->errorDb('get_fields_from_table', mysql_error($this->_db), $query);
 			return false;
 		}
 		$fields = array();
 		while($row = mysql_fetch_assoc($result)) {
-			$fields[] = $row['field'];
+			$fields[] = $row['Field'];
 		}
 		return $fields;
 	}

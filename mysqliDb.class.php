@@ -129,7 +129,9 @@ class mysqliDb extends Db implements iDb {
 	 */
 	public function isConnected() {
 		if($this->_db) {
-			if(!empty($this->_db->sqlstate)) {
+			// Dislike supressing the warning but can't be helped
+			$stat = @$this->_db->stat();
+			if(!empty($stat)) {
 				return true;
 			}
 			return false;
@@ -141,7 +143,7 @@ class mysqliDb extends Db implements iDb {
 	 * Close the active database connection if one exists
 	 */
 	public function closeDb() {
-		if($this->_db->isConnected()) {
+		if($this->isConnected()) {
 			$this->_db->close();
 		}
 	}
@@ -173,14 +175,22 @@ class mysqliDb extends Db implements iDb {
 	 */
 	public function getFieldsFromTable($table) {
 		$query = 'SHOW COLUMNS FROM `' . $table . '`';
+
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+		
+		// Run the query and report all errors
 		$result = $this->_db->query($query);
+		$this->_queryCount++;
 		if(!$result) {
 			$this->errorDb('get_fields_from_table', $this->_db->error, $query);
 			return false;
 		}
 		$fields = array();
 		while($row = $result->fetch_assoc()) {
-			$fields[] = $row['field'];
+			$fields[] = $row['Field'];
 		}
 		return $fields;
 	}
@@ -698,7 +708,7 @@ class mysqliDb extends Db implements iDb {
 	public function insertRow($table, $data) {
 
 		// Sort out values for database query
-		$table = $this->buildFromString($table);
+		$table = $this->buildFrom($table);
 		$data = $this->preDb($data);
 			
 		// Join up data
