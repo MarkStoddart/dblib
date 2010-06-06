@@ -348,5 +348,16 @@ class mysqlDbTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($fields[2], 'content');
 		$this->assertEquals($this->db->getQueryCount(), 1);
 	}
+	
+	public function testRawQuery() {
+		$this->db->connectDb('localhost', 'root', 'ga6-bxd', 'test');
+		$this->db->insertRow('testing', array(
+			'subject'	=>	'TEST13',
+			'content'	=>	'Test THIRTEEN'
+		));
+		$result = $this->db->rawQuery('SELECT * FROM testing WHERE subject = ?', 'TEST13');
+		$this->assertEquals($result[0]['content'], 'Test THIRTEEN');
+		$this->assertEquals($this->db->getQueryCount(), 2);
+	}
 
 }

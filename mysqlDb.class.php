@@ -5,10 +5,9 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.2
+ * @version 1.2.3
  */
 
-require_once 'iDb.interface.php';
 require_once 'Db.class.php';
 
 /**
@@ -815,6 +814,42 @@ class mysqlDb extends Db {
 		
 		// Return the query result
 		return $result;
+	}
+	
+	/**
+	 * Perform a raw query on the MySQL object returning either a set of rows or a boolean result
+	 *
+	 * @param string $query Query string
+	 * @param string $optValues [Optional] Replacements for ? values in the query
+	 * @return array|boolean Array of rows, boolean true or false depending on query
+	 * @since 1.2.3
+	 */
+	public function rawQuery($query, $optValues = '') {
+		$query = $this->buildOpt($query, $optValues);
+		
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+
+		// Get the result and sort out any errors
+		$result = mysql_query($query, $this->_db);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDb('raw', mysql_error($this->_db), $query);
+			return false;
+		}
+		
+		// If there are one or more rows, return them
+		if(mysql_num_rows($result) > 0) {
+			// Return the built array of rows
+			$return = array();
+			while($temp = mysql_fetch_assoc($result)) {
+				$return[] = $temp;
+			}
+			return $this->postDb($return);
+		}
+		return true;
 	}
 	
 	/**

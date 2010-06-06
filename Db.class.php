@@ -5,8 +5,10 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.2
+ * @version 1.2.3
  */
+
+require_once 'iDb.interface.php';
 
 /**
  * Common DB class
@@ -16,7 +18,7 @@ abstract class Db implements iDb {
 	// Version constants
 	const VERSION_MAJOR = 1;
 	const VERSION_MINOR = 2;
-	const VERSION_REVISION = 2;
+	const VERSION_REVISION = 3;
 	
 	// Set up some useful options
 	protected $_stripEnabled = true;

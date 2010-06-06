@@ -6,7 +6,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.2
+ * @version 1.2.3
  */
 
 /**
@@ -38,6 +38,8 @@ interface iDb {
 	public function replaceRow($table, $data);
 	public function updateRows($table, $data, $opt = '', $optValues = '');
 	public function deleteRows($table, $opt = '', $optValues = '');
+	
+	public function rawQuery($query, $optValues = '');
 	
 	public function insertId();
 	
