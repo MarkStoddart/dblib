@@ -6,7 +6,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2
+ * @version 1.2.2
  */
 
 /**
@@ -35,6 +35,7 @@ interface iDb {
 	public function getNumJoinedRows($table, $joins = array(), $opt = '', $optValues = '');
 	
 	public function insertRow($table, $data);
+	public function replaceRow($table, $data);
 	public function updateRows($table, $data, $opt = '', $optValues = '');
 	public function deleteRows($table, $opt = '', $optValues = '');
 	

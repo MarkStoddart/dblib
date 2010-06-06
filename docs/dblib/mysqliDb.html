@@ -105,7 +105,7 @@
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 										()
 									</div>
-																																																																																																																								
+																																																																																																																																
 												<div class="method-definition">
 											<span class="method-result">mysqliDb</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -215,6 +215,11 @@
 											<span class="method-result">boolean</span>
 										<a href="#isConnected" title="details" class="method-name">isConnected</a>
 										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#replaceRow" title="details" class="method-name">replaceRow</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -624,7 +629,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">deleteRows</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a749">749</a></span>)
+		<span class="method-title">deleteRows</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a789">789</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1199,7 +1204,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">insertId</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a783">783</a></span>)
+		<span class="method-title">insertId</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a823">823</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1229,7 +1234,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">insertRow</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a708">708</a></span>)
+		<span class="method-title">insertRow</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a661">661</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1294,8 +1299,46 @@
 					</dl>
 			
 	</div>
-<a name="methodsetupDb" id="setupDb"><!-- --></a>
+<a name="methodreplaceRow" id="replaceRow"><!-- --></a>
 <div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">replaceRow</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a701">701</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replace a row into the database</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Successful replacement or not</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			replaceRow
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$table</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$data</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$table</span><span class="var-description">: Table to perform replacement on</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$data</span><span class="var-description">: K=&gt;V array of columns and data</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../dblib/iDb.html#methodreplaceRow">iDb::replaceRow()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodsetupDb" id="setupDb"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">setupDb</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a81">81</a></span>)
@@ -1338,10 +1381,10 @@
 			
 	</div>
 <a name="methodupdateRows" id="updateRows"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">updateRows</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a663">663</a></span>)
+		<span class="method-title">updateRows</span> (line <span class="line-number"><a href="../__filesource/fsource_dblib__mysqliDb.class.php.html#a743">743</a></span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1453,7 +1496,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 06 Jun 2010 21:35:45 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 06 Jun 2010 21:46:59 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 require_once 'iDb.interface.php';
@@ -652,6 +652,86 @@ class mysqliDb extends Db implements iDb {
 	}
 	
 	/**
+	 * Insert a row into the database
+	 * 
+	 * @param string $table Table to perform update on
+	 * @param array $data K=>V array of columns and data
+	 * @return boolean Successful update or not
+	 */
+	public function insertRow($table, $data) {
+
+		// Sort out values for database query
+		$table = $this->buildFrom($table);
+		$data = $this->preDb($data);
+			
+		// Join up data
+		$fields = $this->buildSelect(array_keys($data));
+		$values = join(', ', array_values($data));
+		
+		// Build the query
+		$query = "
+			INSERT INTO {$table}
+			({$fields}) VALUES ({$values})
+		";
+			
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+
+		// Get the result and sort out any errors
+		$result = $this->_db->query($query);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDb('insert_row', $this->_db->error, $query);
+			return false;
+		}
+		
+		// Return the query result
+		return $result;
+	}
+	
+	/**
+	 * Replace a row into the database
+	 * 
+	 * @param string $table Table to perform replacement on
+	 * @param array $data K=>V array of columns and data
+	 * @return boolean Successful replacement or not
+	 */
+	public function replaceRow($table, $data) {
+
+		// Sort out values for database query
+		$table = $this->buildFrom($table);
+		$data = $this->preDb($data);
+			
+		// Join up data
+		$fields = $this->buildSelect(array_keys($data));
+		$values = join(', ', array_values($data));
+		
+		// Build the query
+		$query = "
+			REPLACE INTO {$table}
+			({$fields}) VALUES ({$values})
+		";
+			
+		// Check if the query needs to be printed
+		if($this->_getQueries) {
+			return $query;
+		}
+
+		// Get the result and sort out any errors
+		$result = $this->_db->query($query);
+		$this->_queryCount++;
+		if(!$result) {
+			$this->errorDb('replace_row', $this->_db->error, $query);
+			return false;
+		}
+		
+		// Return the query result
+		return $result;
+	}
+	
+	/**
 	 * Update one or more table rows
 	 *
 	 * @param string $table Table to perform update on
@@ -691,46 +771,6 @@ class mysqliDb extends Db implements iDb {
 		$this->_queryCount++;
 		if(!$result) {
 			$this->errorDb('update_rows', $this->_db->error, $query);
-			return false;
-		}
-		
-		// Return the query result
-		return $result;
-	}
-	
-	/**
-	 * Insert a row into the database
-	 * 
-	 * @param string $table Table to perform update on
-	 * @param array $data K=>V array of columns and data
-	 * @return boolean Successful update or not
-	 */
-	public function insertRow($table, $data) {
-
-		// Sort out values for database query
-		$table = $this->buildFrom($table);
-		$data = $this->preDb($data);
-			
-		// Join up data
-		$fields = $this->buildSelect(array_keys($data));
-		$values = join(', ', array_values($data));
-		
-		// Build the query
-		$query = "
-			INSERT INTO {$table}
-			({$fields}) VALUES ({$values})
-		";
-			
-		// Check if the query needs to be printed
-		if($this->_getQueries) {
-			return $query;
-		}
-
-		// Get the result and sort out any errors
-		$result = $this->_db->query($query);
-		$this->_queryCount++;
-		if(!$result) {
-			$this->errorDb('insert_row', $this->_db->error, $query);
 			return false;
 		}
 		

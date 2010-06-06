@@ -67,6 +67,23 @@ class mysqlDbTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->db->getQueryCount(), 1);
 	}
 	
+	public function testReplaceRow() {
+		$this->db->connectDb('localhost', 'root', 'ga6-bxd', 'test');
+		$insert = $this->db->insertRow('testing', array(
+			'id'		=>	1,
+			'subject'	=>	'TEST1',
+			'content'	=>	'Test One'
+		));
+		$this->assertTrue($insert);
+		$replace = $this->db->replaceRow('testing', array(
+			'id'		=>	1,
+			'subject'	=>	'TEST1.1',
+			'content'	=>	'Test One Point One'
+		));
+		$this->assertTrue($replace);
+		$this->assertEquals($this->db->getQueryCount(), 2);
+	}
+	
 	public function testGetField() {
 		$this->db->connectDb('localhost', 'root', 'ga6-bxd', 'test');
 		$this->db->insertRow('testing', array(
