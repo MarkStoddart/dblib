@@ -5,18 +5,18 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2
+ * @version 1.2.1
  */
 
 /**
  * Common DB class
  */
-abstract class Db {
+abstract class Db implements iDb {
 	
 	// Version constants
 	const VERSION_MAJOR = 1;
 	const VERSION_MINOR = 2;
-	const VERSION_REVISION = 0;
+	const VERSION_REVISION = 1;
 	
 	// Set up some useful options
 	protected $_stripEnabled = true;

@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2
+ * @version 1.2.1
  */
 
 require_once 'iDb.interface.php';

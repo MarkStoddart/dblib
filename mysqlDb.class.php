@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2
+ * @version 1.2.1
  */
 
 require_once 'iDb.interface.php';
@@ -14,7 +14,7 @@ require_once 'Db.class.php';
 /**
  * MySQL class
  */
-class mysqlDb extends Db implements iDb {
+class mysqlDb extends Db {
 	
 	protected $_db;
 	protected $_host;
