@@ -19,6 +19,7 @@ abstract class Db implements iDb {
 	const VERSION_MAJOR = 1;
 	const VERSION_MINOR = 2;
 	const VERSION_REVISION = 3;
+	const CONFIG_FILE = 'config.ini';
 	
 	// Set up some useful options
 	protected $_stripEnabled = true;
@@ -37,6 +38,9 @@ abstract class Db implements iDb {
 	 * Constructor
 	 */
 	protected function __construct() {
+		// Parse config file
+		$config = parse_ini_file(self::CONFIG_FILE);
+		die(var_dump($config));
 		// Check for magic quotes
 		if(get_magic_quotes_gpc()) {
 			$this->_stripEnabled = false;
@@ -212,7 +216,6 @@ abstract class Db implements iDb {
 	 * @param string $query [Optional] Query from where the error happened
 	 */
 	protected function errorDb($error, $dbError = '', $query = '') {
-
 		// Only provide detailed output in debug mode
 		echo '<p class="db_error">';
 		if($this->_debug) {
