@@ -21,15 +21,17 @@ abstract class Db implements iDb {
 	const VERSION_REVISION = 3;
 	const CONFIG_FILE = 'config.ini';
 	
-	// Set up some useful options
-	protected $_stripEnabled = true;
-	protected $_debug = false;
-	protected $_autoClose = false;
-	protected $_caching = true;
-	protected $_exitOnError = true;
-	protected $_getQueries = false;
-	protected $_adminEmail = false;
-	protected $_tableSeparator = '|';
+	// Default configuration options
+	protected $_config = array(
+		'stripEnabled'		=>	true,
+		'debug'				=>	false,
+		'autoClose'			=>	false,
+		'caching'			=>	true,
+		'exitOnError'		=>	true,
+		'getQueries'		=>	false,
+		'adminEmail'		=>	false,
+		'tableSeparator'	=>	'|'
+	);
 	
 	// New singleton instance
 	protected static $_instance = null;
@@ -38,13 +40,46 @@ abstract class Db implements iDb {
 	 * Constructor
 	 */
 	protected function __construct() {
-		// Parse config file
-		$config = parse_ini_file(self::CONFIG_FILE);
-		die(var_dump($config));
-		// Check for magic quotes
+		// Check the configuration file exists
+		if(!file_exists(self::CONFIG_FILE)) {
+			// Throw a warning
+			trigger_error('Could not open configuration file for DBlib, using default options.', E_WARNING);
+		} else {
+			// Parse config file
+			$config = parse_ini_file(self::CONFIG_FILE);
+			
+			// Merge the custom configuration with the default
+			$this->_config = array_merge($this->_config, $config);
+		}
+		
+		die(var_dump($this->_config));
+		
+		// Check for magic quotes (This needs to be removed at some point, probably causes more problems than it solves!)
 		if(get_magic_quotes_gpc()) {
 			$this->_stripEnabled = false;
 		}
+	}
+	
+	/**
+	 * Set a configuration option
+	 *
+	 * @param string $key Configuration option
+	 * @param mixed $value Option value
+	 * @return Db Object for chaining
+	 */
+	public function setConfig($key, $value) {
+		$this->_config[$key] = $value;
+		return $this;
+	}
+	
+	/**
+	 * Get configuration option
+	 *
+	 * @param string $key Config option key
+	 * @return mixed Configuration setting
+	 */
+	public function getConfig($key) {
+		return $this->_config[$key];
 	}
 	
 	/**
