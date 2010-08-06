@@ -43,7 +43,7 @@ abstract class Db implements iDb {
 		// Check the configuration file exists
 		if(!file_exists(self::CONFIG_FILE)) {
 			// Throw a warning
-			trigger_error('Could not open configuration file for DBlib, using default options.', E_WARNING);
+			trigger_error('Could not open configuration file for DBlib, using default options.', E_USER_WARNING);
 		} else {
 			// Parse config file
 			$config = parse_ini_file(self::CONFIG_FILE);
