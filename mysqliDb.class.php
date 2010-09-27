@@ -39,7 +39,7 @@ class mysqliDb extends Db {
 	 * Close the database
 	 */
 	public function __destruct() {
-		if($this->_autoClose) {
+		if($this->getConfig('autoClose')) {
 			$this->closeDb();
 		}
 	}
@@ -176,7 +176,7 @@ class mysqliDb extends Db {
 		$query = 'SHOW COLUMNS FROM `' . $table . '`';
 
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
@@ -241,7 +241,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
@@ -285,7 +285,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
@@ -323,7 +323,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 			
@@ -365,7 +365,7 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -421,7 +421,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
@@ -473,7 +473,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
@@ -519,7 +519,7 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -578,7 +578,7 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -634,7 +634,7 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -674,7 +674,7 @@ class mysqliDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -714,7 +714,7 @@ class mysqliDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -761,7 +761,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -798,7 +798,7 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 
@@ -826,7 +826,7 @@ class mysqliDb extends Db {
 		$query = $this->buildOpt($query, $optValues);
 		
 		// Check if the query needs to be printed
-		if($this->_getQueries) {
+		if($this->getConfig('getQueries')) {
 			return $query;
 		}
 

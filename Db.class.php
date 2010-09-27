@@ -22,7 +22,7 @@ abstract class Db implements iDb {
 	const CONFIG_FILE = 'config.ini';
 	
 	// Default configuration options
-	protected $_config = array(
+	private $_config = array(
 		'stripEnabled'		=>	true,
 		'debug'				=>	false,
 		'autoClose'			=>	false,
@@ -364,7 +364,7 @@ abstract class Db implements iDb {
 		if(is_array($vars)) {
 
 			// Get matches
-			$numMatches = preg_match_all('/([^\\\]\?)/i', $stmt, $matches);
+			$numMatches = preg_match_all('/((?<!\\)\?)/', $stmt, $matches);
 			
 			// Throw an error if the matches aren't the same
 			if($numMatches > count($vars)) {
@@ -374,11 +374,11 @@ abstract class Db implements iDb {
 			// Replace all matches found
 			for($i = 0; $i < $numMatches; $i++) {
 				if(isset($vars[$i])) {
-					$stmt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDb($vars[$i]), $stmt, 1);
+					$stmt = preg_replace('/((?<!\\)\?)\?/', "$1" . $this->preDb($vars[$i]), $stmt, 1);
 				}
 			}
 		} else {
-			$stmt = preg_replace('/([^\\\])\?/i', "$1" . $this->preDb($vars), $stmt, 1);
+			$stmt = preg_replace('/((?<!\\)\?)\?/', "$1" . $this->preDb($vars), $stmt, 1);
 		}
 		return $stmt;
 	}
