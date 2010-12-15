@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.3
+ * @version 1.3
  */
 
 require_once 'iDb.interface.php';
@@ -14,14 +14,16 @@ require_once 'iDb.interface.php';
  * Common DB class
  */
 abstract class Db implements iDb {
+    
+    // Config file definition, normally this shouldn't need to be changed
+	const CONFIG_FILE = 'config.ini';
 	
 	// Version constants
 	const VERSION_MAJOR = 1;
 	const VERSION_MINOR = 2;
 	const VERSION_REVISION = 3;
-	const CONFIG_FILE = 'config.ini';
 	
-	// Default configuration options
+	// Default configuration options that can be overwritten in config.ini (NOT HERE!)
 	private $_config = array(
 		'stripEnabled'		=>	true,
 		'debug'				=>	false,
@@ -33,29 +35,41 @@ abstract class Db implements iDb {
 		'tableSeparator'	=>	'|'
 	);
 	
-	// New singleton instance
+	// Define a quick path variable that will be resolved later
+	private $_path = '.';
+	
+	// New singleton instance for getInstance() calls
 	protected static $_instance = null;
 	
 	/**
 	 * Constructor
 	 */
 	protected function __construct() {
+	    // Resolve the path of this DBlib installation
+		$includes = get_included_files();
+		$basepath = realpath('./');
+		foreach ($includes as $include) {
+		    if (strpos($include, 'Db.class.php')) {
+		        $basepath = realpath(dirname($include));
+		    }
+		}
+		$this->_path = $basepath;
+		unset($includes, $include, $basepath);
+
 		// Check the configuration file exists
-		if(!file_exists(self::CONFIG_FILE)) {
+		if (!file_exists($this->_path . '/' . self::CONFIG_FILE)) {
 			// Throw a warning
 			trigger_error('Could not open configuration file for DBlib, using default options.', E_USER_WARNING);
 		} else {
 			// Parse config file
-			$config = parse_ini_file(self::CONFIG_FILE);
+			$config = parse_ini_file($this->_path . '/' . self::CONFIG_FILE);
 			
 			// Merge the custom configuration with the default
 			$this->_config = array_merge($this->_config, $config);
 		}
 		
-		die(var_dump($this->_config));
-		
 		// Check for magic quotes (This needs to be removed at some point, probably causes more problems than it solves!)
-		if(get_magic_quotes_gpc()) {
+		if (get_magic_quotes_gpc()) {
 			$this->_stripEnabled = false;
 		}
 	}
@@ -66,6 +80,7 @@ abstract class Db implements iDb {
 	 * @param string $key Configuration option
 	 * @param mixed $value Option value
 	 * @return Db Object for chaining
+	 * @since 1.3
 	 */
 	public function setConfig($key, $value) {
 		$this->_config[$key] = $value;
@@ -77,6 +92,7 @@ abstract class Db implements iDb {
 	 *
 	 * @param string $key Config option key
 	 * @return mixed Configuration setting
+	 * @since 1.3
 	 */
 	public function getConfig($key) {
 		return $this->_config[$key];
@@ -87,19 +103,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param mixed $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setStripEnabled($value) {
-		$this->_stripEnabled = $value;
-		return $this;
+		return $this->setConfig('stripEnabled', $value);
 	}
 	
 	/**
 	 * Get strip enabled value
 	 *
 	 * @return mixed strip enabled value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getStripEnabled() {
-		return $this->_stripEnabled;
+		return $this->getConfig('stripEnabled');
 	}
 		
 	/**
@@ -107,19 +124,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param boolean $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setDebug($value) {
-		$this->_debug = $value;
-		return $this;
+		return $this->setConfig('debug', $value);
 	}
 	
 	/**
 	 * Get debug value
 	 *
 	 * @return boolean Debug value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getDebug() {
-		return $this->_debug;
+		return $this->getConfig('debug');
 	}
 		
 	/**
@@ -127,19 +145,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param boolean $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setAutoClose($value) {
-		$this->_autoClose = $value;
-		return $this;
+		return $this->setConfig('autoClose', $value);
 	}
 	
 	/**
 	 * Get auto close value
 	 *
 	 * @return boolean Auto close value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getAutoClose() {
-		return $this->_autoClose;
+		return $this->getConfig('autoClose');
 	}
 		
 	/**
@@ -147,19 +166,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param boolean $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setCaching($value) {
-		$this->_caching = $value;
-		return $this;
+		return $this->setConfig('caching', $value);
 	}
 	
 	/**
 	 * Get caching value
 	 *
 	 * @return boolean Caching value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getCaching() {
-		return $this->_caching;
+		return $this->getConfig('caching');
 	}
 		
 	/**
@@ -167,19 +187,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param boolean $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setExitOnError($value) {
-		$this->_exitOnError = $value;
-		return $this;
+		return $this->setConfig('exitOnError', $value);
 	}
 	
 	/**
 	 * Get exit on error value
 	 *
 	 * @return boolean Exit on error value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getExitOnError() {
-		return $this->_exitOnError;
+		return $this->getConfig('exitOnError');
 	}
 		
 	/**
@@ -187,19 +208,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param boolean $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setGetQueries($value) {
-		$this->_getQueries = $value;
-		return $this;
+		return $this->setConfig('getQueries', $value);
 	}
 	
 	/**
 	 * Get get queries value
 	 *
 	 * @return boolean Get queries value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getGetQueries() {
-		return $this->_getQueries;
+		return $this->getConfig('getQueries');
 	}
 		
 	/**
@@ -207,19 +229,20 @@ abstract class Db implements iDb {
 	 *
 	 * @param mixed $value Value to set
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setAdminEmail($value) {
-		$this->_adminEmail = $value;
-		return $this;
+		return $this->setConfig('adminEmail', $value);
 	}
 	
 	/**
 	 * Get admin email value
 	 *
 	 * @return mixed Admin email value
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getAdminEmail() {
-		return $this->_adminEmail;
+		return $this->getConfig('adminEmail');
 	}
 	
 	/**
@@ -227,10 +250,10 @@ abstract class Db implements iDb {
 	 *
 	 * @param string $sep Table separator
 	 * @return Db For chaining
+	 * @deprecated Use setConfig() instead
 	 */
 	public function setTableSeparator($sep) {
-		$this->_tableSeparator = $sep;
-		return $this;
+		return $this->setConfig('tableSeparator', $value);
 	}
 	
 	/**
@@ -238,9 +261,10 @@ abstract class Db implements iDb {
 	 *
 	 * @return string Table separator
 	 * @since 1.2
+	 * @deprecated Use getConfig() instead
 	 */
 	public function getTableSeparator() {
-		return $this->getTableSeparator;
+		return $this->getConfig('tableSeparator');
 	}
 
 	/**
@@ -253,7 +277,7 @@ abstract class Db implements iDb {
 	protected function errorDb($error, $dbError = '', $query = '') {
 		// Only provide detailed output in debug mode
 		echo '<p class="db_error">';
-		if($this->_debug) {
+		if ($this->getConfig('debug')) {
 			echo 'Query error in context "' . $error . '":<br /><strong>'
 					. $dbError . 
 					'</strong><br /><br />';
@@ -262,12 +286,12 @@ abstract class Db implements iDb {
 			}
 		} else {
 			echo 'A database error occurred when performing the last operation. The system administrator has been informed.';
-			if($this->_adminEmail) {
+			if($this->getConfig('adminEmail')) {
 				mail($this->_adminEmail, 'DBlib -> DB Error (' . $error . ')', 'A database error occurred in context "' . $error . '".' . "\n\n" . $dbError . "\n\n" . 'Query: ' . $query);
 			}
 		}
 		echo '</p>';
-		if($this->_exitOnError) {
+		if ($this->getConfig('exitOnError')) {
 			exit;
 		}
 	}
@@ -279,18 +303,17 @@ abstract class Db implements iDb {
 	 * @return mixed Variable post-processing
 	 */
 	protected function preDb($var) {
-		
 		// Make sure any null variables are returned as passed
-		if(is_null($var) || $var === 'NULL') {
+		if (is_null($var) || $var === 'NULL') {
 			return 'NULL';
 		}
 		
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
-		if(is_array($var)) {
+		if (is_array($var)) {
 			$newArray = array();
-			foreach($var as $key => $value) {
-				if($this->_stripEnabled && strpos($value, "\'") === false) {
+			foreach ($var as $key => $value) {
+				if ($this->getConfig('stripEnabled') && strpos($value, "\'") === false) {
 					$newArray[$this->escape(html_entity_decode($key))] = $this->preDb($value);
 				} else {
 					$newArray[html_entity_decode($key)] = $this->preDb($value);
@@ -298,7 +321,7 @@ abstract class Db implements iDb {
 			}
 			return $newArray;
 		} else {
-			if($this->_stripEnabled) {
+			if($this->getConfig('stripEnabled')) {
 				return "'" . $this->escape(html_entity_decode($var)) . "'";
 			}
 			return "'" . html_entity_decode($var) . "'";
@@ -312,17 +335,16 @@ abstract class Db implements iDb {
 	 * @return mixed Variable post-processing
 	 */
 	protected function postDb($var) {
-		
 		// Make sure any false and null variables are returned as passed
-		if($var === false) {
+		if ($var === false) {
 			return false;
 		}
 
 		// Use a recursive call if the variable is an array, to make sure it
 		// is penetrated to the correct depth
-		if(is_array($var)) {
+		if (is_array($var)) {
 			$newArray = array();
-			foreach($var as $key => $value) {
+			foreach ($var as $key => $value) {
 				$newArray[htmlentities(stripslashes($key))] = $this->postDb($value);
 			}
 			return $newArray;
@@ -361,24 +383,23 @@ abstract class Db implements iDb {
 	 */
 	protected function prepareStatement($stmt, $vars) {
 		// Go through each match and replace the ? if a value exists
-		if(is_array($vars)) {
-
+		if (is_array($vars)) {
 			// Get matches
-			$numMatches = preg_match_all('/((?<!\\)\?)/', $stmt, $matches);
+			$numMatches = preg_match_all('/((?<!\\\)\?)/', $stmt, $matches);
 			
 			// Throw an error if the matches aren't the same
-			if($numMatches > count($vars)) {
+			if ($numMatches > count($vars)) {
 				$this->errorDb('escape_count');
 			}
 			
 			// Replace all matches found
-			for($i = 0; $i < $numMatches; $i++) {
-				if(isset($vars[$i])) {
-					$stmt = preg_replace('/((?<!\\)\?)\?/', "$1" . $this->preDb($vars[$i]), $stmt, 1);
+			for ($i = 0; $i < $numMatches; $i++) {
+				if (isset($vars[$i])) {
+					$stmt = preg_replace('/((?<!\\\)\?)/', $this->preDb($vars[$i]), $stmt, 1);
 				}
 			}
 		} else {
-			$stmt = preg_replace('/((?<!\\)\?)\?/', "$1" . $this->preDb($vars), $stmt, 1);
+			$stmt = preg_replace('/((?<!\\\)\?)/', $this->preDb($vars), $stmt, 1);
 		}
 		return $stmt;
 	}
@@ -390,10 +411,9 @@ abstract class Db implements iDb {
 	 * @return string MySQL formatted string
 	 */
 	protected function buildSelect($fields) {
-		
 		// Every field needs to be enclosed in ` characters
-		if(is_array($fields)) {
-			foreach($fields as $key => $field) {
+		if (is_array($fields)) {
+			foreach ($fields as $key => $field) {
 				$fields[$key] = $this->prepareFields($field);
 			}
 			return join(', ', $fields);
@@ -408,9 +428,8 @@ abstract class Db implements iDb {
 	 * @return string MySQL formatted string
 	 */
 	protected function buildFrom($tables) {
-		
 		// Every table name, with alias, needs to be enclosed in ` characters
-		if(is_array($tables)) {
+		if (is_array($tables)) {
 			foreach($tables as $key => $table) {
 				$tables[$key] = $this->prepareFields($table);
 			}
@@ -427,7 +446,7 @@ abstract class Db implements iDb {
 	 */
 	protected function buildJoin($joins) {
 		$string = '';
-		foreach($joins as $join) {
+		foreach ($joins as $join) {
 			// Build the join string each time by enclosing fields and tables in ` characters
 			$string .= "\n"
 				. strtoupper($join['type'])
@@ -452,7 +471,6 @@ abstract class Db implements iDb {
 	 * @return string Correctly formatted and escaped string
 	 */
 	protected function buildOpt($opt, $optValues = null) {
-		
 		// Return the finished string
 		return $this->prepareStatement($opt, $optValues);
 	}

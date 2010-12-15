@@ -5,7 +5,7 @@
  * 
  * @package dblib
  * @author Jamie Hurst
- * @version 1.2.3
+ * @version 1.3
  */
 
 require_once 'Db.class.php';
@@ -39,7 +39,7 @@ class mysqlDb extends Db {
 	 * Close the database
 	 */
 	public function __destruct() {
-		if($this->getConfig('autoClose')) {
+		if ($this->getConfig('autoClose')) {
 			$this->closeDb();
 		}
 	}
@@ -50,7 +50,7 @@ class mysqlDb extends Db {
 	 * @return mysqlDb Instance
 	 */
 	public static function getInstance() {
-		if(self::$_instance == null) {
+		if (self::$_instance === null) {
 			self::$_instance = new mysqlDB();
 		}
 		return self::$_instance;
@@ -63,7 +63,7 @@ class mysqlDb extends Db {
 	 * @return mysqlDb This object
 	 */
 	public function applyObject($object) {
-		if($this->_db == null) {
+		if ($this->_db == null) {
 			$this->_db = $object;
 		}
 		return $this;
@@ -78,16 +78,16 @@ class mysqlDb extends Db {
 	 * @param string $db [Optional] Database to use
 	 */
 	public function setupDb($host = null, $user = null, $pass = null, $db = null) {
-		if(!is_null($host)) {
+		if (!is_null($host)) {
 			$this->_host = $host;
 		}
-		if(!is_null($user)) {
+		if (!is_null($user)) {
 			$this->_user = $user;
 		}
-		if(!is_null($pass)) {
+		if (!is_null($pass)) {
 			$this->_pass = $pass;
 		}
-		if(!is_null($db)) {
+		if (!is_null($db)) {
 			$this->_name = $db;
 		}
 	}
@@ -103,7 +103,7 @@ class mysqlDb extends Db {
 	 */
 	public function connectDb($host = null, $user = null, $pass = null, $db = null) {
 		// Check if already connected
-		if($this->isConnected()) {
+		if ($this->isConnected()) {
 			return true;
 		}
 		
@@ -112,14 +112,14 @@ class mysqlDb extends Db {
 		
 		// Attempt a connection
 		$this->_db = mysql_connect($this->_host, $this->_user, $this->_pass);
-		if(!$this->_db) {
+		if (!$this->_db) {
 			$this->errorDb('connect');
 			return false;
 		}
 		
 		// Select the database to use
 		$select = mysql_select_db($this->_name, $this->_db);
-		if(!$select) {
+		if (!$select) {
 			$this->errorDb('connect_db');
 			return false;
 		}
@@ -134,8 +134,8 @@ class mysqlDb extends Db {
 	 * @since 1.2
 	 */
 	public function isConnected() {
-		if($this->_db) {
-			if(is_resource($this->_db)) {
+		if ($this->_db) {
+			if (is_resource($this->_db)) {
 				return true;
 			}
 			return false;
@@ -147,7 +147,7 @@ class mysqlDb extends Db {
 	 * Close the active database connection if one exists
 	 */
 	public function closeDb() {
-		if($this->isConnected()) {
+		if ($this->isConnected()) {
 			mysql_close($this->_db);
 		}
 	}
@@ -182,19 +182,19 @@ class mysqlDb extends Db {
 		$query = 'SHOW COLUMNS FROM `' . $table . '`';
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_fields_from_table', mysql_error($this->_db), $query);
 			return false;
 		}
 		$fields = array();
-		while($row = mysql_fetch_assoc($result)) {
+		while ($row = mysql_fetch_assoc($result)) {
 			$fields[] = $row['Field'];
 		}
 		return $fields;
@@ -227,7 +227,7 @@ class mysqlDb extends Db {
 	public function getFields($fields, $table, $opt = '', $optValues = '') {
 
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -247,20 +247,20 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_fields', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// Return the resulting fields
-		if($fieldsArray) {
+		if ($fieldsArray) {
 			return $this->postDb(mysql_fetch_assoc($result));
 		}
 		return $this->postDb(mysql_result($result, 0));
@@ -289,14 +289,14 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Get the result and report any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_row', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -327,21 +327,21 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 			
 		// Get the result, report any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_rows', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = mysql_fetch_assoc($result)) {
+		while ($temp = mysql_fetch_assoc($result)) {
 			$return[] = $temp;
 		}
 		return $this->postDb($return);
@@ -369,14 +369,14 @@ class mysqlDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result, report any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_num_rows', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -403,7 +403,7 @@ class mysqlDb extends Db {
 	public function getJoinedFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
 		
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -425,19 +425,20 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries'))
+		if ($this->getConfig('getQueries')) {
 			return $query;
+		}
 		
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_fields', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// Return the resulting field
-		if($fieldsArray) {
+		if ($fieldsArray) {
 			return $this->postDb(mysql_fetch_assoc($result));
 		} else {
 			return $this->postDb(mysql_result($result, 0));
@@ -475,14 +476,14 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_row', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -521,21 +522,21 @@ class mysqlDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_rows', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = mysql_fetch_assoc($result)) {
+		while ($temp = mysql_fetch_assoc($result)) {
 			$return[] = $temp;
 		}
 		return $this->postDb($return);
@@ -559,7 +560,7 @@ class mysqlDb extends Db {
 	public function getJoinedRowsOfFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
 
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -580,26 +581,26 @@ class mysqlDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_rows_fields', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		if($fieldsArray) {
-			while($temp = mysql_fetch_assoc($result)) {
+		if ($fieldsArray) {
+			while ($temp = mysql_fetch_assoc($result)) {
 				$return[] = $temp;
 			}
 		} else {
-			while($temp = mysql_result($result, 0)) {
+			while ($temp = mysql_result($result, 0)) {
 				$return[] = $temp;
 			}
 		}
@@ -636,14 +637,14 @@ class mysqlDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_num_rows', mysql_query($this->_db), $query);
 			return false;
 		}
@@ -676,14 +677,14 @@ class mysqlDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('insert_row', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -716,14 +717,14 @@ class mysqlDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('replace_row', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -750,7 +751,7 @@ class mysqlDb extends Db {
 	
 		// Join up data
 		$updates = array();
-		foreach($data as $key => $value) {
+		foreach ($data as $key => $value) {
 			$updates[] = "`{$key}` = {$value}";
 		}
 		$data = join(', ', $updates);
@@ -763,14 +764,14 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('update_rows', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -800,14 +801,14 @@ class mysqlDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('delete_rows', mysql_error($this->_db), $query);
 			return false;
 		}
@@ -828,23 +829,23 @@ class mysqlDb extends Db {
 		$query = $this->buildOpt($query, $optValues);
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = mysql_query($query, $this->_db);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('raw', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// If there are one or more rows, return them
-		if(mysql_num_rows($result) > 0) {
+		if (mysql_num_rows($result) > 0) {
 			// Return the built array of rows
 			$return = array();
-			while($temp = mysql_fetch_assoc($result)) {
+			while ($temp = mysql_fetch_assoc($result)) {
 				$return[] = $temp;
 			}
 			return $this->postDb($return);

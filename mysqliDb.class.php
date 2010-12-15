@@ -39,7 +39,7 @@ class mysqliDb extends Db {
 	 * Close the database
 	 */
 	public function __destruct() {
-		if($this->getConfig('autoClose')) {
+		if ($this->getConfig('autoClose')) {
 			$this->closeDb();
 		}
 	}
@@ -50,7 +50,7 @@ class mysqliDb extends Db {
 	 * @return mysqliDb Instance
 	 */
 	public static function getInstance() {
-		if(self::$_instance == null) {
+		if (self::$_instance == null) {
 			self::$_instance = new mysqliDb();
 		}
 		return self::$_instance;
@@ -63,7 +63,7 @@ class mysqliDb extends Db {
 	 * @return mysqliDb This object
 	 */
 	public function applyObject($object) {
-		if($this->_db == null) {
+		if ($this->_db == null) {
 			$this->_db = $object;
 		}
 		return $this;
@@ -78,16 +78,16 @@ class mysqliDb extends Db {
 	 * @param string $db [Optional] Database to use
 	 */
 	public function setupDb($host = null, $user = null, $pass = null, $db = null) {
-		if(!is_null($host)) {
+		if (!is_null($host)) {
 			$this->_host = $host;
 		}
-		if(!is_null($user)) {
+		if (!is_null($user)) {
 			$this->_user = $user;
 		}
-		if(!is_null($pass)) {
+		if (!is_null($pass)) {
 			$this->_pass = $pass;
 		}
-		if(!is_null($db)) {
+		if (!is_null($db)) {
 			$this->_name = $db;
 		}
 	}
@@ -103,7 +103,7 @@ class mysqliDb extends Db {
 	 */
 	public function connectDb($host = null, $user = null, $pass = null, $db = null) {
 		// Check if connection is lready established
-		if($this->isConnected()) {
+		if ($this->isConnected()) {
 			return true;
 		}
 		
@@ -112,7 +112,7 @@ class mysqliDb extends Db {
 		
 		// Attempt a connection
 		$this->_db = new mysqli($this->_host, $this->_user, $this->_pass, $this->_name);
-		if(!$this->_db) {
+		if (!$this->_db) {
 			$this->errorDB('connect');
 			return false;
 		}
@@ -127,10 +127,10 @@ class mysqliDb extends Db {
 	 * @since 1.2
 	 */
 	public function isConnected() {
-		if($this->_db) {
+		if ($this->_db) {
 			// Dislike supressing the warning but can't be helped
 			$stat = @$this->_db->stat();
-			if(!empty($stat)) {
+			if (!empty($stat)) {
 				return true;
 			}
 			return false;
@@ -142,7 +142,7 @@ class mysqliDb extends Db {
 	 * Close the active database connection if one exists
 	 */
 	public function closeDb() {
-		if($this->isConnected()) {
+		if ($this->isConnected()) {
 			$this->_db->close();
 		}
 	}
@@ -176,19 +176,19 @@ class mysqliDb extends Db {
 		$query = 'SHOW COLUMNS FROM `' . $table . '`';
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_fields_from_table', $this->_db->error, $query);
 			return false;
 		}
 		$fields = array();
-		while($row = $result->fetch_assoc()) {
+		while ($row = $result->fetch_assoc()) {
 			$fields[] = $row['Field'];
 		}
 		return $fields;
@@ -221,7 +221,7 @@ class mysqliDb extends Db {
 	public function getFields($fields, $table, $opt = '', $optValues = '') {
 
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -241,20 +241,20 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_fields', $this->_db->error, $query);
 			return false;
 		}
 		
 		// Return the resulting field
-		if($fieldsArray) {
+		if ($fieldsArray) {
 			$row = $result->fetch_assoc();
 			return $this->postDb($row);
 		}
@@ -285,14 +285,14 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Get the result and report any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_row', $this->_db->error, $query);
 			return false;
 		}
@@ -323,21 +323,21 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 			
 		// Get the result, report any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_rows', $this->_db->error, $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_assoc()) {
+		while ($temp = $result->fetch_assoc()) {
 			$return[] = $temp;
 		}
 		return $this->postDb($return);
@@ -365,14 +365,14 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result, report any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_num_rows', $this->_db->error, $query);
 			return false;
 		}
@@ -399,7 +399,7 @@ class mysqliDb extends Db {
 	public function getJoinedFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
 		
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -421,20 +421,20 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_fields', $this->_db->error, $query);
 			return false;
 		}
 		
 		// Return the resulting field
-		if($fieldsArray) {
+		if ($fieldsArray) {
 			$row = $result->fetch_assoc();
 			return $this->postDb($row);
 		}
@@ -473,14 +473,14 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 		
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_row', $this->_db->error, $query);
 			return false;
 		}
@@ -519,21 +519,21 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_rows', $this->_db->error, $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		while($temp = $result->fetch_assoc()) {
+		while ($temp = $result->fetch_assoc()) {
 			$return[] = $temp;
 		}
 		return $this->postDb($return);
@@ -557,7 +557,7 @@ class mysqliDb extends Db {
 	public function getJoinedRowsOfFields($fields, $tables, $joins = array(), $opt = '', $optValues = '') {
 
 		// Check if fields is an array
-		if(is_array($fields)) {
+		if (is_array($fields)) {
 			$fieldsArray = true;
 		} else {
 			$fieldsArray = false;
@@ -578,26 +578,26 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_rows', $this->_db->error, $query);
 			return false;
 		}
 		
 		// Return the built array of rows
 		$return = array();
-		if($fieldsArray) {
-			while($temp = $result->fetch_assoc()) {
+		if ($fieldsArray) {
+			while ($temp = $result->fetch_assoc()) {
 				$return[] = $temp;
 			}
 		} else {
-			while($temp = $result->fetch_array()) {
+			while ($temp = $result->fetch_array()) {
 				$return[] = $temp[0];
 			}
 		}
@@ -634,14 +634,14 @@ class mysqliDb extends Db {
 		";
 
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Run the query and report all errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('get_joined_num_rows', $this->_db->error, $query);
 			return false;
 		}
@@ -674,14 +674,14 @@ class mysqliDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('insert_row', $this->_db->error, $query);
 			return false;
 		}
@@ -714,14 +714,14 @@ class mysqliDb extends Db {
 		";
 			
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('replace_row', $this->_db->error, $query);
 			return false;
 		}
@@ -748,7 +748,7 @@ class mysqliDb extends Db {
 	
 		// Join up data
 		$updates = array();
-		foreach($data as $key => $value) {
+		foreach ($data as $key => $value) {
 			$updates[] = "`{$key}` = {$value}";
 		}
 		$data = join(', ', $updates);
@@ -761,14 +761,14 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('update_rows', $this->_db->error, $query);
 			return false;
 		}
@@ -798,14 +798,14 @@ class mysqliDb extends Db {
 		";
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('delete_rows', $this->_db->error, $query);
 			return false;
 		}
@@ -826,23 +826,23 @@ class mysqliDb extends Db {
 		$query = $this->buildOpt($query, $optValues);
 		
 		// Check if the query needs to be printed
-		if($this->getConfig('getQueries')) {
+		if ($this->getConfig('getQueries')) {
 			return $query;
 		}
 
 		// Get the result and sort out any errors
 		$result = $this->_db->query($query);
 		$this->_queryCount++;
-		if(!$result) {
+		if (!$result) {
 			$this->errorDb('raw', mysql_error($this->_db), $query);
 			return false;
 		}
 		
 		// If there are one or more rows, return them
-		if($result->num_rows > 0) {
+		if ($result->num_rows > 0) {
 			// Return the built array of rows
 			$return = array();
-			while($temp = $result->fetch_assoc()) {
+			while ($temp = $result->fetch_assoc()) {
 				$return[] = $temp;
 			}
 			return $this->postDb($return);
